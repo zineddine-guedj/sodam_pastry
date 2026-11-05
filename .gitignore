@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# C++ compiled executables
+program
+*.out
+
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
