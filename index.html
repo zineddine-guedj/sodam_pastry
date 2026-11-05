@@ -1,12 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My First Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sodam Pastry · A little cloud of sweetness</title>
+  <meta name="description" content="Handmade Korean-inspired pastries from a little kitchen in Algiers. Pavlovas, dome cakes and fruit & flower cream cakes, made to melt at the first bite.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/section-heading.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
-    <h1>Hello, World!</h1>
-    <p>This is my first HTML page.</p>
-    <button>Click Me</button>
+<body class="page-home">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Sodam Pastry, home">
+        <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__tagline">A Quiet Abundance of Joy</span>
+        <span class="brand__name">Sodam Pastry</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html" aria-current="page">Home</a></li>
+          <li><a class="nav__link" href="creations.html">Creations</a></li>
+          <li><a class="nav__link" href="reserve-pastry.html">Reserve</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary" href="reserve-pastry.html">Order now <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow">From a little kitchen in Algiers</p>
+          <h1 class="hero__title" id="hero-title">A little cloud of sweetness</h1>
+          <p class="hero__lead">Handmade pastries, made to melt at the first bite</p>
+          <p class="hero__script">A Quiet Abundance of Joy</p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="creations.html">See creations <span class="btn__arrow" aria-hidden="true">↗</span></a>
+            <a class="btn btn--secondary" href="reserve-pastry.html">Reserve an order <span class="btn__arrow" aria-hidden="true">↗</span></a>
+          </div>
+
+          <p class="hero__note">
+            <img src="assets/icons/wheat.svg" alt="" width="16" height="16">
+            Small batches · 48h notice
+          </p>
+        </div>
+
+        <div class="hero__visual">
+          <figure class="polaroid polaroid--hero">
+            <img src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peaches and small flowers on a ceramic cake stand" width="800" height="600">
+            <figcaption class="polaroid__caption">a little garden, made with love.</figcaption>
+            <span class="stamp" aria-hidden="true">
+              <span class="stamp__ko">소담</span>
+              <img src="assets/icons/cloud.svg" alt="" width="14" height="14">
+            </span>
+          </figure>
+        </div>
+      </div>
+
+      <div class="container hero__footer">
+        <p class="hero__tags">Handmade · Korean-inspired · Full of heart</p>
+        <a class="hero__scroll" href="#signatures">stay a little, find your sweetness <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <!-- ============ SIGNATURES ============ -->
+    <section class="section" id="signatures" aria-labelledby="signatures-title">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">A few of our favourites</p>
+          <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+          <h2 class="section-heading__title" id="signatures-title">Our signatures</h2>
+          <p class="section-heading__intro">Light as a cloud, lovely to share. A little sweetness for every kind of day.</p>
+        </header>
+
+        <div class="card-grid card-grid--3">
+          <article class="pastry-card">
+            <img class="pastry-card__img" src="assets/images/creations/pavlova.jpg" alt="Individual pavlova with berries on a speckled plate" loading="lazy">
+            <h3 class="pastry-card__title">Individual Pavlova</h3>
+            <p class="pastry-card__text">A crisp little cloud, soft at heart, crowned with berries.</p>
+            <a class="pastry-card__link" href="reserve-pastry.html?pastry=pavlova">Reserve this</a>
+          </article>
+
+          <article class="pastry-card">
+            <img class="pastry-card__img" src="assets/images/creations/dome-cake.jpg" alt="Pale pink dome cake decorated with raspberries and tiny flowers on a stand" loading="lazy">
+            <h3 class="pastry-card__title">Dome Cake</h3>
+            <p class="pastry-card__text">A flower-kissed dome with a delicate, creamy heart.</p>
+            <a class="pastry-card__link" href="reserve-pastry.html?pastry=dome-cake">Reserve this</a>
+          </article>
+
+          <article class="pastry-card">
+            <img class="pastry-card__img" src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peaches and small flowers" loading="lazy">
+            <h3 class="pastry-card__title">Fruit &amp; Flower Cream Cake</h3>
+            <p class="pastry-card__text">A little garden of sweetness, where every bite feels like a summer dream.</p>
+            <a class="pastry-card__link" href="reserve-pastry.html?pastry=fruit-cream-cake">Reserve this</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section section--cream about" id="about" aria-labelledby="about-title">
+      <div class="container about__inner">
+        <figure class="polaroid polaroid--about">
+          <img src="assets/images/creations/dessert-box.jpg" alt="Kraft box of mini pavlovas topped with berries, beside a gift box tied with gingham ribbon" width="800" height="600" loading="lazy">
+          <figcaption class="polaroid__caption">from my little kitchen, to your table ♡</figcaption>
+        </figure>
+
+        <div class="about__text">
+          <header class="section-heading">
+            <p class="eyebrow">The heart behind the sweetness</p>
+            <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+            <h2 class="section-heading__title" id="about-title">Small kitchen. Abundant joy.</h2>
+          </header>
+
+          <p class="about__meaning"><span lang="ko">소담</span> means a quiet abundance, simple, generous, and full of joy.</p>
+          <p>Sodam is a home-based pastry kitchen in Algiers, inspired by the gentle beauty of Korean cafés. Fresh fruit, delicate cream and thoughtful little details come together, one small batch at a time.</p>
+          <p>For birthdays, afternoon tea, or simply because. Something handmade, for someone you love.</p>
+          <p class="about__sign">Made slowly. Shared happily.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW TO ORDER ============ -->
+    <section class="section" id="how-to-order" aria-labelledby="steps-title">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">Three gentle little steps</p>
+          <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+          <h2 class="section-heading__title" id="steps-title">A little joy, on its way to you</h2>
+        </header>
+
+        <ol class="steps">
+          <li class="step-ticket">
+            <span class="step-ticket__no">No. 01</span>
+            <img class="step-ticket__icon" src="assets/icons/cake.svg" alt="" width="24" height="24">
+            <h3 class="step-ticket__title">Choose</h3>
+            <p>Find a little favourite in our creations, or dream up something of your own.</p>
+          </li>
+          <li class="step-ticket">
+            <span class="step-ticket__no">No. 02</span>
+            <img class="step-ticket__icon" src="assets/icons/calendar.svg" alt="" width="24" height="24">
+            <h3 class="step-ticket__title">Reserve</h3>
+            <p>Tell us your date and the little details. Please allow at least 48 hours.</p>
+          </li>
+          <li class="step-ticket">
+            <span class="step-ticket__no">No. 03</span>
+            <img class="step-ticket__icon" src="assets/icons/gift.svg" alt="" width="24" height="24">
+            <h3 class="step-ticket__title">Enjoy</h3>
+            <p>We’ll confirm everything with you. Then, a beautiful box of joy awaits.</p>
+          </li>
+        </ol>
+
+        <a class="btn btn--primary" href="reserve-pastry.html">Start a reservation <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <!-- ============ LATEST CREATIONS ============ -->
+    <section class="section" id="latest" aria-labelledby="latest-title">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">Fresh from our little kitchen</p>
+          <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+          <h2 class="section-heading__title" id="latest-title">Latest creations</h2>
+          <p class="section-heading__intro">A few sweet moments, before they found their way to someone’s table.</p>
+        </header>
+
+        <!-- Later, home.js can fill this list from data/creations.json -->
+        <ul class="card-grid card-grid--4 polaroid-list">
+          <li>
+            <a class="polaroid polaroid--small" href="creation-detail.html?id=berry-little-joys">
+              <img src="assets/images/creations/pavlova.jpg" alt="Pavlova with strawberries and berries" loading="lazy">
+              <span class="polaroid__caption">berry little joys</span>
+            </a>
+          </li>
+          <li>
+            <a class="polaroid polaroid--small" href="creation-detail.html?id=a-bloom-for-you">
+              <img src="assets/images/creations/dome-cake.jpg" alt="Pink dome cake with raspberries and tiny flowers" loading="lazy">
+              <span class="polaroid__caption">a bloom for you</span>
+            </a>
+          </li>
+          <li>
+            <a class="polaroid polaroid--small" href="creation-detail.html?id=beautifully-boxed">
+              <img src="assets/images/creations/dessert-box.jpg" alt="Box of mini pavlovas with a gift box" loading="lazy">
+              <span class="polaroid__caption">beautifully boxed</span>
+            </a>
+          </li>
+          <li>
+            <a class="polaroid polaroid--small" href="creation-detail.html?id=peach-afternoon">
+              <img src="assets/images/creations/peach-cake.jpg" alt="Layer cake topped with a peach-coloured cream rose" loading="lazy">
+              <span class="polaroid__caption">peach afternoon</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="latest__actions">
+          <a class="btn btn--secondary" href="creations.html">Explore the full gallery <span class="btn__arrow" aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">More little joys · @sodam_pastry ↗</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="index.html" aria-label="Sodam Pastry, home">
+          <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Handmade with care · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <a href="contact.html">Contact us · Orders require 48h notice</a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/pages/home.js" defer></script>
 </body>
 </html>
