@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserve · The day &amp; the little details · Sodam Pastry</title>
+  <meta name="description" content="Step 2 of 4. Choose your date, time window and delivery, and share the small touches that make your pastry yours.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/section-heading.css">
+  <link rel="stylesheet" href="css/components/stepper.css">
+  <link rel="stylesheet" href="css/components/forms.css">
+  <link rel="stylesheet" href="css/components/chips.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/pages/reserve.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-reserve page-reserve-details">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Sodam Pastry, home">
+        <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__tagline">A Quiet Abundance of Joy</span>
+        <span class="brand__name">Sodam Pastry</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="creations.html">Creations</a></li>
+          <li><a class="nav__link" href="reserve-pastry.html" aria-current="page">Reserve</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary" href="reserve-pastry.html">Order now <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container reserve">
+
+      <!-- ============ PROGRESS ============ -->
+      <p class="eyebrow reserve__kicker">Made by hand, reserved with love</p>
+
+      <ol class="stepper" aria-label="Reservation progress">
+        <li class="stepper__step is-done">
+          <span class="stepper__dot"><span aria-hidden="true">✓</span><span class="visually-hidden">Completed:</span></span>
+          <span class="stepper__label">Pastry</span>
+        </li>
+        <li class="stepper__step is-current" aria-current="step">
+          <span class="stepper__dot">2</span>
+          <span class="stepper__label">Details</span>
+        </li>
+        <li class="stepper__step">
+          <span class="stepper__dot">3</span>
+          <span class="stepper__label">Contact</span>
+        </li>
+        <li class="stepper__step">
+          <span class="stepper__dot">4</span>
+          <span class="stepper__label">Review</span>
+        </li>
+      </ol>
+
+      <!-- ============ STEP 2 ============ -->
+      <section class="reserve__step" aria-labelledby="step-title">
+        <header class="section-heading">
+          <p class="eyebrow">Your reservation · Step 2 of 4</p>
+          <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+          <h1 class="section-heading__title" id="step-title">The day &amp; the little details</h1>
+          <p class="section-heading__intro">A date to look forward to, and the small touches that make it yours.</p>
+        </header>
+
+        <!-- Summary of step 1: reserve-details.js fills it from the saved draft -->
+        <aside class="notice" aria-label="Your pastry">
+          <img class="notice__icon" src="assets/icons/cake.svg" alt="" width="20" height="20">
+          <div>
+            <p class="notice__title">Your little joy</p>
+            <p id="pastry-summary">Fruit &amp; Flower Cream Cake · Medium, 6–8 servings · 1 cake</p>
+          </div>
+        </aside>
+
+        <form class="reserve__form" id="details-form" action="reserve-contact.html" method="get">
+
+          <!-- ---------- Calendar ---------- -->
+          <p class="eyebrow">Your preferred date</p>
+
+          <!-- Sample month from the design. reserve-details.js should build the real
+               calendar, disable past dates and the 48h notice window, and set data-date. -->
+          <section class="calendar" aria-label="Choose a date">
+            <div class="calendar__head">
+              <button class="calendar__nav" type="button" id="cal-prev" aria-label="Previous month">‹</button>
+              <h2 class="calendar__month" id="cal-month" aria-live="polite">November 2026</h2>
+              <button class="calendar__nav" type="button" id="cal-next" aria-label="Next month">›</button>
+            </div>
+
+            <table class="calendar__table">
+              <thead>
+                <tr>
+                  <th scope="col"><abbr title="Monday">M</abbr></th>
+                  <th scope="col"><abbr title="Tuesday">T</abbr></th>
+                  <th scope="col"><abbr title="Wednesday">W</abbr></th>
+                  <th scope="col"><abbr title="Thursday">T</abbr></th>
+                  <th scope="col"><abbr title="Friday">F</abbr></th>
+                  <th scope="col"><abbr title="Saturday">S</abbr></th>
+                  <th scope="col"><abbr title="Sunday">S</abbr></th>
+                </tr>
+              </thead>
+              <tbody id="cal-body">
+                <tr>
+                  <td></td><td></td><td></td><td></td><td></td><td></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-01" disabled>1</button></td>
+                </tr>
+                <tr>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-02" disabled>2</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-03">3</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-04">4</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-05">5</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-06">6</button></td>
+                  <td><button class="calendar__day is-selected" type="button" data-date="2026-11-07" aria-pressed="true">7</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-08">8</button></td>
+                </tr>
+                <tr>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-09">9</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-10">10</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-11">11</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-12">12</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-13">13</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-14">14</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-15">15</button></td>
+                </tr>
+                <tr>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-16">16</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-17">17</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-18">18</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-19">19</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-20">20</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-21">21</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-22">22</button></td>
+                </tr>
+                <tr>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-23">23</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-24">24</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-25">25</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-26">26</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-27">27</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-28">28</button></td>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-29">29</button></td>
+                </tr>
+                <tr>
+                  <td><button class="calendar__day" type="button" data-date="2026-11-30">30</button></td>
+                  <td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p class="calendar__note">48h notice · dates remain subject to availability.</p>
+          </section>
+
+          <!-- ---------- Date, time, delivery ---------- -->
+          <section class="form-card" aria-label="Date, time and delivery">
+            <div class="field">
+              <label class="field__label" for="selected-date">Selected date</label>
+              <input class="field__input" type="text" id="selected-date" name="date_label" value="Saturday, 7 November 2026" readonly required>
+              <input type="hidden" name="date" id="date-value" value="2026-11-07">
+            </div>
+
+            <fieldset class="field field--chips">
+              <legend class="eyebrow">Preferred time window</legend>
+              <label class="chip-radio">
+                <input type="radio" name="time" value="10:00-12:00" required>
+                <span class="chip">10:00–12:00</span>
+              </label>
+              <label class="chip-radio">
+                <input type="radio" name="time" value="14:00-16:00" checked>
+                <span class="chip">14:00–16:00</span>
+              </label>
+              <label class="chip-radio">
+                <input type="radio" name="time" value="16:00-18:00">
+                <span class="chip">16:00–18:00</span>
+              </label>
+            </fieldset>
+
+            <fieldset class="field field--chips">
+              <legend class="eyebrow">How shall it reach you?</legend>
+              <label class="chip-radio">
+                <input type="radio" name="fulfilment" value="pickup" required>
+                <span class="chip">Pickup</span>
+              </label>
+              <label class="chip-radio">
+                <input type="radio" name="fulfilment" value="delivery" checked>
+                <span class="chip">Delivery</span>
+              </label>
+
+              <!-- reserve-details.js swaps the text with data-pickup / data-delivery.
+                   The pickup sentence is a placeholder to confirm with the client. -->
+              <p class="field__help" id="fulfilment-note"
+                 data-delivery="Delivery in Algiers, subject to availability. We’ll confirm the area and any delivery fee with you. Add your address in the next step."
+                 data-pickup="Pickup from our little kitchen in Algiers. We’ll share the exact address once your reservation is confirmed.">
+                Delivery in Algiers, subject to availability. We’ll confirm the area and any delivery fee with you. Add your address in the next step.
+              </p>
+            </fieldset>
+          </section>
+
+          <!-- ---------- Message, allergies, inspiration ---------- -->
+          <section class="form-card" aria-label="Little details">
+            <div class="field">
+              <label class="field__label" for="cake-message">Cake message · optional</label>
+              <input class="field__input" type="text" id="cake-message" name="message" maxlength="40" placeholder="Happy birthday, Lina" aria-describedby="message-help">
+              <p class="field__help" id="message-help">Keep it short and sweet · up to 40 characters.</p>
+            </div>
+
+            <div class="field">
+              <label class="field__label" for="allergies">Allergies &amp; special requests</label>
+              <textarea class="field__input field__textarea" id="allergies" name="allergies" rows="4" placeholder="No nuts, please. Blush flowers." aria-describedby="allergies-help"></textarea>
+              <p class="field__help" id="allergies-help">Please tell us about all allergies. Our home kitchen handles milk, eggs, gluten and nuts; we’ll discuss what is safely possible before confirming.</p>
+            </div>
+
+            <div class="field">
+              <span class="eyebrow" id="upload-label">Inspiration photo · optional</span>
+              <label class="dropzone" for="inspiration">
+                <img class="dropzone__icon" src="assets/icons/image-plus.svg" alt="" width="28" height="28">
+                <span class="dropzone__text">Add a little inspiration · browse files</span>
+                <span class="dropzone__hint">JPG / PNG · up to 10 MB each</span>
+              </label>
+              <input class="visually-hidden" type="file" id="inspiration" name="inspiration" accept="image/jpeg,image/png" multiple aria-labelledby="upload-label">
+              <ul class="dropzone__list" id="upload-list" aria-live="polite"></ul>
+            </div>
+          </section>
+
+          <div class="reserve__actions">
+            <a class="back-link" href="reserve-pastry.html"><span aria-hidden="true">←</span> Back</a>
+            <button class="btn btn--primary" type="submit">Continue <span class="btn__arrow" aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="index.html" aria-label="Sodam Pastry, home">
+          <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Handmade with care · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <a href="contact.html">Contact us · Orders require 48h notice</a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky reserve bar: visible on mobile and tablet, hidden from 1024px up -->
+  <div class="sticky-reserve">
+    <p class="sticky-reserve__text">
+      <span class="sticky-reserve__title">Made just for you</span>
+      <span class="sticky-reserve__sub">48h notice</span>
+    </p>
+    <a class="btn btn--primary" href="reserve-pastry.html">Reserve <span class="btn__arrow" aria-hidden="true">↗</span></a>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/utils/storage.js" defer></script>
+  <script src="js/utils/reservation-draft.js" defer></script>
+  <script src="js/utils/format.js" defer></script>
+  <script src="js/components/stepper.js" defer></script>
+  <script src="js/pages/reserve-details.js" defer></script>
+</body>
+</html>
