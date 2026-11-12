@@ -1,0 +1,151 @@
+/* =========================================================
+   Sodam Pastry · design tokens (css/base/variables.css)
+   Source: "A quiet little design language" UI kit.
+   Mobile-first: the values below are the 390px design.
+   Tablet and desktop overrides go in css/responsive.css.
+   Breakpoints (reference only): 768px tablet, 1024px desktop.
+   ========================================================= */
+
+:root {
+
+  /* ---------- 1. COLOUR PALETTE (exact hex codes from the kit) ---------- */
+  --color-white:      #FFFFFF;
+  --color-canvas:     #F9F9F7;  /* page background */
+  --color-cream:      #F5EFE6;  /* alternate sections, notices, footer */
+  --color-linen:      #EADFCF;  /* primary button, active chip, borders */
+  --color-beige:      #D9C7AE;
+  --color-taupe:      #A89479;  /* labels, small details (decoration) */
+  --color-ink:        #2B2B2B;  /* headings and main text */
+  --color-gold:       #C9A96E;  /* fine rules and borders only */
+  --color-dusty-rose: #E0B4B4;  /* tiny details, hover touches */
+  --color-rosewood:   #9B5A63;  /* Korean text, handwriting, accents */
+
+  /* Derived from the palette (the kit has no mid-grey for paragraphs).
+     Both pass WCAG AA contrast on canvas, white and cream. */
+  --color-text-soft:  #5E5A55;  /* paragraph text (soft ink) */
+  --color-taupe-text: #7A6A52;  /* taupe made readable for small text */
+
+  /* ---------- 2. SEMANTIC COLOURS (use these in the components) ---------- */
+  --color-bg:             var(--color-canvas);
+  --color-surface:        var(--color-white);
+  --color-surface-soft:   var(--color-cream);
+  --color-surface-strong: var(--color-linen);
+
+  --color-text:           var(--color-ink);
+  --color-text-muted:     var(--color-text-soft);
+  --color-text-label:     var(--color-taupe-text);  /* eyebrows, captions */
+  --color-text-accent:    var(--color-rosewood);
+
+  --color-border:         var(--color-linen);   /* cards, fields */
+  --color-border-strong:  var(--color-beige);
+  --color-line:           var(--color-gold);    /* dividers, button borders */
+
+  --color-focus:          var(--color-rosewood);
+  --color-error:          var(--color-rosewood);
+  --color-success:        var(--color-rosewood);
+
+  /* Gingham pattern from the photos (use with background-size: var(--gingham-size)) */
+  --gingham-size:   28px;
+  --pattern-gingham:
+    linear-gradient(rgba(217, 199, 174, .35) 50%, transparent 50%),
+    linear-gradient(90deg, rgba(217, 199, 174, .35) 50%, transparent 50%);
+
+  /* ---------- 3. TYPOGRAPHY ---------- */
+  --font-serif:  "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;  /* headings */
+  --font-label:  "Montserrat", "Helvetica Neue", Arial, sans-serif;                    /* nav, buttons, labels */
+  --font-sans:   "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;     /* body */
+  --font-korean: "Noto Serif KR", "Cormorant Garamond", serif;                          /* 소담 */
+  --font-hand:   "Gaegu", "Nanum Pen Script", "Comic Sans MS", cursive;                /* handwritten notes */
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold: 600;
+
+  /* Sizes. Kit: Cormorant 88 / 54 / 38 (desktop / tablet / mobile),
+     Montserrat 10 / 11, Inter 14 / 1.75 */
+  --fs-display: 2.375rem;  /* 38px  h1                      (tablet 54, desktop 88) */
+  --fs-h2:      2rem;      /* 32px  section titles          (tablet 40, desktop 48) */
+  --fs-h3:      1.75rem;   /* 28px  card titles             (desktop 30) */
+  --fs-h4:      1.25rem;   /* 20px  small headings */
+  --fs-lead:    1rem;      /* 16px  intro paragraphs        (desktop 18) */
+  --fs-body:    0.875rem;  /* 14px  body text */
+  --fs-small:   0.75rem;   /* 12px  help text, dates */
+  --fs-label:   0.625rem;  /* 10px  uppercase labels, eyebrows */
+  --fs-button:  0.6875rem; /* 11px  buttons, chips, nav */
+  --fs-script:  1.25rem;   /* 20px  handwritten notes */
+
+  --lh-display: 1.1;
+  --lh-heading: 1.15;
+  --lh-body:    1.75;      /* from the kit */
+  --lh-label:   1.4;
+
+  --tracking-label: 0.15em;  /* kit: +1.5 at 10px */
+  --tracking-wide:  0.2em;   /* kit: +2 at 10px */
+
+  /* ---------- 4. SPACING (4px base) ---------- */
+  --space-1:  0.25rem;  /*   4px */
+  --space-2:  0.5rem;   /*   8px */
+  --space-3:  0.75rem;  /*  12px */
+  --space-4:  1rem;     /*  16px */
+  --space-5:  1.25rem;  /*  20px */
+  --space-6:  1.5rem;   /*  24px */
+  --space-8:  2rem;     /*  32px */
+  --space-10: 2.5rem;   /*  40px */
+  --space-12: 3rem;     /*  48px */
+  --space-16: 4rem;     /*  64px */
+  --space-20: 5rem;     /*  80px */
+  --space-30: 7.5rem;   /* 120px */
+
+  --section-space: var(--space-16);  /* vertical padding of a section (desktop 120) */
+
+  /* ---------- 5. LAYOUT ---------- */
+  --container-max: 75rem;     /* 1200px */
+  --container-pad: 1.25rem;   /* 20px on mobile (tablet 32) */
+  --header-height: 5.75rem;   /* 92px (desktop 108) */
+  --sticky-bar-height: 5rem;  /* 80px "Made just for you" bar */
+  --tap-target:   2.75rem;    /* 44px minimum, from the kit */
+  --button-height: 3rem;      /* 48px */
+  --field-height:  3.25rem;   /* 52px */
+
+  /* ---------- 6. RADII ---------- */
+  --radius-xs:   4px;      /* polaroid frame */
+  --radius-sm:   12px;
+  --radius-md:   16px;     /* photos */
+  --radius-lg:   24px;     /* cards */
+  --radius-field: 20px;    /* inputs */
+  --radius-pill: 999px;    /* buttons, chips */
+
+  /* ---------- 7. BORDERS & SHADOWS ---------- */
+  --border-width:  1px;
+  --border-card:   var(--border-width) solid var(--color-border);
+  --border-gold:   var(--border-width) solid var(--color-line);
+  --border-dashed: var(--border-width) dashed var(--color-line);   /* upload box */
+
+  --shadow-soft:     0 8px 24px rgba(43, 43, 43, .06);
+  --shadow-polaroid: 0 10px 28px rgba(43, 43, 43, .08);
+
+  /* ---------- 8. DETAILS ---------- */
+  --tilt-left:  -1.5deg;   /* polaroids, 1 to 2 degrees */
+  --tilt-right:  1.5deg;
+  --opacity-disabled: .5;  /* disabled buttons */
+
+  /* ---------- 9. MOTION ---------- */
+  --ease:          cubic-bezier(.2, .7, .2, 1);
+  --duration-fast: 150ms;  /* hover */
+  --duration-base: 250ms;
+  --duration-slow: 600ms;  /* fade-up on scroll */
+
+  /* ---------- 10. LAYERS ---------- */
+  --z-sticky: 40;
+  --z-header: 50;
+  --z-modal:  100;
+}
+
+/* Calmer motion for people who ask for it */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}
