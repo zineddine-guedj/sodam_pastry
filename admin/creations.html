@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manage creations · Owner Studio · Sodam Pastry</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/base/variables.css">
+  <link rel="stylesheet" href="../css/base/reset.css">
+  <link rel="stylesheet" href="../css/base/typography.css">
+  <link rel="stylesheet" href="../css/components/buttons.css">
+  <link rel="stylesheet" href="../css/components/admin-navbar.css">
+  <link rel="stylesheet" href="../css/components/section-heading.css">
+  <link rel="stylesheet" href="../css/components/forms.css">
+  <link rel="stylesheet" href="../css/components/chips.css">
+  <link rel="stylesheet" href="../css/components/modal.css">
+  <link rel="stylesheet" href="../css/components/footer.css">
+  <link rel="stylesheet" href="../css/pages/admin-creations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="page-admin page-admin-creations">
+
+  <!-- ============ HEADER (owner studio) ============ -->
+  <header class="site-header site-header--admin">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="Sodam Pastry, view the website">
+        <img class="brand__logo" src="../assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__name">Owner Studio</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Owner menu">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="creations.html" aria-current="page">Creations</a></li>
+          <li><a class="nav__link" href="reservations.html">Reservations</a></li>
+          <li><a class="nav__link" href="../index.html">View website</a></li>
+        </ul>
+        <!-- admin-navbar.js clears the "logged in" flag and goes back to login.html -->
+        <button class="btn btn--primary" type="button" id="sign-out">Sign out <span class="btn__arrow" aria-hidden="true">↗</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container admin">
+
+      <!-- Studio tabs -->
+      <nav class="studio-tabs" aria-label="Studio sections">
+        <a class="chip is-active" href="creations.html" aria-current="page">Creations</a>
+        <a class="chip" href="reservations.html">Reservations</a>
+        <span class="studio-tabs__label">Private studio</span>
+      </nav>
+
+      <!-- ============ PAGE INTRO ============ -->
+      <header class="section-heading">
+        <p class="eyebrow">The owner’s little studio</p>
+        <img class="section-heading__flower" src="../assets/icons/flower.svg" alt="" width="20" height="20">
+        <h1 class="section-heading__title" id="page-title">Care for your creations</h1>
+        <p class="section-heading__intro">A new little masterpiece? Give it a place in the collection.</p>
+      </header>
+
+      <!-- ============ ADD / EDIT FORM ============ -->
+      <!-- The same form is used to add a creation and to edit one (the Edit buttons below fill it).
+           The design shows a filled example; this version starts empty. -->
+      <section class="form-card" aria-labelledby="form-title">
+        <h2 class="form-card__title" id="form-title">Add a new creation</h2>
+
+        <form id="creation-form" novalidate>
+          <input type="hidden" name="id" id="creation-id" value="">
+
+          <!-- Photos -->
+          <div class="field">
+            <span class="eyebrow" id="photos-label">Creation photos · multiple images</span>
+            <label class="dropzone" for="creation-photos">
+              <img class="dropzone__icon" src="../assets/icons/image-plus.svg" alt="" width="28" height="28">
+              <span class="dropzone__text">Drop your photos here, or browse files</span>
+              <span class="dropzone__hint">JPG / PNG · up to 10 MB each</span>
+            </label>
+            <input class="visually-hidden" type="file" id="creation-photos" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="photos-label">
+
+            <!-- admin-creations.js adds one <li> per photo, from the template below -->
+            <ul class="photo-previews" id="photo-previews"></ul>
+            <p class="field__help" id="photo-status" aria-live="polite">No photos yet · The first image will be your cover. Add more views to tell the whole little story.</p>
+
+            <template id="photo-template">
+              <li class="photo-preview">
+                <img class="photo-preview__img" src="" alt="">
+                <span class="photo-preview__label">Detail photo</span>
+                <button class="link-button" type="button" data-action="remove-photo">Remove</button>
+              </li>
+            </template>
+          </div>
+
+          <!-- Title -->
+          <div class="field" data-field="title">
+            <label class="field__label" for="creation-title">Creation title <span aria-hidden="true">*</span></label>
+            <input class="field__input" type="text" id="creation-title" name="title" placeholder="Fruit &amp; Flower Cream Cake" required aria-describedby="creation-title-message">
+            <p class="field__message" id="creation-title-message" hidden data-empty="Please give your creation a title."></p>
+          </div>
+
+          <!-- Description -->
+          <div class="field" data-field="description">
+            <label class="field__label" for="creation-description">Short description <span aria-hidden="true">*</span></label>
+            <textarea class="field__input field__textarea" id="creation-description" name="description" rows="4" placeholder="A little garden of sweetness, where every bite feels like a summer dream." required aria-describedby="creation-description-help creation-description-message"></textarea>
+            <p class="field__help" id="creation-description-help">A short, warm description for the gallery card.</p>
+            <p class="field__message" id="creation-description-message" hidden data-empty="Please add a short description."></p>
+          </div>
+
+          <!-- Category: the select is the real field, the chips are quick picks kept in sync by the script -->
+          <div class="field" data-field="category">
+            <label class="field__label" for="creation-category">Category <span aria-hidden="true">*</span></label>
+            <select class="field__input field__select" id="creation-category" name="category" required aria-describedby="creation-category-message">
+              <option value="" selected disabled>Choose a category</option>
+              <option value="pavlova">Pavlova</option>
+              <option value="dome-cakes">Dome cakes</option>
+              <option value="custom-cakes">Custom cakes</option>
+              <option value="fruit-cakes">Fruit cakes</option>
+              <option value="seasonal">Seasonal</option>
+            </select>
+
+            <div class="chips" role="group" aria-label="Quick category pick">
+              <button class="chip" type="button" data-category="pavlova" aria-pressed="false">Pavlova</button>
+              <button class="chip" type="button" data-category="dome-cakes" aria-pressed="false">Dome cakes</button>
+              <button class="chip" type="button" data-category="custom-cakes" aria-pressed="false">Custom cakes</button>
+              <button class="chip" type="button" data-category="fruit-cakes" aria-pressed="false">Fruit cakes</button>
+              <button class="chip" type="button" data-category="seasonal" aria-pressed="false">Seasonal</button>
+            </div>
+            <p class="field__message" id="creation-category-message" hidden data-empty="Please choose a category."></p>
+          </div>
+
+          <!-- Date -->
+          <div class="field" data-field="date">
+            <label class="field__label" for="creation-date">Creation date <span aria-hidden="true">*</span></label>
+            <input class="field__input" type="date" id="creation-date" name="date" required aria-describedby="creation-date-message">
+            <p class="field__message" id="creation-date-message" hidden data-empty="Please choose the creation date."></p>
+          </div>
+
+          <!-- Publish switch -->
+          <div class="field switch-field">
+            <span class="eyebrow" id="publish-label">Publish to gallery</span>
+            <div class="switch-row">
+              <p class="switch-row__text" id="publish-text" aria-live="polite"
+                 data-on="On · Visible to your visitors after saving."
+                 data-off="Off · Saved as a draft, hidden from visitors.">On · Visible to your visitors after saving.</p>
+              <label class="switch">
+                <input type="checkbox" role="switch" id="creation-publish" name="publish" checked aria-labelledby="publish-label">
+                <span class="switch__track" aria-hidden="true"></span>
+              </label>
+            </div>
+          </div>
+
+          <hr class="form-card__divider">
+
+          <div class="form-actions">
+            <button class="btn btn--primary" type="submit" name="status" value="published">Publish creation <span class="btn__arrow" aria-hidden="true">↗</span></button>
+            <button class="btn btn--secondary" type="submit" name="status" value="draft">Save as draft <span class="btn__arrow" aria-hidden="true">↗</span></button>
+            <button class="btn btn--ghost" type="reset">Clear form</button>
+          </div>
+
+          <!-- Shown by admin-creations.js after saving (text is a placeholder to confirm) -->
+          <p class="form-success" id="form-status" role="status" hidden>Saved! Your creation is in the collection.</p>
+        </form>
+      </section>
+
+      <!-- ============ COLLECTION ============ -->
+      <section class="collection" aria-labelledby="collection-title">
+        <header class="collection__head">
+          <h2 class="collection__title" id="collection-title">Your collection</h2>
+          <p class="collection__count" id="collection-count" aria-live="polite">6 creations</p>
+        </header>
+
+        <!-- Sample list from the design. admin-creations.js should build it from localStorage / data/creations.json. -->
+        <ul class="collection__list" id="collection-list">
+
+          <li class="creation-row" data-id="individual-pavlova">
+            <img class="creation-row__img" src="../assets/images/creations/pavlova.jpg" alt="" width="72" height="72" loading="lazy">
+            <div class="creation-row__info">
+              <h3 class="creation-row__title">Individual Pavlova</h3>
+              <p class="creation-row__category">Pavlova</p>
+            </div>
+            <time class="creation-row__date" datetime="2026-10-24">24 Oct 2026</time>
+            <div class="creation-row__actions">
+              <span class="chip chip--status chip--published">Published</span>
+              <button class="link-button" type="button" data-action="edit" aria-label="Edit Individual Pavlova">Edit</button>
+              <button class="link-button" type="button" data-action="delete" aria-label="Delete Individual Pavlova">Delete</button>
+            </div>
+          </li>
+
+          <li class="creation-row" data-id="dome-cake">
+            <img class="creation-row__img" src="../assets/images/creations/dome-cake.jpg" alt="" width="72" height="72" loading="lazy">
+            <div class="creation-row__info">
+              <h3 class="creation-row__title">Dome Cake</h3>
+              <p class="creation-row__category">Dome cakes</p>
+            </div>
+            <time class="creation-row__date" datetime="2026-10-22">22 Oct 2026</time>
+            <div class="creation-row__actions">
+              <span class="chip chip--status chip--published">Published</span>
+              <button class="link-button" type="button" data-action="edit" aria-label="Edit Dome Cake">Edit</button>
+              <button class="link-button" type="button" data-action="delete" aria-label="Delete Dome Cake">Delete</button>
+            </div>
+          </li>
+
+          <li class="creation-row" data-id="fruit-flower-cream-cake">
+            <img class="creation-row__img" src="../assets/images/creations/fruit-cake.jpg" alt="" width="72" height="72" loading="lazy">
+            <div class="creation-row__info">
+              <h3 class="creation-row__title">Fruit &amp; Flower Cream Cake</h3>
+              <p class="creation-row__category">Fruit cakes</p>
+            </div>
+            <time class="creation-row__date" datetime="2026-10-20">20 Oct 2026</time>
+            <div class="creation-row__actions">
+              <span class="chip chip--status chip--published">Published</span>
+              <button class="link-button" type="button" data-action="edit" aria-label="Edit Fruit &amp; Flower Cream Cake">Edit</button>
+              <button class="link-button" type="button" data-action="delete" aria-label="Delete Fruit &amp; Flower Cream Cake">Delete</button>
+            </div>
+          </li>
+
+          <li class="creation-row" data-id="a-ribbon-of-joy">
+            <img class="creation-row__img" src="../assets/images/creations/ribbon-cake.jpg" alt="" width="72" height="72" loading="lazy">
+            <div class="creation-row__info">
+              <h3 class="creation-row__title">A Ribbon of Joy</h3>
+              <p class="creation-row__category">Custom cakes</p>
+            </div>
+            <time class="creation-row__date" datetime="2026-10-18">18 Oct 2026</time>
+            <div class="creation-row__actions">
+              <span class="chip chip--status chip--published">Published</span>
+              <button class="link-button" type="button" data-action="edit" aria-label="Edit A Ribbon of Joy">Edit</button>
+              <button class="link-button" type="button" data-action="delete" aria-label="Delete A Ribbon of Joy">Delete</button>
+            </div>
+          </li>
+
+          <li class="creation-row" data-id="the-little-dessert-box">
+            <img class="creation-row__img" src="../assets/images/creations/dessert-box.jpg" alt="" width="72" height="72" loading="lazy">
+            <div class="creation-row__info">
+              <h3 class="creation-row__title">The Little Dessert Box</h3>
+              <p class="creation-row__category">Seasonal</p>
+            </div>
+            <time class="creation-row__date" datetime="2026-10-16">16 Oct 2026</time>
+            <div class="creation-row__actions">
+              <span class="chip chip--status chip--published">Published</span>
+              <button class="link-button" type="button" data-action="edit" aria-label="Edit The Little Dessert Box">Edit</button>
+              <button class="link-button" type="button" data-action="delete" aria-label="Delete The Little Dessert Box">Delete</button>
+            </div>
+          </li>
+
+          <li class="creation-row" data-id="peach-afternoon">
+            <img class="creation-row__img" src="../assets/images/creations/peach-cake.jpg" alt="" width="72" height="72" loading="lazy">
+            <div class="creation-row__info">
+              <h3 class="creation-row__title">Peach Afternoon</h3>
+              <p class="creation-row__category">Seasonal</p>
+            </div>
+            <time class="creation-row__date" datetime="2026-10-12">12 Oct 2026</time>
+            <div class="creation-row__actions">
+              <span class="chip chip--status chip--published">Published</span>
+              <button class="link-button" type="button" data-action="edit" aria-label="Edit Peach Afternoon">Edit</button>
+              <button class="link-button" type="button" data-action="delete" aria-label="Delete Peach Afternoon">Delete</button>
+            </div>
+          </li>
+
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ DELETE CONFIRMATION (UI kit modal) ============ -->
+  <dialog class="modal" id="delete-dialog" aria-labelledby="delete-title">
+    <form method="dialog" class="modal__box">
+      <button class="modal__close" type="submit" value="keep" aria-label="Close">×</button>
+      <p class="eyebrow">A little pause</p>
+      <h2 class="modal__title" id="delete-title">Remove this creation?</h2>
+      <p>It will leave your gallery. Existing reservation requests will keep their details.</p>
+      <div class="modal__actions">
+        <button class="btn btn--secondary" type="submit" value="keep">Keep it <span class="btn__arrow" aria-hidden="true">↗</span></button>
+        <button class="btn btn--primary" type="submit" value="remove" id="confirm-remove">Remove creation <span class="btn__arrow" aria-hidden="true">↗</span></button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ============ FOOTER (owner studio) ============ -->
+  <footer class="site-footer site-footer--admin">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="../index.html" aria-label="Sodam Pastry, view the website">
+          <img class="brand__logo" src="../assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Owner studio · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <p>Private workspace · Sodam Pastry</p>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/utils/storage.js" defer></script>
+  <script src="../js/utils/validators.js" defer></script>
+  <script src="../js/utils/format.js" defer></script>
+  <script src="../js/components/modal.js" defer></script>
+  <script src="../js/components/admin-navbar.js" defer></script>
+  <script src="../js/pages/admin-creations.js" defer></script>
+</body>
+</html>
