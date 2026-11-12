@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manage reservations · Owner Studio · Sodam Pastry</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/base/variables.css">
+  <link rel="stylesheet" href="../css/base/reset.css">
+  <link rel="stylesheet" href="../css/base/typography.css">
+  <link rel="stylesheet" href="../css/components/buttons.css">
+  <link rel="stylesheet" href="../css/components/admin-navbar.css">
+  <link rel="stylesheet" href="../css/components/section-heading.css">
+  <link rel="stylesheet" href="../css/components/chips.css">
+  <link rel="stylesheet" href="../css/components/cards.css">
+  <link rel="stylesheet" href="../css/components/tables.css">
+  <link rel="stylesheet" href="../css/components/footer.css">
+  <link rel="stylesheet" href="../css/pages/admin-reservations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="page-admin page-admin-reservations">
+
+  <!-- ============ HEADER (owner studio) ============ -->
+  <header class="site-header site-header--admin">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="Sodam Pastry, view the website">
+        <img class="brand__logo" src="../assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__name">Owner Studio</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Owner menu">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="creations.html">Creations</a></li>
+          <li><a class="nav__link" href="reservations.html" aria-current="page">Reservations</a></li>
+          <li><a class="nav__link" href="../index.html">View website</a></li>
+        </ul>
+        <!-- admin-navbar.js clears the "logged in" flag and goes back to login.html -->
+        <button class="btn btn--primary" type="button" id="sign-out">Sign out <span class="btn__arrow" aria-hidden="true">↗</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container admin">
+
+      <!-- Studio tabs -->
+      <nav class="studio-tabs" aria-label="Studio sections">
+        <a class="chip" href="creations.html">Creations</a>
+        <a class="chip is-active" href="reservations.html" aria-current="page">Reservations</a>
+        <span class="studio-tabs__label">Private studio</span>
+      </nav>
+
+      <!-- ============ PAGE INTRO ============ -->
+      <header class="section-heading">
+        <p class="eyebrow">The owner’s little studio</p>
+        <img class="section-heading__flower" src="../assets/icons/flower.svg" alt="" width="20" height="20">
+        <h1 class="section-heading__title" id="page-title">Sweet moments, waiting for you</h1>
+        <p class="section-heading__intro">Read each request, check the little details, then reach out personally to confirm.</p>
+      </header>
+
+      <!-- ============ SUMMARY NUMBERS ============ -->
+      <!-- admin-reservations.js recounts these from the saved reservations -->
+      <ul class="stats" aria-label="Reservation summary">
+        <li class="stat">
+          <span class="stat__number" id="count-new">02</span>
+          <span class="stat__label">New requests</span>
+        </li>
+        <li class="stat">
+          <span class="stat__number" id="count-confirmed">01</span>
+          <span class="stat__label">Confirmed</span>
+        </li>
+        <li class="stat">
+          <span class="stat__number" id="count-completed">01</span>
+          <span class="stat__label">Completed</span>
+        </li>
+        <li class="stat">
+          <span class="stat__number" id="count-cancelled">01</span>
+          <span class="stat__label">Cancelled</span>
+        </li>
+      </ul>
+
+      <!-- ============ FILTERS ============ -->
+      <div class="chips" role="group" aria-label="Filter reservations by status">
+        <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All · <span data-count="all">5</span></button>
+        <button class="chip" type="button" data-filter="new" aria-pressed="false">New · <span data-count="new">2</span></button>
+        <button class="chip" type="button" data-filter="confirmed" aria-pressed="false">Confirmed · <span data-count="confirmed">1</span></button>
+        <button class="chip" type="button" data-filter="completed" aria-pressed="false">Completed · <span data-count="completed">1</span></button>
+        <button class="chip" type="button" data-filter="cancelled" aria-pressed="false">Cancelled · <span data-count="cancelled">1</span></button>
+      </div>
+
+      <p class="list-label" id="list-label" aria-live="polite">All reservations · Newest first</p>
+
+      <!-- ============ RESERVATIONS LIST ============ -->
+      <!-- Sample requests from the design. admin-reservations.js should build the list from
+           localStorage (reservations saved on reserve-review.html) and data/reservations.json. -->
+      <ul class="reservation-list" id="reservation-list">
+
+        <li class="reservation-card is-new" data-id="SD-0107" data-status="new">
+          <p class="reservation-card__ref">SD-0107</p>
+          <h2 class="reservation-card__name">Yasmine Benali</h2>
+          <div class="reservation-card__pastry">
+            <img class="reservation-card__img" src="../assets/images/creations/fruit-cake.jpg" alt="" width="72" height="72" loading="lazy">
+            <div>
+              <p class="reservation-card__title">Fruit &amp; Flower Cream Cake</p>
+              <p class="reservation-card__size">Medium · 6–8 servings</p>
+            </div>
+          </div>
+          <p class="reservation-card__date"><time datetime="2026-11-07">7 Nov 2026</time></p>
+          <p class="reservation-card__time">14:00–16:00</p>
+          <div class="reservation-card__foot">
+            <span class="chip chip--status chip--new">New</span>
+            <button class="link-button" type="button" data-action="review" aria-controls="closer-look" aria-label="Review request SD-0107, Yasmine Benali">Review</button>
+          </div>
+        </li>
+
+        <li class="reservation-card is-new" data-id="SD-0106" data-status="new">
+          <p class="reservation-card__ref">SD-0106</p>
+          <h2 class="reservation-card__name">Amira Haddad</h2>
+          <div class="reservation-card__pastry">
+            <img class="reservation-card__img" src="../assets/images/creations/pavlova.jpg" alt="" width="72" height="72" loading="lazy">
+            <div>
+              <p class="reservation-card__title">Individual Pavlova</p>
+              <p class="reservation-card__size">Box of 6 · 6 servings</p>
+            </div>
+          </div>
+          <p class="reservation-card__date"><time datetime="2026-11-06">6 Nov 2026</time></p>
+          <p class="reservation-card__time">10:00–12:00</p>
+          <div class="reservation-card__foot">
+            <span class="chip chip--status chip--new">New</span>
+            <button class="link-button" type="button" data-action="review" aria-controls="closer-look" aria-label="Review request SD-0106, Amira Haddad">Review</button>
+          </div>
+        </li>
+
+        <li class="reservation-card" data-id="SD-0105" data-status="confirmed">
+          <p class="reservation-card__ref">SD-0105</p>
+          <h2 class="reservation-card__name">Lina Meziane</h2>
+          <div class="reservation-card__pastry">
+            <img class="reservation-card__img" src="../assets/images/creations/dome-cake.jpg" alt="" width="72" height="72" loading="lazy">
+            <div>
+              <p class="reservation-card__title">Dome Cake</p>
+              <p class="reservation-card__size">Small · 4–6 servings</p>
+            </div>
+          </div>
+          <p class="reservation-card__date"><time datetime="2026-11-05">5 Nov 2026</time></p>
+          <p class="reservation-card__time">14:00–16:00</p>
+          <div class="reservation-card__foot">
+            <span class="chip chip--status chip--confirmed">Confirmed</span>
+            <button class="link-button" type="button" data-action="review" aria-controls="closer-look" aria-label="Review request SD-0105, Lina Meziane">Review</button>
+          </div>
+        </li>
+
+        <li class="reservation-card" data-id="SD-0104" data-status="completed">
+          <p class="reservation-card__ref">SD-0104</p>
+          <h2 class="reservation-card__name">Sarah Aït Ali</h2>
+          <div class="reservation-card__pastry">
+            <img class="reservation-card__img" src="../assets/images/creations/dessert-box.jpg" alt="" width="72" height="72" loading="lazy">
+            <div>
+              <p class="reservation-card__title">The Little Dessert Box</p>
+              <p class="reservation-card__size">Box of 8 · 4 servings</p>
+            </div>
+          </div>
+          <p class="reservation-card__date"><time datetime="2026-10-30">30 Oct 2026</time></p>
+          <p class="reservation-card__time">16:00–18:00</p>
+          <div class="reservation-card__foot">
+            <span class="chip chip--status chip--completed">Completed</span>
+            <button class="link-button" type="button" data-action="review" aria-controls="closer-look" aria-label="Review request SD-0104, Sarah Aït Ali">Review</button>
+          </div>
+        </li>
+
+        <li class="reservation-card" data-id="SD-0103" data-status="cancelled">
+          <p class="reservation-card__ref">SD-0103</p>
+          <h2 class="reservation-card__name">Nour Bensaïd</h2>
+          <div class="reservation-card__pastry">
+            <img class="reservation-card__img" src="../assets/images/creations/ribbon-cake.jpg" alt="" width="72" height="72" loading="lazy">
+            <div>
+              <p class="reservation-card__title">A Ribbon of Joy</p>
+              <p class="reservation-card__size">Medium · 6–8 servings</p>
+            </div>
+          </div>
+          <p class="reservation-card__date"><time datetime="2026-10-28">28 Oct 2026</time></p>
+          <p class="reservation-card__time">10:00–12:00</p>
+          <div class="reservation-card__foot">
+            <span class="chip chip--status chip--cancelled">Cancelled</span>
+            <button class="link-button" type="button" data-action="review" aria-controls="closer-look" aria-label="Review request SD-0103, Nour Bensaïd">Review</button>
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- Empty state (UI kit). Shown by the script when a filter has no results. -->
+      <div class="empty-state" id="empty-state" hidden>
+        <img class="empty-state__icon" src="../assets/icons/inbox.svg" alt="" width="28" height="28">
+        <h2 class="empty-state__title">A quiet moment in the kitchen</h2>
+        <p>No new reservations yet. Your next little moment of joy will appear here.</p>
+        <button class="btn btn--secondary" type="button" id="view-all">View all reservations <span class="btn__arrow" aria-hidden="true">↗</span></button>
+      </div>
+
+      <!-- ============ A CLOSER LOOK ============ -->
+      <!-- Sample request SD-0107. admin-reservations.js fills this panel when "Review" is pressed
+           (every field with an id) and moves focus here. -->
+      <section class="closer-look" id="closer-look" tabindex="-1" aria-labelledby="closer-title" aria-live="polite" data-id="SD-0107">
+        <header class="closer-look__head">
+          <h2 class="closer-look__title" id="closer-title">A closer look · <span id="look-ref">SD-0107</span></h2>
+          <span class="chip chip--status chip--new" id="look-status">New</span>
+        </header>
+
+        <div class="closer-look__block">
+          <h3 class="closer-look__label" id="look-name">Yasmine Benali</h3>
+          <p id="look-phone">+213 555 010 107</p>
+          <p id="look-where">Delivery · 12 Rue des Jasmins</p>
+          <p id="look-area">Hydra, Algiers</p>
+          <p id="look-when">7 Nov 2026 · 14:00–16:00</p>
+        </div>
+
+        <div class="closer-look__block">
+          <h3 class="closer-look__label" id="look-pastry">Fruit &amp; Flower Cream Cake · Medium</h3>
+          <p id="look-servings">6–8 servings · 1 cake</p>
+          <p id="look-message">Message: “Happy birthday, Lina”</p>
+          <p id="look-allergies">No nuts, please. Blush flowers.</p>
+          <p id="look-photo">Inspiration photo: not added</p>
+        </div>
+
+        <aside class="notice" aria-label="Allergy reminder">
+          <img class="notice__icon" src="../assets/icons/heart.svg" alt="" width="20" height="20">
+          <div>
+            <p class="notice__title">Check allergy requirements before confirming</p>
+            <p>This request has no final quote. Discuss safe preparation, availability and delivery with <span id="look-first-name">Yasmine</span> first.</p>
+          </div>
+        </aside>
+
+        <div class="closer-look__actions">
+          <!-- admin-reservations.js sets the href with whatsapp.js (client's number + request number) -->
+          <a class="btn btn--primary" id="look-whatsapp" href="https://wa.me/213555010107" target="_blank" rel="noopener">Message on WhatsApp <span class="btn__arrow" aria-hidden="true">↗</span></a>
+          <button class="btn btn--secondary" type="button" data-action="confirm">Mark confirmed <span class="btn__arrow" aria-hidden="true">↗</span></button>
+          <button class="btn btn--ghost" type="button" data-action="complete">Mark completed</button>
+          <button class="btn btn--ghost" type="button" data-action="cancel">Cancel request</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ FOOTER (owner studio) ============ -->
+  <footer class="site-footer site-footer--admin">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="../index.html" aria-label="Sodam Pastry, view the website">
+          <img class="brand__logo" src="../assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Owner studio · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <p>Private workspace · Sodam Pastry</p>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/utils/storage.js" defer></script>
+  <script src="../js/utils/format.js" defer></script>
+  <script src="../js/utils/whatsapp.js" defer></script>
+  <script src="../js/components/admin-navbar.js" defer></script>
+  <script src="../js/pages/admin-reservations.js" defer></script>
+</body>
+</html>
