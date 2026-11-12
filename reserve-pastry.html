@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserve · Choose your pastry · Sodam Pastry</title>
+  <meta name="description" content="Step 1 of 4. Choose your little joy: individual pavlova, dome cake, custom cake, fruit cream cake or dessert box. Handmade in Algiers by Sodam Pastry.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/section-heading.css">
+  <link rel="stylesheet" href="css/components/stepper.css">
+  <link rel="stylesheet" href="css/components/forms.css">
+  <link rel="stylesheet" href="css/components/chips.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/pages/reserve.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-reserve page-reserve-pastry">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Sodam Pastry, home">
+        <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__tagline">A Quiet Abundance of Joy</span>
+        <span class="brand__name">Sodam Pastry</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="creations.html">Creations</a></li>
+          <li><a class="nav__link" href="reserve-pastry.html" aria-current="page">Reserve</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary" href="reserve-pastry.html">Order now <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container reserve">
+
+      <!-- ============ PROGRESS ============ -->
+      <p class="eyebrow reserve__kicker">Made by hand, reserved with love</p>
+
+      <!-- stepper.js can set aria-current="step" and the is-current / is-done classes from the page's body class -->
+      <ol class="stepper" aria-label="Reservation progress">
+        <li class="stepper__step is-current" aria-current="step">
+          <span class="stepper__dot">1</span>
+          <span class="stepper__label">Pastry</span>
+        </li>
+        <li class="stepper__step">
+          <span class="stepper__dot">2</span>
+          <span class="stepper__label">Details</span>
+        </li>
+        <li class="stepper__step">
+          <span class="stepper__dot">3</span>
+          <span class="stepper__label">Contact</span>
+        </li>
+        <li class="stepper__step">
+          <span class="stepper__dot">4</span>
+          <span class="stepper__label">Review</span>
+        </li>
+      </ol>
+
+      <!-- ============ STEP 1 ============ -->
+      <section class="reserve__step" aria-labelledby="step-title">
+        <header class="section-heading">
+          <p class="eyebrow">Your reservation · Step 1 of 4</p>
+          <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+          <h1 class="section-heading__title" id="step-title">Choose your little joy</h1>
+          <p class="section-heading__intro">Something light, something lovely. What shall we make for you?</p>
+        </header>
+
+        <!-- Shown by reserve-pastry.js only when the visitor arrives from a creation (?creation=… or ?pastry=…) -->
+        <aside class="notice" id="preselect-notice" aria-label="Preselected creation">
+          <img class="notice__icon" src="assets/icons/heart.svg" alt="" width="20" height="20">
+          <div>
+            <p class="notice__title">From the gallery, with love</p>
+            <p>Fruit &amp; Flower Cream Cake is preselected. Keep your favourite or choose another creation below.</p>
+          </div>
+        </aside>
+
+        <form class="reserve__form" id="pastry-form" action="reserve-details.html" method="get">
+
+          <!-- Pastry choice: radio buttons styled as photo cards -->
+          <fieldset class="pastry-options">
+            <legend class="visually-hidden">Choose a pastry</legend>
+
+            <label class="pastry-option">
+              <input class="pastry-option__input" type="radio" name="pastry" value="pavlova" data-name="Individual Pavlova">
+              <span class="pastry-option__card">
+                <img src="assets/images/creations/pavlova.jpg" alt="Individual pavlova with berries on a speckled plate" width="640" height="360" loading="lazy">
+                <span class="pastry-option__title">Individual Pavlova</span>
+                <span class="pastry-option__cta">Choose this</span>
+                <span class="pastry-option__selected"><img src="assets/icons/check-circle.svg" alt="" width="16" height="16"> Selected for your reservation</span>
+              </span>
+            </label>
+
+            <label class="pastry-option">
+              <input class="pastry-option__input" type="radio" name="pastry" value="dome-cake" data-name="Dome Cake">
+              <span class="pastry-option__card">
+                <img src="assets/images/creations/dome-cake.jpg" alt="Pale pink dome cake with raspberries on a cake stand" width="640" height="360" loading="lazy">
+                <span class="pastry-option__title">Dome Cake</span>
+                <span class="pastry-option__cta">Choose this</span>
+                <span class="pastry-option__selected"><img src="assets/icons/check-circle.svg" alt="" width="16" height="16"> Selected for your reservation</span>
+              </span>
+            </label>
+
+            <label class="pastry-option">
+              <input class="pastry-option__input" type="radio" name="pastry" value="custom-cake" data-name="Custom Cake">
+              <span class="pastry-option__card">
+                <img src="assets/images/creations/ribbon-cake.jpg" alt="Small white cake decorated with pink piped ribbons and tiny flowers" width="640" height="360" loading="lazy">
+                <span class="pastry-option__title">Custom Cake</span>
+                <span class="pastry-option__cta">Choose this</span>
+                <span class="pastry-option__selected"><img src="assets/icons/check-circle.svg" alt="" width="16" height="16"> Selected for your reservation</span>
+              </span>
+            </label>
+
+            <label class="pastry-option">
+              <input class="pastry-option__input" type="radio" name="pastry" value="fruit-cream-cake" data-name="Fruit &amp; Flower Cream Cake" checked>
+              <span class="pastry-option__card">
+                <img src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peaches and small flowers" width="640" height="360" loading="lazy">
+                <span class="pastry-option__title">Fruit Cream Cake</span>
+                <span class="pastry-option__cta">Choose this</span>
+                <span class="pastry-option__selected"><img src="assets/icons/check-circle.svg" alt="" width="16" height="16"> Selected for your reservation</span>
+              </span>
+            </label>
+
+            <label class="pastry-option">
+              <input class="pastry-option__input" type="radio" name="pastry" value="dessert-box" data-name="Dessert Box">
+              <span class="pastry-option__card">
+                <img src="assets/images/creations/dessert-box.jpg" alt="Kraft dessert box of mini pavlovas and fruit tarts tied with a gingham ribbon" width="640" height="360" loading="lazy">
+                <span class="pastry-option__title">Dessert Box</span>
+                <span class="pastry-option__cta">Choose this</span>
+                <span class="pastry-option__selected"><img src="assets/icons/check-circle.svg" alt="" width="16" height="16"> Selected for your reservation</span>
+              </span>
+            </label>
+          </fieldset>
+
+          <!-- Selected creation: size + quantity -->
+          <section class="selection" aria-labelledby="selection-title">
+            <p class="eyebrow">Your selected creation</p>
+            <h2 class="selection__title" id="selection-title">Fruit &amp; Flower Cream Cake</h2>
+            <p class="selection__text">Choose a size for your gathering. Serving guides are approximate; we’ll confirm the details together.</p>
+
+            <fieldset class="size-options">
+              <legend class="visually-hidden">Size</legend>
+              <label class="chip-radio">
+                <input type="radio" name="size" value="small" data-servings="4–6">
+                <span class="chip">Small · 4–6</span>
+              </label>
+              <label class="chip-radio">
+                <input type="radio" name="size" value="medium" data-servings="6–8" checked>
+                <span class="chip">Medium · 6–8</span>
+              </label>
+              <label class="chip-radio">
+                <input type="radio" name="size" value="large" data-servings="10–12">
+                <span class="chip">Large · 10–12</span>
+              </label>
+            </fieldset>
+
+            <div class="quantity" role="group" aria-labelledby="quantity-label">
+              <span class="quantity__label" id="quantity-label">Quantity</span>
+              <button class="quantity__btn" type="button" id="qty-minus" aria-label="Decrease quantity">−</button>
+              <output class="quantity__value" id="qty-value" for="qty-minus qty-plus" aria-live="polite">1 cake</output>
+              <button class="quantity__btn" type="button" id="qty-plus" aria-label="Increase quantity">+</button>
+              <input type="hidden" name="quantity" id="qty-input" value="1">
+            </div>
+          </section>
+
+          <div class="reserve__actions">
+            <p class="script-note">take your time ♡</p>
+            <button class="btn btn--primary" type="submit">Continue <span class="btn__arrow" aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="index.html" aria-label="Sodam Pastry, home">
+          <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Handmade with care · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <a href="contact.html">Contact us · Orders require 48h notice</a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky reserve bar: visible on mobile and tablet, hidden from 1024px up -->
+  <div class="sticky-reserve">
+    <p class="sticky-reserve__text">
+      <span class="sticky-reserve__title">Made just for you</span>
+      <span class="sticky-reserve__sub">48h notice</span>
+    </p>
+    <a class="btn btn--primary" href="reserve-pastry.html">Reserve <span class="btn__arrow" aria-hidden="true">↗</span></a>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/utils/storage.js" defer></script>
+  <script src="js/utils/reservation-draft.js" defer></script>
+  <script src="js/components/stepper.js" defer></script>
+  <script src="js/pages/reserve-pastry.js" defer></script>
+</body>
+</html>

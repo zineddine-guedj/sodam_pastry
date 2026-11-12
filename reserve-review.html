@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserve · A last little look · Sodam Pastry</title>
+  <meta name="description" content="Step 4 of 4. Check your reservation details before sending them to Sodam Pastry's kitchen.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/section-heading.css">
+  <link rel="stylesheet" href="css/components/stepper.css">
+  <link rel="stylesheet" href="css/components/receipt.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/pages/reserve.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-reserve page-reserve-review">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Sodam Pastry, home">
+        <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__tagline">A Quiet Abundance of Joy</span>
+        <span class="brand__name">Sodam Pastry</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="creations.html">Creations</a></li>
+          <li><a class="nav__link" href="reserve-pastry.html" aria-current="page">Reserve</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary" href="reserve-pastry.html">Order now <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container reserve">
+
+      <!-- ============ PROGRESS ============ -->
+      <p class="eyebrow reserve__kicker">Made by hand, reserved with love</p>
+
+      <ol class="stepper" aria-label="Reservation progress">
+        <li class="stepper__step is-done">
+          <span class="stepper__dot"><span aria-hidden="true">✓</span><span class="visually-hidden">Completed:</span></span>
+          <span class="stepper__label">Pastry</span>
+        </li>
+        <li class="stepper__step is-done">
+          <span class="stepper__dot"><span aria-hidden="true">✓</span><span class="visually-hidden">Completed:</span></span>
+          <span class="stepper__label">Details</span>
+        </li>
+        <li class="stepper__step is-done">
+          <span class="stepper__dot"><span aria-hidden="true">✓</span><span class="visually-hidden">Completed:</span></span>
+          <span class="stepper__label">Contact</span>
+        </li>
+        <li class="stepper__step is-current" aria-current="step">
+          <span class="stepper__dot">4</span>
+          <span class="stepper__label">Review</span>
+        </li>
+      </ol>
+
+      <!-- ============ STEP 4 ============ -->
+      <section class="reserve__step" aria-labelledby="step-title">
+        <header class="section-heading">
+          <p class="eyebrow">Your reservation · Step 4 of 4</p>
+          <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+          <h1 class="section-heading__title" id="step-title">A last little look</h1>
+          <p class="section-heading__intro">Your wishes, gathered in one place. Check the details before sending them to our kitchen.</p>
+        </header>
+
+        <!-- The text inside the receipt is the sample data from the design.
+             reserve-review.js should replace each field marked with an id using the saved draft. -->
+        <article class="receipt" aria-labelledby="receipt-title">
+          <header class="receipt__head">
+            <img class="receipt__logo" src="assets/logo/sodam-logo.png" alt="" width="76" height="76">
+            <div>
+              <p class="receipt__eyebrow">Your little box of joy</p>
+              <h2 class="receipt__title" id="receipt-title">Request · <span id="receipt-ref">SD-0107</span></h2>
+            </div>
+          </header>
+
+          <section class="receipt__section" aria-labelledby="r-pastry">
+            <div class="receipt__row">
+              <h3 class="receipt__label" id="r-pastry">Your pastry</h3>
+              <a class="receipt__change" href="reserve-pastry.html">Change pastry</a>
+            </div>
+            <p id="receipt-pastry">Fruit &amp; Flower Cream Cake</p>
+            <p id="receipt-size">Medium · 6–8 servings</p>
+          </section>
+
+          <section class="receipt__section" aria-labelledby="r-when">
+            <div class="receipt__row">
+              <h3 class="receipt__label" id="r-when">When &amp; where</h3>
+              <a class="receipt__change" href="reserve-details.html">Change details</a>
+            </div>
+            <p id="receipt-when">Sat, 7 Nov 2026 · 14:00–16:00</p>
+            <p id="receipt-where">Delivery · Algiers</p>
+          </section>
+
+          <section class="receipt__section" aria-labelledby="r-for">
+            <div class="receipt__row">
+              <h3 class="receipt__label" id="r-for">Made for</h3>
+              <a class="receipt__change" href="reserve-contact.html">Change contact</a>
+            </div>
+            <p id="receipt-name">Yasmine Benali</p>
+            <p id="receipt-phone">+213 555 010 107</p>
+            <p id="receipt-address">12 Rue des Jasmins, Hydra, Algiers</p>
+          </section>
+
+          <section class="receipt__section" aria-labelledby="r-details">
+            <div class="receipt__row">
+              <h3 class="receipt__label" id="r-details">The little details</h3>
+              <a class="receipt__change" href="reserve-details.html">Change requests</a>
+            </div>
+            <p id="receipt-message">“Happy birthday, Lina”</p>
+            <p id="receipt-allergies">No nuts, please. Blush flowers.</p>
+            <p id="receipt-photo">Inspiration photo: not added</p>
+          </section>
+
+          <footer class="receipt__foot">
+            <p class="receipt__note">No final price yet. Sodam will confirm availability, delivery arrangements and your quote personally before your order is confirmed.</p>
+            <p class="receipt__script">made slowly, with a happy heart ♡</p>
+          </footer>
+        </article>
+
+        <!-- Not a confirmed order -->
+        <aside class="notice" aria-label="Important">
+          <img class="notice__icon" src="assets/icons/heart.svg" alt="" width="20" height="20">
+          <div>
+            <p class="notice__title">A request, not a confirmed order</p>
+            <p>Sending this reservation does not confirm availability. Sodam will contact you to agree on the final design, price, delivery and any allergy requirements.</p>
+          </div>
+        </aside>
+
+        <!-- What happens next -->
+        <section class="next-steps" aria-labelledby="next-title">
+          <h2 class="eyebrow" id="next-title">What happens next?</h2>
+          <p class="next-steps__text">We’ll read your little note and reply personally on WhatsApp. Your order is confirmed only after you and Sodam have agreed on all the details.</p>
+
+          <aside class="notice" aria-label="Contact check">
+            <img class="notice__icon" src="assets/icons/check-circle.svg" alt="" width="20" height="20">
+            <div>
+              <p class="notice__title">Contact details checked</p>
+              <p id="contact-check">Yasmine Benali · WhatsApp ending 010 107. Optional email omitted after correction.</p>
+            </div>
+          </aside>
+        </section>
+
+        <!-- Sending: reserve-review.js saves the reservation, then goes to thank-you.html -->
+        <form id="review-form" action="thank-you.html" method="get">
+          <div class="reserve__actions">
+            <a class="back-link" href="reserve-contact.html"><span aria-hidden="true">←</span> Back</a>
+            <button class="btn btn--primary" type="submit" id="send-btn">Send reservation <span class="btn__arrow" aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="index.html" aria-label="Sodam Pastry, home">
+          <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Handmade with care · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <a href="contact.html">Contact us · Orders require 48h notice</a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky reserve bar: visible on mobile and tablet, hidden from 1024px up -->
+  <div class="sticky-reserve">
+    <p class="sticky-reserve__text">
+      <span class="sticky-reserve__title">Made just for you</span>
+      <span class="sticky-reserve__sub">48h notice</span>
+    </p>
+    <a class="btn btn--primary" href="reserve-pastry.html">Reserve <span class="btn__arrow" aria-hidden="true">↗</span></a>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/utils/storage.js" defer></script>
+  <script src="js/utils/reservation-draft.js" defer></script>
+  <script src="js/utils/format.js" defer></script>
+  <script src="js/components/stepper.js" defer></script>
+  <script src="js/pages/reserve-review.js" defer></script>
+</body>
+</html>
