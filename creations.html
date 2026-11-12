@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creations · Sodam Pastry</title>
+  <meta name="description" content="Little creations, lovely moments. Pavlovas, dome cakes, custom cakes and seasonal treats, handmade in Algiers by Sodam Pastry.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/section-heading.css">
+  <link rel="stylesheet" href="css/components/chips.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/pages/creations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-creations">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Sodam Pastry, home">
+        <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__tagline">A Quiet Abundance of Joy</span>
+        <span class="brand__name">Sodam Pastry</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="creations.html" aria-current="page">Creations</a></li>
+          <li><a class="nav__link" href="reserve-pastry.html">Reserve</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary" href="reserve-pastry.html">Order now <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ PAGE INTRO ============ -->
+    <section class="page-intro" aria-labelledby="page-title">
+      <div class="container">
+        <header class="section-heading">
+          <p class="eyebrow">The Sodam collection</p>
+          <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+          <h1 class="section-heading__title" id="page-title">Little creations. Lovely moments.</h1>
+          <p class="section-heading__intro">A soft swirl of cream, a petal, a little fruit. Each creation is made by hand, and no two are quite the same.</p>
+        </header>
+
+        <!-- Filter chips: creations.js reads data-filter and shows/hides cards by data-category -->
+        <div class="chips" role="group" aria-label="Filter creations by category">
+          <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-filter="pavlova" aria-pressed="false">Pavlova</button>
+          <button class="chip" type="button" data-filter="dome-cakes" aria-pressed="false">Dome cakes</button>
+          <button class="chip" type="button" data-filter="custom-cakes" aria-pressed="false">Custom cakes</button>
+          <button class="chip" type="button" data-filter="fruit-cakes" aria-pressed="false">Fruit cakes</button>
+          <button class="chip" type="button" data-filter="seasonal" aria-pressed="false">Seasonal</button>
+        </div>
+
+        <p class="results-count" id="results-count" aria-live="polite">6 little joys · All creations</p>
+        <p class="script-note">made to be shared ♡</p>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section class="section gallery" aria-label="Creations">
+      <div class="container">
+        <!-- Later, creations.js can build these cards from data/creations.json -->
+        <ul class="card-grid gallery__grid" id="gallery-grid">
+
+          <li class="gallery__item" data-category="pavlova">
+            <article class="gallery-card">
+              <a class="gallery-card__media" href="creation-detail.html?id=individual-pavlova">
+                <img src="assets/images/creations/pavlova.jpg" alt="Individual pavlova with berries and tiny flowers on a speckled plate, with a silver spoon" width="640" height="480" loading="lazy">
+              </a>
+              <p class="gallery-card__category">Pavlova</p>
+              <h2 class="gallery-card__title"><a href="creation-detail.html?id=individual-pavlova">Individual Pavlova</a></h2>
+              <p class="gallery-card__text">A crisp little cloud, soft at heart, crowned with berries.</p>
+              <time class="gallery-card__date" datetime="2026-10-24">24 Oct 2026</time>
+              <a class="gallery-card__link" href="reserve-pastry.html?creation=individual-pavlova">Reserve this</a>
+            </article>
+          </li>
+
+          <li class="gallery__item" data-category="dome-cakes">
+            <article class="gallery-card">
+              <a class="gallery-card__media" href="creation-detail.html?id=dome-cake">
+                <img src="assets/images/creations/dome-cake.jpg" alt="Pale pink dome cake with raspberries and daisies on a cake stand, on a gingham cloth" width="640" height="480" loading="lazy">
+              </a>
+              <p class="gallery-card__category">Dome cakes</p>
+              <h2 class="gallery-card__title"><a href="creation-detail.html?id=dome-cake">Dome Cake</a></h2>
+              <p class="gallery-card__text">A flower-kissed dome with a delicate, creamy heart.</p>
+              <time class="gallery-card__date" datetime="2026-10-22">22 Oct 2026</time>
+              <a class="gallery-card__link" href="reserve-pastry.html?creation=dome-cake">Reserve this</a>
+            </article>
+          </li>
+
+          <li class="gallery__item" data-category="fruit-cakes">
+            <article class="gallery-card">
+              <a class="gallery-card__media" href="creation-detail.html?id=fruit-flower-cream-cake">
+                <img src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peaches and small flowers on a ceramic stand" width="640" height="480" loading="lazy">
+              </a>
+              <p class="gallery-card__category">Fruit cakes</p>
+              <h2 class="gallery-card__title"><a href="creation-detail.html?id=fruit-flower-cream-cake">Fruit &amp; Flower Cream Cake</a></h2>
+              <p class="gallery-card__text">A little garden of sweetness, where every bite feels like a summer dream.</p>
+              <time class="gallery-card__date" datetime="2026-10-20">20 Oct 2026</time>
+              <a class="gallery-card__link" href="reserve-pastry.html?creation=fruit-flower-cream-cake">Reserve this</a>
+            </article>
+          </li>
+
+          <li class="gallery__item" data-category="custom-cakes">
+            <article class="gallery-card">
+              <a class="gallery-card__media" href="creation-detail.html?id=a-ribbon-of-joy">
+                <img src="assets/images/creations/ribbon-cake.jpg" alt="Small white cake decorated with pink piped ribbons and tiny flowers, on a stoneware plate" width="640" height="480" loading="lazy">
+              </a>
+              <p class="gallery-card__category">Custom cakes</p>
+              <h2 class="gallery-card__title"><a href="creation-detail.html?id=a-ribbon-of-joy">A Ribbon of Joy</a></h2>
+              <p class="gallery-card__text">For a birthday, a small milestone, a beautiful ordinary day.</p>
+              <time class="gallery-card__date" datetime="2026-10-18">18 Oct 2026</time>
+              <a class="gallery-card__link" href="reserve-pastry.html?creation=a-ribbon-of-joy">Reserve this</a>
+            </article>
+          </li>
+
+          <li class="gallery__item" data-category="seasonal">
+            <article class="gallery-card">
+              <a class="gallery-card__media" href="creation-detail.html?id=the-little-dessert-box">
+                <img src="assets/images/creations/dessert-box.jpg" alt="Kraft dessert box of mini pavlovas and fruit tarts, tied with a gingham ribbon" width="640" height="480" loading="lazy">
+              </a>
+              <p class="gallery-card__category">Seasonal</p>
+              <h2 class="gallery-card__title"><a href="creation-detail.html?id=the-little-dessert-box">The Little Dessert Box</a></h2>
+              <p class="gallery-card__text">Little joys, nestled together and ready to be shared.</p>
+              <time class="gallery-card__date" datetime="2026-10-16">16 Oct 2026</time>
+              <a class="gallery-card__link" href="reserve-pastry.html?creation=the-little-dessert-box">Reserve this</a>
+            </article>
+          </li>
+
+          <li class="gallery__item" data-category="seasonal">
+            <article class="gallery-card">
+              <a class="gallery-card__media" href="creation-detail.html?id=peach-afternoon">
+                <img src="assets/images/creations/peach-cake.jpg" alt="Layered peach and vanilla cake topped with a cream rose, on a linen cloth" width="640" height="480" loading="lazy">
+              </a>
+              <p class="gallery-card__category">Seasonal</p>
+              <h2 class="gallery-card__title"><a href="creation-detail.html?id=peach-afternoon">Peach Afternoon</a></h2>
+              <p class="gallery-card__text">Soft peaches and vanilla, a slow afternoon in every slice.</p>
+              <time class="gallery-card__date" datetime="2026-10-12">12 Oct 2026</time>
+              <a class="gallery-card__link" href="reserve-pastry.html?creation=peach-afternoon">Reserve this</a>
+            </article>
+          </li>
+
+        </ul>
+
+        <!-- Shown by creations.js when a filter has no results -->
+        <p class="gallery__empty" id="gallery-empty" hidden>No creations here yet. Try another category, or <a href="reserve-pastry.html">dream up something of your own</a>.</p>
+
+        <!-- Custom order note -->
+        <aside class="notice" aria-label="Custom orders">
+          <img class="notice__icon" src="assets/icons/heart.svg" alt="" width="20" height="20">
+          <div>
+            <p class="notice__title">Something only you can imagine?</p>
+            <p>We’d love to hear your idea. Choose Custom Cake when reserving, and share the little details that make it yours.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="index.html" aria-label="Sodam Pastry, home">
+          <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Handmade with care · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <a href="contact.html">Contact us · Orders require 48h notice</a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky reserve bar: visible on mobile and tablet, hidden from 1024px up -->
+  <div class="sticky-reserve">
+    <p class="sticky-reserve__text">
+      <span class="sticky-reserve__title">Made just for you</span>
+      <span class="sticky-reserve__sub">48h notice</span>
+    </p>
+    <a class="btn btn--primary" href="reserve-pastry.html">Reserve <span class="btn__arrow" aria-hidden="true">↗</span></a>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/pages/creations.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fruit &amp; Flower Cream Cake · Sodam Pastry</title>
+  <meta name="description" content="A little garden of sweetness, where every bite feels like a summer dream. Soft vanilla sponge, whipped cream and seasonal fruit, handmade in Algiers.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/pages/creation-detail.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-creation-detail">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Sodam Pastry, home">
+        <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__tagline">A Quiet Abundance of Joy</span>
+        <span class="brand__name">Sodam Pastry</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="creations.html" aria-current="page">Creations</a></li>
+          <li><a class="nav__link" href="reserve-pastry.html">Reserve</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary" href="reserve-pastry.html">Order now <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container detail">
+
+      <a class="back-link" href="creations.html"><span aria-hidden="true">←</span> All creations</a>
+
+      <!-- Default content below is for "fruit-flower-cream-cake".
+           creation-detail.js reads ?id= and replaces the fields marked with an id. -->
+      <article class="detail__layout" aria-labelledby="creation-title">
+
+        <!-- ============ GALLERY / CAROUSEL ============ -->
+        <section class="carousel" aria-roledescription="carousel" aria-label="Photos of this creation">
+          <ul class="carousel__track" id="carousel-track">
+            <li class="carousel__slide" id="slide-1">
+              <img src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peach slices and small white flowers, on a ceramic cake stand" width="800" height="800">
+            </li>
+            <li class="carousel__slide" id="slide-2">
+              <img src="assets/images/creations/fruit-cake-2.jpg" alt="The same cake seen from a lower angle, with fruit and flowers on top" width="800" height="800" loading="lazy">
+            </li>
+            <li class="carousel__slide" id="slide-3">
+              <img src="assets/images/creations/fruit-cake-3.jpg" alt="A slice taken from the cake, showing the layers of sponge, cream and fruit" width="800" height="800" loading="lazy">
+            </li>
+          </ul>
+
+          <ul class="carousel__thumbs" aria-label="Choose a photo">
+            <li><button class="carousel__thumb is-active" type="button" aria-label="Show photo 1" aria-current="true" data-slide="0"><img src="assets/images/creations/fruit-cake.jpg" alt="" width="96" height="96"></button></li>
+            <li><button class="carousel__thumb" type="button" aria-label="Show photo 2" data-slide="1"><img src="assets/images/creations/fruit-cake-2.jpg" alt="" width="96" height="96" loading="lazy"></button></li>
+            <li><button class="carousel__thumb" type="button" aria-label="Show photo 3" data-slide="2"><img src="assets/images/creations/fruit-cake-3.jpg" alt="" width="96" height="96" loading="lazy"></button></li>
+          </ul>
+
+          <div class="carousel__controls">
+            <button class="carousel__arrow" type="button" id="carousel-prev" aria-label="Previous photo">←</button>
+            <div class="carousel__dots" aria-hidden="true">
+              <span class="carousel__dot is-active"></span>
+              <span class="carousel__dot"></span>
+              <span class="carousel__dot"></span>
+            </div>
+            <button class="carousel__arrow" type="button" id="carousel-next" aria-label="Next photo">→</button>
+          </div>
+
+          <p class="carousel__hint">Swipe to see every little detail</p>
+        </section>
+
+        <!-- ============ INFO ============ -->
+        <div class="detail__info">
+          <p class="eyebrow" id="creation-category">Fruit cakes · Made to order</p>
+          <h1 class="detail__title" id="creation-title">Fruit &amp; Flower Cream Cake</h1>
+          <p class="detail__tagline" id="creation-tagline">A little garden of sweetness, where every bite feels like a summer dream.</p>
+
+          <div class="detail__text" id="creation-description">
+            <p>Soft vanilla sponge, delicate whipped cream and seasonal fruit, finished with a scattering of edible flowers. Light, fresh and made for the moments worth gathering for.</p>
+            <p>Every cake is handmade. Fruit and flowers may change with the season, but the feeling stays the same.</p>
+          </div>
+
+          <dl class="detail__meta">
+            <div>
+              <dt>Created</dt>
+              <dd><time id="creation-date" datetime="2026-10-20">20 Oct 2026</time></dd>
+            </div>
+            <div>
+              <dt>To share</dt>
+              <dd id="creation-servings">6–8 servings · Medium</dd>
+            </div>
+          </dl>
+
+          <a class="btn btn--primary btn--block" id="reserve-link" href="reserve-pastry.html?creation=fruit-flower-cream-cake">Reserve this creation <span class="btn__arrow" aria-hidden="true">↗</span></a>
+
+          <aside class="notice" aria-label="Reservation preview">
+            <img class="notice__icon" src="assets/icons/heart.svg" alt="" width="20" height="20">
+            <div>
+              <p class="notice__title">Your creation will be preselected</p>
+              <p id="preselect-text">Fruit &amp; Flower Cream Cake · Medium, 6–8 servings. You can change this at step 1. Please reserve at least 48 hours ahead.</p>
+            </div>
+          </aside>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="index.html" aria-label="Sodam Pastry, home">
+          <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Handmade with care · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <a href="contact.html">Contact us · Orders require 48h notice</a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky reserve bar: visible on mobile and tablet, hidden from 1024px up -->
+  <div class="sticky-reserve">
+    <p class="sticky-reserve__text">
+      <span class="sticky-reserve__title">Made just for you</span>
+      <span class="sticky-reserve__sub">48h notice</span>
+    </p>
+    <a class="btn btn--primary" href="reserve-pastry.html">Reserve <span class="btn__arrow" aria-hidden="true">↗</span></a>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/components/carousel.js" defer></script>
+  <script src="js/pages/creation-detail.js" defer></script>
+</body>
+</html>
