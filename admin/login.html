@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Owner login · Sodam Pastry</title>
+  <meta name="description" content="Private owner access to the Sodam Pastry studio.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/base/variables.css">
+  <link rel="stylesheet" href="../css/base/reset.css">
+  <link rel="stylesheet" href="../css/base/typography.css">
+  <link rel="stylesheet" href="../css/components/buttons.css">
+  <link rel="stylesheet" href="../css/components/admin-navbar.css">
+  <link rel="stylesheet" href="../css/components/forms.css">
+  <link rel="stylesheet" href="../css/components/footer.css">
+  <link rel="stylesheet" href="../css/pages/admin-login.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="page-admin page-admin-login">
+
+  <!-- ============ HEADER (owner studio) ============ -->
+  <header class="site-header site-header--admin">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="Sodam Pastry, back to the website">
+        <img class="brand__logo" src="../assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__name">Owner Studio</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <!-- Before login the menu only leads back to the public site -->
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="../index.html">Back to Sodam</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="login container" aria-labelledby="login-title">
+
+      <p class="eyebrow">Private · Owner only</p>
+      <h1 class="login__title" id="login-title">Welcome to your little studio</h1>
+      <p class="login__lead">A quiet place to care for your creations and the sweet moments waiting to happen.</p>
+
+      <!-- MOCK LOGIN for the front-end demo only. It is not secure.
+           Replace it with real authentication when the backend is added. -->
+      <div class="form-card login__card">
+        <p class="login__access">
+          <img src="../assets/icons/lock.svg" alt="" width="20" height="20">
+          <span class="eyebrow">Sodam owner access</span>
+        </p>
+
+        <form id="login-form" action="creations.html" method="get" novalidate>
+
+          <div class="field" data-field="email">
+            <label class="field__label" for="owner-email">Owner email</label>
+            <input class="field__input" type="email" id="owner-email" name="email" autocomplete="username" placeholder="owner@example.com" required aria-describedby="owner-email-message">
+            <p class="field__message" id="owner-email-message" hidden
+               data-empty="Please enter your email."
+               data-invalid="Add a complete email, like owner@example.com."></p>
+          </div>
+
+          <div class="field" data-field="password">
+            <label class="field__label" for="owner-password">Password</label>
+            <input class="field__input" type="password" id="owner-password" name="password" autocomplete="current-password" required aria-describedby="owner-password-message">
+            <p class="field__message" id="owner-password-message" hidden data-empty="Please enter your password."></p>
+          </div>
+
+          <!-- Shown by admin-login.js when the details are wrong (text is a placeholder to confirm) -->
+          <p class="form-error" id="login-error" role="alert" hidden>That email or password doesn’t look right. Please try again.</p>
+
+          <button class="btn btn--primary btn--block" type="submit">Log in <span class="btn__arrow" aria-hidden="true">↗</span></button>
+        </form>
+
+        <p class="field__help">This space is for the Sodam owner only. Customer reservations don’t require an account.</p>
+      </div>
+
+      <a class="back-link" href="../index.html"><span aria-hidden="true">←</span> Back to Sodam</a>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER (owner studio) ============ -->
+  <footer class="site-footer site-footer--admin">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="../index.html" aria-label="Sodam Pastry, back to the website">
+          <img class="brand__logo" src="../assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Owner studio · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <p>Private workspace · Sodam Pastry</p>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/utils/storage.js" defer></script>
+  <script src="../js/utils/validators.js" defer></script>
+  <script src="../js/pages/admin-login.js" defer></script>
+</body>
+</html>

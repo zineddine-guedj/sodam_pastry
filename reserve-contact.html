@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reserve · Who is this sweetness for? · Sodam Pastry</title>
+  <meta name="description" content="Step 3 of 4. Leave your name, phone or WhatsApp number and delivery address so Sodam can confirm your reservation.">
+  <link rel="icon" href="assets/logo/favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gaegu:wght@400;700&family=Inter:wght@300;400;500&family=Montserrat:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base/variables.css">
+  <link rel="stylesheet" href="css/base/reset.css">
+  <link rel="stylesheet" href="css/base/typography.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/navbar.css">
+  <link rel="stylesheet" href="css/components/section-heading.css">
+  <link rel="stylesheet" href="css/components/stepper.css">
+  <link rel="stylesheet" href="css/components/forms.css">
+  <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/footer.css">
+  <link rel="stylesheet" href="css/pages/reserve.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="page-reserve page-reserve-contact">
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Sodam Pastry, home">
+        <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <span class="brand__tagline">A Quiet Abundance of Joy</span>
+        <span class="brand__name">Sodam Pastry</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html">Home</a></li>
+          <li><a class="nav__link" href="creations.html">Creations</a></li>
+          <li><a class="nav__link" href="reserve-pastry.html" aria-current="page">Reserve</a></li>
+          <li><a class="nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary" href="reserve-pastry.html">Order now <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container reserve">
+
+      <!-- ============ PROGRESS ============ -->
+      <p class="eyebrow reserve__kicker">Made by hand, reserved with love</p>
+
+      <ol class="stepper" aria-label="Reservation progress">
+        <li class="stepper__step is-done">
+          <span class="stepper__dot"><span aria-hidden="true">✓</span><span class="visually-hidden">Completed:</span></span>
+          <span class="stepper__label">Pastry</span>
+        </li>
+        <li class="stepper__step is-done">
+          <span class="stepper__dot"><span aria-hidden="true">✓</span><span class="visually-hidden">Completed:</span></span>
+          <span class="stepper__label">Details</span>
+        </li>
+        <li class="stepper__step is-current" aria-current="step">
+          <span class="stepper__dot">3</span>
+          <span class="stepper__label">Contact</span>
+        </li>
+        <li class="stepper__step">
+          <span class="stepper__dot">4</span>
+          <span class="stepper__label">Review</span>
+        </li>
+      </ol>
+
+      <!-- ============ STEP 3 ============ -->
+      <section class="reserve__step" aria-labelledby="step-title">
+        <header class="section-heading">
+          <p class="eyebrow">Your reservation · Step 3 of 4</p>
+          <img class="section-heading__flower" src="assets/icons/flower.svg" alt="" width="20" height="20">
+          <h1 class="section-heading__title" id="step-title">Who is this sweetness for?</h1>
+          <p class="section-heading__intro">Leave us a little way to reach you. We’ll be in touch to confirm the details.</p>
+        </header>
+
+        <!-- Summary of steps 1 and 2: reserve-contact.js fills it from the saved draft -->
+        <aside class="notice" aria-label="Your reservation so far">
+          <img class="notice__icon" src="assets/icons/heart.svg" alt="" width="20" height="20">
+          <div>
+            <p class="notice__title" id="when-summary">Delivery · Sat, 7 Nov · 14:00–16:00</p>
+            <p id="pastry-summary">Fruit &amp; Flower Cream Cake · Medium, 6–8 servings. Your preferred details are saved for this request.</p>
+          </div>
+        </aside>
+
+        <!-- novalidate: reserve-contact.js shows the friendly messages below instead of the browser's default bubbles -->
+        <form class="reserve__form" id="contact-form" action="reserve-review.html" method="get" novalidate>
+
+          <section class="form-card" aria-label="Your contact details">
+
+            <!-- Name -->
+            <div class="field" data-field="name">
+              <label class="field__label" for="name">Your name <span aria-hidden="true">*</span></label>
+              <div class="field__control">
+                <input class="field__input" type="text" id="name" name="name" autocomplete="name" placeholder="What shall we call you?" required aria-describedby="name-message">
+                <img class="field__status field__status--valid" src="assets/icons/check-circle.svg" alt="" width="20" height="20" hidden>
+                <img class="field__status field__status--error" src="assets/icons/alert-circle.svg" alt="" width="20" height="20" hidden>
+              </div>
+              <!-- Messages are shown by reserve-contact.js. The "empty" text is a placeholder to confirm. -->
+              <p class="field__message" id="name-message" hidden
+                 data-valid="Lovely, your name is ready."
+                 data-empty="Please tell us what to call you."></p>
+            </div>
+
+            <!-- Phone / WhatsApp -->
+            <div class="field" data-field="phone">
+              <label class="field__label" for="phone">Phone / WhatsApp <span aria-hidden="true">*</span></label>
+              <div class="field__control">
+                <input class="field__input" type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+213 555 010 107" required aria-describedby="phone-message">
+                <img class="field__status field__status--valid" src="assets/icons/check-circle.svg" alt="" width="20" height="20" hidden>
+                <img class="field__status field__status--error" src="assets/icons/alert-circle.svg" alt="" width="20" height="20" hidden>
+              </div>
+              <p class="field__message" id="phone-message" hidden
+                 data-valid="Valid format. We’ll contact you on this number."
+                 data-empty="Please add a number we can reach you on, like +213 555 010 107."
+                 data-invalid="That number looks incomplete. Try the format +213 555 010 107."></p>
+            </div>
+
+            <!-- Email (optional) -->
+            <div class="field" data-field="email">
+              <label class="field__label" for="email">Email · optional</label>
+              <div class="field__control">
+                <input class="field__input" type="email" id="email" name="email" autocomplete="email" placeholder="yasmine@example.com" aria-describedby="email-message">
+                <img class="field__status field__status--valid" src="assets/icons/check-circle.svg" alt="" width="20" height="20" hidden>
+                <img class="field__status field__status--error" src="assets/icons/alert-circle.svg" alt="" width="20" height="20" hidden>
+              </div>
+              <p class="field__message" id="email-message" hidden
+                 data-invalid="Add a complete email, like yasmine@example.com, or clear this optional field to continue."></p>
+            </div>
+
+            <hr class="form-card__divider">
+
+            <!-- Delivery address: required only when "Delivery" was chosen in step 2.
+                 reserve-contact.js should hide this fieldset and drop the required attributes for pickup. -->
+            <fieldset class="address" id="address-fieldset">
+              <legend class="eyebrow">Delivery address · required for delivery</legend>
+
+              <div class="field" data-field="street">
+                <label class="field__label" for="street">Street address <span aria-hidden="true">*</span></label>
+                <input class="field__input" type="text" id="street" name="street" autocomplete="street-address" placeholder="12 Rue des Jasmins" required aria-describedby="street-message">
+                <p class="field__message" id="street-message" hidden data-empty="Please add your street address."></p>
+              </div>
+
+              <div class="field" data-field="area">
+                <label class="field__label" for="area">Area / district <span aria-hidden="true">*</span></label>
+                <input class="field__input" type="text" id="area" name="area" autocomplete="address-level3" placeholder="Hydra" required aria-describedby="area-message">
+                <p class="field__message" id="area-message" hidden data-empty="Please add your area or district."></p>
+              </div>
+
+              <div class="field" data-field="city">
+                <label class="field__label" for="city">City <span aria-hidden="true">*</span></label>
+                <input class="field__input" type="text" id="city" name="city" autocomplete="address-level2" placeholder="Algiers" required aria-describedby="city-message">
+                <p class="field__message" id="city-message" hidden data-empty="Please add your city."></p>
+              </div>
+            </fieldset>
+
+            <p class="field__help">Your details are used only to arrange this reservation. No newsletters, just a little sweetness.</p>
+          </section>
+
+          <!-- Shown by reserve-contact.js when a field needs attention (text for the email case comes from the design) -->
+          <p class="form-error" id="form-error" role="alert" hidden>One little thing to fix: complete or remove the email above before continuing.</p>
+
+          <div class="reserve__actions">
+            <a class="back-link" href="reserve-details.html"><span aria-hidden="true">←</span> Back</a>
+            <button class="btn btn--primary" type="submit" id="continue-btn">Continue <span class="btn__arrow" aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <a class="brand brand--footer" href="index.html" aria-label="Sodam Pastry, home">
+          <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="" width="64" height="64">
+          <span>
+            <span class="site-footer__title">A Quiet Abundance of Joy</span>
+            <span class="site-footer__sub">Handmade with care · Algiers</span>
+          </span>
+        </a>
+
+        <div class="site-footer__links">
+          <a href="https://www.instagram.com/sodam_pastry" target="_blank" rel="noopener">Instagram · @sodam_pastry ↗</a>
+          <a href="contact.html">Contact us · Orders require 48h notice</a>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <small>© 2026 Sodam Pastry · <span lang="ko">소담</span></small>
+        <p class="site-footer__script">a little sweetness, a little joy.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky reserve bar: visible on mobile and tablet, hidden from 1024px up -->
+  <div class="sticky-reserve">
+    <p class="sticky-reserve__text">
+      <span class="sticky-reserve__title">Made just for you</span>
+      <span class="sticky-reserve__sub">48h notice</span>
+    </p>
+    <a class="btn btn--primary" href="reserve-pastry.html">Reserve <span class="btn__arrow" aria-hidden="true">↗</span></a>
+  </div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/utils/storage.js" defer></script>
+  <script src="js/utils/reservation-draft.js" defer></script>
+  <script src="js/utils/validators.js" defer></script>
+  <script src="js/utils/format.js" defer></script>
+  <script src="js/components/stepper.js" defer></script>
+  <script src="js/pages/reserve-contact.js" defer></script>
+</body>
+</html>
