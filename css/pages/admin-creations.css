@@ -1,0 +1,243 @@
+/* =========================================================
+   Sodam Pastry · owner "Manage creations" page
+   (css/pages/admin-creations.css)
+   Needs css/base/variables.css and the components:
+   admin-navbar, section-heading, forms, chips, modal, buttons.
+   Mobile-first. The tablet and desktop layouts are an assumption
+   (only the 390px frame was available): the list becomes 2 columns,
+   then wide one-line rows, and the cards get a comfortable max width.
+   ========================================================= */
+
+/* ---------- Page ---------- */
+.page-admin-creations .admin {
+  padding-bottom: var(--space-16);
+}
+
+/* Form card while a creation is being edited */
+.page-admin-creations .form-card.is-editing {
+  border-color: var(--color-line);
+}
+
+
+/* ---------- Photo previews (inside the upload field) ---------- */
+.photo-previews {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.photo-previews:empty {
+  display: none;
+}
+
+.photo-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.photo-preview__img {
+  width: 100%;
+  aspect-ratio: 9 / 8;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.photo-preview__label {
+  margin-top: var(--space-1);
+}
+
+.photo-preview .link-button {
+  min-height: var(--tap-target);
+  margin-top: calc(var(--space-2) * -1);
+  padding-left: 0;
+  font-size: var(--fs-small);
+}
+
+
+/* ---------- Publish switch ---------- */
+.switch-field {
+  margin-top: var(--space-6);
+}
+
+
+/* ---------- Collection ---------- */
+.collection {
+  margin-top: var(--space-12);
+}
+
+.collection__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.collection__count {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-text-label);
+}
+
+.collection__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+/* ---------- One creation row (a card on mobile) ---------- */
+.creation-row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  grid-template-areas:
+    "img     info"
+    "date    date"
+    "actions actions";
+  column-gap: var(--space-4);
+  row-gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--duration-fast) var(--ease),
+    box-shadow var(--duration-base) var(--ease),
+    opacity var(--duration-base) var(--ease),
+    transform var(--duration-base) var(--ease);
+}
+
+.creation-row:hover {
+  box-shadow: var(--shadow-soft);
+}
+
+.creation-row.is-editing {
+  border-color: var(--color-line);
+}
+
+/* Fades out before the script removes it */
+.creation-row.is-removing {
+  opacity: 0;
+  transform: scale(.98);
+}
+
+.creation-row__img {
+  grid-area: img;
+  width: 4.5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.creation-row__info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.creation-row__category {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-text-label);
+}
+
+.creation-row__date {
+  grid-area: date;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.creation-row__actions {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding-top: var(--space-2);
+}
+
+/* Status chip on the left, Edit / Delete after it */
+.creation-row__actions .chip--status {
+  margin-right: auto;
+}
+
+/* Drafts look a little quieter */
+.creation-row.is-draft .creation-row__img {
+  opacity: .75;
+}
+
+
+/* ---------- Tablet: two columns ---------- */
+@media (min-width: 768px) {
+  .collection__list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  .photo-previews {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .creation-row {
+    grid-template-columns: 5rem 1fr;
+    padding: var(--space-6);
+  }
+
+  .creation-row__img {
+    width: 5rem;
+    height: 5.5rem;
+  }
+}
+
+
+/* ---------- Desktop: comfortable width, wide one-line rows ---------- */
+@media (min-width: 1024px) {
+  .page-admin-creations .admin > .form-card,
+  .page-admin-creations .admin > .collection {
+    max-width: 56rem;
+  }
+
+  .photo-previews {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .collection__list {
+    grid-template-columns: 1fr;
+  }
+
+  .creation-row {
+    grid-template-columns: 5rem minmax(0, 1fr) auto auto;
+    grid-template-areas: "img info date actions";
+    column-gap: var(--space-6);
+  }
+
+  .creation-row__actions {
+    padding-top: 0;
+    gap: var(--space-5);
+  }
+
+  .creation-row__actions .chip--status {
+    margin-right: var(--space-2);
+  }
+}
