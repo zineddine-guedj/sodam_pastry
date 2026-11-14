@@ -1,0 +1,105 @@
+/* =========================================================
+   Sodam Pastry · stepper (css/components/stepper.css)
+   Needs css/base/variables.css
+   Markup: <ol class="stepper"><li class="stepper__step is-done|is-current">
+             <span class="stepper__dot">1</span>
+             <span class="stepper__label">Pastry</span></li>…</ol>
+   Four steps: Pastry, Details, Contact, Review.
+   ========================================================= */
+
+/* ---------- Row of steps ---------- */
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: var(--space-6) 0 var(--space-8);
+  padding: 0 0 var(--space-6);
+  list-style: none;
+  border-bottom: var(--border-gold);
+}
+
+/* ---------- One step ---------- */
+.stepper__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+/* Thin line joining the dots */
+.stepper__step:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 1.25rem;
+  right: 50%;
+  z-index: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.stepper__step.is-done:not(:first-child)::before,
+.stepper__step.is-current:not(:first-child)::before {
+  background: var(--color-line);
+}
+
+/* ---------- Dot ---------- */
+.stepper__dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--color-text-label);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: 50%;
+}
+
+/* Done: linen fill with a rosewood check */
+.stepper__step.is-done .stepper__dot {
+  font-size: 1.25rem;
+  color: var(--color-text-accent);
+  background: var(--color-surface-strong);
+  border-color: var(--color-surface-strong);
+}
+
+/* Current: rosewood ring */
+.stepper__step.is-current .stepper__dot {
+  color: var(--color-text-accent);
+  background: var(--color-surface-strong);
+  border-color: var(--color-rosewood);
+}
+
+/* ---------- Label ---------- */
+.stepper__label {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.stepper__step.is-current .stepper__label {
+  color: var(--color-text-accent);
+}
+
+/* ---------- Tablet and up ---------- */
+@media (min-width: 768px) {
+  .stepper {
+    max-width: 40rem;
+    margin-inline: auto;
+    margin-bottom: var(--space-12);
+  }
+
+  .stepper__dot {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .stepper__step:not(:first-child)::before {
+    top: 1.375rem;
+  }
+}
