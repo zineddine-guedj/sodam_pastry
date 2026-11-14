@@ -1,0 +1,178 @@
+/* =========================================================
+   Sodam Pastry · buttons (css/components/buttons.css)
+   Needs css/base/variables.css
+   Variants: .btn--primary, .btn--secondary, .btn--ghost, .btn--block
+   Also: .link-button (Edit / Delete / Remove) and the small text
+   links of the cards ("Reserve this")
+   ========================================================= */
+
+/* ---------- Base button ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: var(--button-height);
+  padding: 0 var(--space-6);
+  font-family: var(--font-label);
+  font-size: var(--fs-button);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--color-text);
+  background: transparent;
+  border: var(--border-gold);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease),
+    opacity var(--duration-fast) var(--ease);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Arrow (↗) */
+.btn__arrow {
+  display: inline-block;
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  color: var(--color-text-accent);
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+.btn:hover .btn__arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ---------- Primary: linen fill, gold line ---------- */
+.btn--primary {
+  background: var(--color-surface-strong);
+  border-color: var(--color-line);
+}
+
+.btn--primary:hover {
+  background: var(--color-surface);
+}
+
+/* ---------- Secondary: white fill, gold line ---------- */
+.btn--secondary {
+  background: var(--color-surface);
+  border-color: var(--color-line);
+}
+
+.btn--secondary:hover {
+  background: var(--color-surface-soft);
+}
+
+/* ---------- Ghost: no line, white pill on hover ---------- */
+.btn--ghost {
+  padding-inline: var(--space-4);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn--ghost:hover {
+  background: var(--color-surface);
+}
+
+/* ---------- Full width ---------- */
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+/* ---------- Disabled ---------- */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn:disabled:hover,
+.btn[aria-disabled="true"]:hover {
+  background: inherit;
+}
+
+.btn--primary:disabled:hover,
+.btn--primary[aria-disabled="true"]:hover {
+  background: var(--color-surface-strong);
+}
+
+.btn--secondary:disabled:hover,
+.btn--secondary[aria-disabled="true"]:hover {
+  background: var(--color-surface);
+}
+
+.btn--ghost:disabled:hover,
+.btn--ghost[aria-disabled="true"]:hover {
+  background: transparent;
+}
+
+.btn:disabled .btn__arrow,
+.btn[aria-disabled="true"] .btn__arrow {
+  transform: none;
+}
+
+/* ---------- Text buttons: Edit / Delete / Remove ---------- */
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-target);
+  padding: 0 var(--space-1);
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  line-height: 1;
+  color: var(--color-text-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.link-button:hover {
+  color: var(--color-text);
+}
+
+.link-button[data-action="delete"] {
+  color: var(--color-text-muted);
+}
+
+.link-button[data-action="delete"]:hover {
+  color: var(--color-text-accent);
+}
+
+/* ---------- Small text links inside cards ("Reserve this") ---------- */
+.pastry-card__link,
+.gallery-card__link {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: var(--tap-target);
+  padding: 0 var(--space-4);
+  font-family: var(--font-label);
+  font-size: var(--fs-button);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-text);
+  border-radius: var(--radius-pill);
+  transition: background-color var(--duration-fast) var(--ease);
+}
+
+.pastry-card__link:hover,
+.gallery-card__link:hover {
+  background: var(--color-surface-soft);
+}
