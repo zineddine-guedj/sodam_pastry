@@ -1,0 +1,257 @@
+/* =========================================================
+   Sodam Pastry · tables (css/components/tables.css)
+   Needs css/base/variables.css
+   OPTIONAL: the current owner pages use cards (.reservation-card,
+   .creation-row), not a <table>. Use this file if you switch a list
+   to a real table, for example the desktop reservations list.
+
+   Mobile-first: on mobile each row is a stacked card and every <td>
+   shows its column name from data-label. From 768px it is a real table.
+   Markup:
+   <div class="table-wrap">
+     <table class="table">
+       <thead><tr><th scope="col">Customer</th>…</tr></thead>
+       <tbody><tr class="is-new"><td data-label="Customer">…</td>…</tr></tbody>
+     </table>
+   </div>
+   Note: some screen readers drop table meaning when rows become blocks.
+   If you use the stacked mobile layout, add role="table", role="row",
+   role="columnheader" and role="cell" to the matching elements.
+   ========================================================= */
+
+/* ---------- Wrapper ---------- */
+.table-wrap {
+  width: 100%;
+  margin-block: var(--space-6);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Mobile: stacked cards ---------- */
+.table,
+.table tbody,
+.table tr,
+.table td {
+  display: block;
+}
+
+/* Column headings are hidden on mobile (data-label is shown instead) */
+.table thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table tr {
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+}
+
+.table tr.is-new {
+  border-color: var(--color-line);
+}
+
+.table td {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text);
+  text-align: right;
+  border: 0;
+}
+
+.table td + td {
+  border-top: var(--border-card);
+}
+
+.table td::before {
+  content: attr(data-label);
+  flex: none;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  line-height: var(--lh-label);
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--color-text-label);
+}
+
+/* ---------- Cell helpers ---------- */
+.table__cell--main {
+  text-align: left;
+}
+
+.table__cell--actions {
+  justify-content: flex-end;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+.table__cell--actions::before {
+  display: none;
+}
+
+.table__thumb {
+  flex: none;
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.table__title {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.table__sub {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.table__ref {
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-label);
+}
+
+/* ---------- Tablet and up: real table ---------- */
+@media (min-width: 768px) {
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .table {
+    display: table;
+    min-width: 40rem;
+    border-spacing: 0 var(--space-2);
+  }
+
+  .table thead {
+    position: static;
+    display: table-header-group;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+  }
+
+  .table tbody {
+    display: table-row-group;
+  }
+
+  .table tr {
+    display: table-row;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  .table th,
+  .table td {
+    display: table-cell;
+    padding: var(--space-4) var(--space-5);
+    vertical-align: middle;
+    text-align: left;
+  }
+
+  .table td::before {
+    display: none;
+  }
+
+  /* Header band: cream, labels in small capitals */
+  .table th {
+    font-family: var(--font-label);
+    font-size: var(--fs-label);
+    font-weight: var(--fw-regular);
+    letter-spacing: var(--tracking-label);
+    line-height: var(--lh-label);
+    text-transform: uppercase;
+    color: var(--color-text-label);
+    background: var(--color-surface-soft);
+  }
+
+  .table th:first-child {
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+  }
+
+  .table th:last-child {
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  /* Each body row is a white rounded strip */
+  .table td {
+    background: var(--color-surface);
+    border-top: var(--border-card);
+    border-bottom: var(--border-card);
+    transition: background-color var(--duration-fast) var(--ease);
+  }
+
+  .table td + td {
+    border-top: var(--border-card);
+  }
+
+  .table td:first-child {
+    border-left: var(--border-card);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+  }
+
+  .table td:last-child {
+    border-right: var(--border-card);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .table tr:hover td {
+    background: var(--color-surface-soft);
+  }
+
+  /* New requests keep a gold line */
+  .table tr.is-new td {
+    border-top-color: var(--color-line);
+    border-bottom-color: var(--color-line);
+  }
+
+  .table tr.is-new td:first-child {
+    border-left-color: var(--color-line);
+  }
+
+  .table tr.is-new td:last-child {
+    border-right-color: var(--color-line);
+  }
+
+  .table__cell--main {
+    display: table-cell;
+  }
+
+  .table__cell--actions {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .table__title {
+    font-size: 1.5rem;
+  }
+}
