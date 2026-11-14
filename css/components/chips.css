@@ -1,0 +1,178 @@
+/* =========================================================
+   Sodam Pastry · chips (css/components/chips.css)
+   Needs css/base/variables.css
+   Contains: .chips, .chip, .chip-radio, .chip--status
+   (new / confirmed / completed / cancelled / published / draft)
+   ========================================================= */
+
+/* ---------- Row of chips ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: var(--space-6) 0;
+}
+
+/* ---------- Chip (filter, size, time, quick pick) ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-target);
+  padding: 0 var(--space-5);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: var(--fw-regular);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--color-line);
+  color: var(--color-text);
+}
+
+/* Selected */
+.chip.is-active,
+.chip[aria-pressed="true"],
+.chip[aria-current="page"] {
+  color: var(--color-text-accent);
+  background: var(--color-surface-strong);
+  border-color: var(--color-line);
+}
+
+.chip:disabled,
+.chip[aria-disabled="true"] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.chip:disabled:hover {
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Chip as a radio button ---------- */
+/* <label class="chip-radio"><input type="radio"><span class="chip">…</span></label> */
+.chip-radio {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.chip-radio input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.chip-radio input:checked + .chip {
+  color: var(--color-text-accent);
+  background: var(--color-surface-strong);
+  border-color: var(--color-line);
+}
+
+.chip-radio input:hover + .chip {
+  border-color: var(--color-line);
+}
+
+.chip-radio input:focus-visible + .chip {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.chip-radio input:disabled + .chip {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* Rows of radio chips inside forms */
+.field--chips,
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.field--chips > legend {
+  width: 100%;
+  margin-bottom: var(--space-1);
+}
+
+/* ---------- Status chips (small tags) ---------- */
+.chip--status {
+  min-height: 0;
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  cursor: default;
+  color: var(--color-text-label);
+  background: var(--color-surface-soft);
+  border-color: var(--color-border);
+}
+
+.chip--status:hover {
+  color: var(--color-text-label);
+  border-color: var(--color-border);
+}
+
+/* New request / Published: soft cream with rosewood text */
+.chip--new,
+.chip--published {
+  color: var(--color-text-accent);
+  background: var(--color-surface-soft);
+  border-color: var(--color-border);
+}
+
+.chip--new:hover,
+.chip--published:hover {
+  color: var(--color-text-accent);
+}
+
+/* Confirmed: cream with taupe text */
+.chip--confirmed {
+  color: var(--color-text-label);
+  background: var(--color-surface-soft);
+  border-color: var(--color-border-strong);
+}
+
+/* Completed: white with soft text */
+.chip--completed {
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+}
+
+/* Cancelled / Draft: quiet, outlined */
+.chip--cancelled,
+.chip--draft {
+  color: var(--color-text-label);
+  background: transparent;
+  border-color: var(--color-border-strong);
+}
+
+/* ---------- Tablet and up ---------- */
+@media (min-width: 768px) {
+  .chip {
+    font-size: 0.8125rem;
+  }
+
+  .chip--status {
+    font-size: 0.75rem;
+  }
+}
