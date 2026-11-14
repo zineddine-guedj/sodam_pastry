@@ -1,0 +1,238 @@
+/* =========================================================
+   Sodam Pastry · typography (css/base/typography.css)
+   Needs css/base/variables.css. Mobile-first: sizes come from
+   the variables, so tablet/desktop only change them in
+   css/responsive.css.
+   Element rules use :where() (zero specificity) so any
+   component class can override them without a fight.
+   ========================================================= */
+
+
+/* ---------- 1. BASE TEXT ---------- */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-linen);
+  color: var(--color-ink);
+}
+
+:where(p) {
+  margin: 0;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+:where(strong, b) { font-weight: var(--fw-medium); }
+:where(em, i)     { font-style: italic; }
+:where(small)     { font-size: var(--fs-small); }
+
+/* Korean text (소담) */
+:lang(ko) { font-family: var(--font-korean); }
+
+
+/* ---------- 2. HEADINGS (Cormorant Garamond) ---------- */
+:where(h1, h2, h3, h4) {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: var(--fw-regular);
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+:where(h1) { font-size: var(--fs-display); line-height: var(--lh-display); letter-spacing: -0.01em; }
+:where(h2) { font-size: var(--fs-h2);      line-height: var(--lh-heading); }
+:where(h3) { font-size: var(--fs-h3);      line-height: 1.2; }
+:where(h4) { font-size: var(--fs-h4);      line-height: 1.25; }
+
+/* Size helpers: keep the right HTML level, pick any visual size */
+.type-display { font-size: var(--fs-display); line-height: var(--lh-display); letter-spacing: -0.01em; }
+.type-h2      { font-size: var(--fs-h2);      line-height: var(--lh-heading); }
+.type-h3      { font-size: var(--fs-h3);      line-height: 1.2; }
+.type-h4      { font-size: var(--fs-h4);      line-height: 1.25; }
+
+/* Section titles: h1 on a page intro, h2 inside a page */
+h1.section-heading__title { font-size: var(--fs-display); line-height: var(--lh-display); }
+h2.section-heading__title { font-size: var(--fs-h2);      line-height: var(--lh-heading); }
+
+/* Titles of cards, tickets, rows and boxes (card size) */
+.pastry-card__title,
+.pastry-option__title,
+.gallery-card__title,
+.step-ticket__title,
+.creation-row__title,
+.reservation-card__name,
+.info-card__title,
+.receipt__title,
+.modal__title,
+.empty-state__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+/* Titles of form cards and panels (section size) */
+.form-card__title,
+.collection__title,
+.closer-look__title {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+}
+
+/* Name of the selected creation on the reservation page */
+.selection__title {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+  color: var(--color-text-accent);
+}
+
+
+/* ---------- 3. LEAD PARAGRAPHS (intro text under a title) ---------- */
+.lead,
+.section-heading__intro,
+.hero__lead,
+.login__lead,
+.thanks__lead,
+.next-steps__text {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-body);
+  color: var(--color-text-muted);
+}
+
+/* Paragraphs that follow each other inside a text block */
+.prose p + p,
+.about__text p + p,
+.detail__text p + p {
+  margin-top: var(--space-5);
+}
+
+
+/* ---------- 4. LABELS (Montserrat, uppercase, wide tracking) ---------- */
+.eyebrow,
+.gallery-card__category,
+.contact-card__label,
+.receipt__label,
+.receipt__eyebrow,
+.closer-look__label,
+.reservation-card__ref,
+.reservation-card__time,
+.stat__label,
+.quantity__label,
+.list-label,
+.studio-tabs__label,
+.dropzone__hint,
+.carousel__hint,
+.results-count,
+.stepper__label,
+.photo-preview__label,
+.step-ticket__no,
+.hero__tags,
+.hero__note,
+.soft-map__caption,
+.site-footer__sub,
+.sticky-reserve__sub,
+.detail__meta dt {
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-label);
+}
+
+/* A label used as a heading (legend, h2, h3) should not add its own margin */
+legend.eyebrow,
+h2.eyebrow,
+h3.closer-look__label,
+h2.contact-card__label,
+h3.receipt__label {
+  margin: 0;
+  padding: 0;
+}
+
+/* Header and footer brand text: a little larger, wider */
+.brand__tagline,
+.brand__name {
+  font-family: var(--font-label);
+  font-size: var(--fs-button);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-wide);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-text-label);
+}
+
+
+/* ---------- 5. HANDWRITTEN NOTES (Gaegu, rosewood) ---------- */
+.script-note,
+.polaroid__caption,
+.receipt__script,
+.thanks__script,
+.site-footer__script {
+  font-family: var(--font-hand);
+  font-size: var(--fs-script);
+  font-weight: var(--fw-regular);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  color: var(--color-text-accent);
+}
+
+.site-footer__script { font-size: 1.125rem; }  /* 18px */
+
+
+/* ---------- 6. LINKS WITH A TEXT STYLE ---------- */
+
+/* "← Back", "← All creations" */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-target);
+  font-family: var(--font-label);
+  font-size: var(--fs-button);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* "More little joys · @sodam_pastry ↗" */
+.text-link {
+  font-size: var(--fs-body);
+  color: var(--color-text-accent);
+  text-decoration: none;
+}
+
+.back-link:hover,
+.text-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+
+.back-link:focus-visible,
+.text-link:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+
+/* ---------- 7. PLACEHOLDER MARKER ---------- */
+/* "Placeholder — replace." in the contact details.
+   Delete each <span class="placeholder-note"> when the real details are in. */
+.placeholder-note {
+  color: var(--color-text-accent);
+}
