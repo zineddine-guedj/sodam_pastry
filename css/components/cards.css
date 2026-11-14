@@ -1,0 +1,378 @@
+/* =========================================================
+   Sodam Pastry · cards (css/components/cards.css)
+   Needs css/base/variables.css
+   Contains: .card-grid, .pastry-card, .gallery-card, .polaroid,
+   .stamp, .notice, .empty-state
+   Mobile-first: 1 column by default, more columns from 768px / 1024px.
+   ========================================================= */
+
+
+/* ---------- Grid ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Polaroid list ("Latest creations"): 2 columns even on mobile */
+.card-grid--4 {
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.gallery__item {
+  display: flex;
+}
+
+
+/* ---------- Pastry card (home: "Our signatures") ---------- */
+.pastry-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  transition:
+    box-shadow var(--duration-base) var(--ease),
+    transform var(--duration-base) var(--ease);
+}
+
+.pastry-card:hover {
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-2px);
+}
+
+.pastry-card__img {
+  width: 100%;
+  aspect-ratio: 7 / 6;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.pastry-card__title {
+  margin: var(--space-4) var(--space-2) 0;
+}
+
+.pastry-card__text {
+  margin: var(--space-2) var(--space-2) 0;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.pastry-card__link {
+  margin-top: auto;
+}
+
+.pastry-card__text + .pastry-card__link {
+  margin-top: var(--space-4);
+}
+
+
+/* ---------- Gallery card (creations page) ---------- */
+.gallery-card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  transition:
+    box-shadow var(--duration-base) var(--ease),
+    transform var(--duration-base) var(--ease);
+}
+
+.gallery-card:hover {
+  box-shadow: var(--shadow-soft);
+}
+
+.gallery-card__media {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.gallery-card__media img {
+  width: 100%;
+  aspect-ratio: 19 / 20;
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease);
+}
+
+.gallery-card:hover .gallery-card__media img {
+  transform: scale(1.03);
+}
+
+.gallery-card__category {
+  margin: var(--space-5) var(--space-2) 0;
+}
+
+.gallery-card__title {
+  margin: var(--space-2) var(--space-2) 0;
+}
+
+.gallery-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gallery-card__title a:hover {
+  color: var(--color-text-accent);
+}
+
+.gallery-card__text {
+  margin: var(--space-3) var(--space-2) 0;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.gallery-card__date {
+  display: block;
+  margin: var(--space-3) var(--space-2) 0;
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: 0.08em;
+  line-height: var(--lh-label);
+  color: var(--color-text-label);
+}
+
+.gallery-card__link {
+  margin-top: auto;
+}
+
+.gallery-card__date + .gallery-card__link {
+  margin-top: var(--space-4);
+}
+
+
+/* ---------- Polaroid ---------- */
+.polaroid {
+  --polaroid-tilt: var(--tilt-left);
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-xs);
+  box-shadow: var(--shadow-polaroid);
+  transform: rotate(var(--polaroid-tilt));
+  transition:
+    transform var(--duration-base) var(--ease),
+    box-shadow var(--duration-base) var(--ease);
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.polaroid__caption {
+  display: block;
+  padding: var(--space-3) var(--space-2) var(--space-1);
+  text-align: center;
+}
+
+/* Hero photo: bigger frame, caption with room for the stamp */
+.polaroid--hero {
+  --polaroid-tilt: -2.5deg;
+  padding: var(--space-4) var(--space-4) var(--space-2);
+}
+
+.polaroid--hero img {
+  aspect-ratio: 4 / 3;
+}
+
+.polaroid--hero .polaroid__caption {
+  padding: var(--space-4) var(--space-12) var(--space-3) var(--space-2);
+  text-align: left;
+}
+
+/* About photo */
+.polaroid--about {
+  --polaroid-tilt: -1deg;
+  padding: var(--space-3) var(--space-3) var(--space-2);
+}
+
+/* Latest creations: small linked polaroids, tilted left then right */
+.polaroid--small {
+  padding: var(--space-2) var(--space-2) var(--space-1);
+}
+
+.polaroid--small img {
+  aspect-ratio: 1 / 1;
+}
+
+.polaroid--small .polaroid__caption {
+  padding: var(--space-3) var(--space-1) var(--space-2);
+  font-size: 1.0625rem;
+}
+
+.polaroid-list > li {
+  display: flex;
+}
+
+.polaroid-list > li > .polaroid {
+  width: 100%;
+}
+
+.polaroid-list > li:nth-child(even) > .polaroid {
+  --polaroid-tilt: var(--tilt-right);
+}
+
+a.polaroid:hover,
+a.polaroid:focus-visible {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+
+/* ---------- Stamp ("소담" badge on the hero photo) ---------- */
+.stamp {
+  position: absolute;
+  right: calc(var(--space-2) * -1);
+  bottom: calc(var(--space-2) * -1);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+  width: 4rem;
+  height: 4rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-rosewood);
+  border-radius: 50%;
+  color: var(--color-text-accent);
+  transform: rotate(4deg);
+}
+
+.stamp__ko {
+  font-family: var(--font-korean);
+  font-size: 1.125rem;
+  line-height: 1;
+  color: var(--color-text-accent);
+}
+
+.stamp img {
+  width: 14px;
+  height: 14px;
+}
+
+
+/* ---------- Notice (gentle information box) ---------- */
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-block: var(--space-6);
+  padding: var(--space-5);
+  background: var(--color-surface-soft);
+  border-radius: var(--radius-lg);
+}
+
+.notice__icon {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 2px;
+}
+
+.notice__title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: var(--fw-regular);
+  line-height: 1.5;
+  color: var(--color-text-accent);
+}
+
+.notice p:not(.notice__title) {
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-block: var(--space-6);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+}
+
+.empty-state__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.empty-state .btn {
+  margin-top: var(--space-2);
+}
+
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .card-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .polaroid--hero {
+    padding: var(--space-5) var(--space-5) var(--space-3);
+  }
+
+  .stamp {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1024px) {
+  .card-grid,
+  .card-grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .card-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pastry-card,
+  .gallery-card {
+    padding: var(--space-4);
+  }
+
+  .pastry-card__title,
+  .gallery-card__title {
+    margin-inline: var(--space-3);
+  }
+
+  .pastry-card__text,
+  .gallery-card__text,
+  .gallery-card__category,
+  .gallery-card__date {
+    margin-inline: var(--space-3);
+  }
+
+  .notice {
+    padding: var(--space-6);
+  }
+}
