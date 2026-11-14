@@ -1,0 +1,134 @@
+/* =========================================================
+   Sodam Pastry · section heading (css/components/section-heading.css)
+   Needs css/base/variables.css
+   Markup:
+   <header class="section-heading">
+     <p class="eyebrow">…</p>
+     <img class="section-heading__flower" …>
+     <h2 class="section-heading__title">…</h2>
+     <p class="section-heading__intro">…</p>
+   </header>
+   A fine gold line before the eyebrow, a small flower on the right.
+   ========================================================= */
+
+/* ---------- Layout ---------- */
+.section-heading {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+/* Eyebrow with a gold rule before it */
+.section-heading .eyebrow {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.section-heading .eyebrow::before {
+  content: "";
+  flex: none;
+  width: 3.25rem;
+  height: 1px;
+  background: var(--color-line);
+}
+
+/* Small flower doodle, top right */
+.section-heading__flower {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Title and intro take the full width under the eyebrow */
+.section-heading__title,
+.section-heading__intro {
+  grid-column: 1 / -1;
+}
+
+.section-heading__title {
+  margin-top: var(--space-5);
+}
+
+.section-heading__intro {
+  max-width: 36rem;
+  margin-top: var(--space-4);
+}
+
+/* ---------- Variants ---------- */
+
+/* Inside a cream section or on the owner pages: same look, no extra space below */
+.section-heading--tight {
+  margin-bottom: var(--space-5);
+}
+
+/* Centered version (no rule before the eyebrow) */
+.section-heading--center {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+}
+
+.section-heading--center .eyebrow::before,
+.section-heading--center .section-heading__flower {
+  display: none;
+}
+
+.section-heading--center .section-heading__title,
+.section-heading--center .section-heading__intro {
+  grid-column: 1;
+}
+
+/* ---------- Page intro (first heading of a page) ---------- */
+.page-intro {
+  padding-top: var(--space-12);
+}
+
+.page-intro .section-heading {
+  margin-bottom: var(--space-6);
+}
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) {
+  .section-heading {
+    margin-bottom: var(--space-10);
+  }
+
+  .section-heading .eyebrow::before {
+    width: 4rem;
+  }
+
+  .section-heading__title {
+    margin-top: var(--space-6);
+  }
+
+  .section-heading__intro {
+    max-width: 40rem;
+  }
+
+  .page-intro {
+    padding-top: var(--space-16);
+  }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1024px) {
+  .section-heading {
+    margin-bottom: var(--space-12);
+  }
+
+  .section-heading__flower {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .section-heading__intro {
+    max-width: 44rem;
+  }
+}
