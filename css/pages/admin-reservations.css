@@ -1,0 +1,289 @@
+/* =========================================================
+   Sodam Pastry · owner "Manage reservations" page
+   (css/pages/admin-reservations.css)
+   Needs css/base/variables.css and the components:
+   admin-navbar, section-heading, chips, cards, buttons.
+   Mobile-first. The tablet and desktop layouts are an assumption
+   (only the 390px frame was available): stats in one row,
+   reservation cards in 2 columns, and the "closer look" panel
+   keeps a comfortable width.
+   ========================================================= */
+
+/* ---------- Page ---------- */
+.page-admin-reservations .admin {
+  padding-bottom: var(--space-16);
+}
+
+
+/* ---------- Summary numbers ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  margin: 0 0 var(--space-8);
+  padding: 0;
+  list-style: none;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 7.5rem;
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-surface-soft);
+  border-radius: var(--radius-lg);
+}
+
+.stat__number {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: var(--fw-regular);
+  line-height: 1;
+  color: var(--color-text-accent);
+}
+
+
+/* ---------- Filters and list label ---------- */
+.page-admin-reservations .chips {
+  margin-bottom: var(--space-5);
+}
+
+.list-label {
+  margin: 0 0 var(--space-6);
+}
+
+
+/* ---------- Reservations list ---------- */
+.reservation-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- One reservation (card) ---------- */
+.reservation-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--duration-fast) var(--ease),
+    box-shadow var(--duration-base) var(--ease);
+}
+
+/* New requests get the gold line */
+.reservation-card.is-new {
+  border-color: var(--color-line);
+}
+
+.reservation-card:hover {
+  box-shadow: var(--shadow-soft);
+}
+
+/* The request currently shown in "A closer look" */
+.reservation-card.is-selected {
+  border-color: var(--color-rosewood);
+  box-shadow: var(--shadow-soft);
+}
+
+.reservation-card__ref {
+  margin: 0;
+}
+
+.reservation-card__name {
+  margin-top: var(--space-2);
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+/* Photo + pastry name */
+.reservation-card__pastry {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.reservation-card__img {
+  flex: none;
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.reservation-card__pastry > div {
+  min-width: 0;
+}
+
+.reservation-card__title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.reservation-card__size {
+  margin: var(--space-1) 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Date and time slot */
+.reservation-card__date {
+  margin: var(--space-5) 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+.reservation-card__time {
+  margin: var(--space-2) 0 0;
+}
+
+/* Status chip + Review */
+.reservation-card__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-6);
+}
+
+/* "Review" is a small uppercase label here, not an underlined link */
+.reservation-card__foot .link-button {
+  padding: 0 var(--space-3);
+  font-family: var(--font-label);
+  font-size: var(--fs-button);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-label);
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--color-text);
+  border-radius: var(--radius-pill);
+  transition: background-color var(--duration-fast) var(--ease);
+}
+
+.reservation-card__foot .link-button:hover {
+  color: var(--color-text);
+  background: var(--color-surface-soft);
+}
+
+
+/* ---------- Empty state (when a filter has no results) ---------- */
+.page-admin-reservations .empty-state {
+  margin-top: var(--space-2);
+}
+
+.empty-state__title {
+  margin: 0;
+}
+
+
+/* ---------- A closer look (details panel) ---------- */
+.closer-look {
+  margin-top: var(--space-10);
+  padding: var(--space-6) var(--space-6) var(--space-8);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
+}
+
+.closer-look:focus {
+  outline: none;
+}
+
+.closer-look:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+}
+
+.closer-look__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.closer-look__title {
+  min-width: 0;
+}
+
+.closer-look__head .chip--status {
+  flex: none;
+  margin-top: var(--space-1);
+}
+
+/* Blocks of information */
+.closer-look__block {
+  margin-top: var(--space-6);
+}
+
+.closer-look__label {
+  margin: 0 0 var(--space-3);
+}
+
+.closer-look__block p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.closer-look .notice {
+  margin-block: var(--space-6);
+}
+
+/* Buttons: WhatsApp and Mark confirmed take a line each on mobile */
+.closer-look__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.closer-look__actions .btn--ghost {
+  padding-inline: var(--space-3);
+}
+
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .reservation-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  .closer-look {
+    padding: var(--space-8) var(--space-8) var(--space-10);
+  }
+
+  .closer-look__block p {
+    font-size: 1rem;
+  }
+}
+
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1024px) {
+  .closer-look {
+    max-width: 48rem;
+  }
+
+  .reservation-card__name {
+    font-size: 1.875rem;
+  }
+}
