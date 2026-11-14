@@ -1,0 +1,118 @@
+/* =========================================================
+   Sodam Pastry · modal (css/components/modal.css)
+   Needs css/base/variables.css
+   Markup: <dialog class="modal"><form method="dialog" class="modal__box">…
+   Open with dialog.showModal(), close with dialog.close().
+   ========================================================= */
+
+/* ---------- Dialog ---------- */
+.modal {
+  width: min(32rem, calc(100% - 2 * var(--container-pad)));
+  max-height: calc(100dvh - 2 * var(--container-pad));
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  color: var(--color-text);
+  background: transparent;
+  border: 0;
+}
+
+/* Backdrop: soft linen, like the UI kit */
+.modal::backdrop {
+  background: rgba(234, 223, 207, .82);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.modal[open] {
+  animation: modal-in var(--duration-base) var(--ease);
+}
+
+.modal[open]::backdrop {
+  animation: modal-fade var(--duration-base) var(--ease);
+}
+
+/* Page behind the modal does not scroll */
+body:has(.modal[open]) {
+  overflow: hidden;
+}
+
+/* ---------- Box ---------- */
+.modal__box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-height: inherit;
+  margin: 0;
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  overflow-y: auto;
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.modal__box > .eyebrow {
+  margin-right: var(--space-10);
+}
+
+.modal__title {
+  margin-right: var(--space-6);
+}
+
+/* ---------- Close button (×) ---------- */
+.modal__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: grid;
+  place-items: center;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  border-radius: 50%;
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease);
+}
+
+.modal__close:hover {
+  color: var(--color-text);
+  background: var(--color-surface-soft);
+}
+
+/* ---------- Buttons ---------- */
+.modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+/* ---------- Animation ---------- */
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes modal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- Tablet and up ---------- */
+@media (min-width: 768px) {
+  .modal__box {
+    padding: var(--space-10) var(--space-8) var(--space-8);
+  }
+}
