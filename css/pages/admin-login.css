@@ -1,0 +1,113 @@
+/* =========================================================
+   Sodam Pastry · owner login page (css/pages/admin-login.css)
+   Needs css/base/variables.css and the components:
+   admin-navbar, forms, buttons, footer.
+   Mobile-first. The tablet and desktop layout is an assumption
+   (only the 390px frame was available): the card stays a
+   comfortable width and the content is centered.
+   ========================================================= */
+
+/* ---------- Page ---------- */
+.page-admin-login main {
+  display: flex;
+  flex-direction: column;
+}
+
+.login {
+  flex: 1 0 auto;
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-16);
+}
+
+/* ---------- Intro ---------- */
+.login__title {
+  margin-top: var(--space-5);
+}
+
+.login__lead {
+  max-width: 32rem;
+  margin-top: var(--space-4);
+}
+
+/* ---------- Login card ---------- */
+.login__card {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-6);
+}
+
+.login__access {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.login__access img {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.login__access .eyebrow {
+  margin: 0;
+}
+
+/* Log in button */
+.login__card .btn--block {
+  margin-top: var(--space-6);
+}
+
+/* Wrong email or password */
+.login__card .form-error {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+/* Note under the button */
+.login__card > .field__help {
+  margin-top: var(--space-6);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+/* ---------- Back link ---------- */
+.login > .back-link {
+  margin-top: var(--space-2);
+}
+
+/* ---------- Tablet and up ---------- */
+@media (min-width: 768px) {
+  .login {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-20);
+  }
+
+  .login__card {
+    max-width: 30rem;
+    padding: var(--space-8);
+  }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1024px) {
+  .login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 40rem;
+    text-align: center;
+  }
+
+  .login__lead {
+    margin-inline: auto;
+  }
+
+  .login__card {
+    width: 100%;
+    text-align: left;
+  }
+
+  .login__access {
+    justify-content: flex-start;
+  }
+}
