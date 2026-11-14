@@ -1,0 +1,496 @@
+/* =========================================================
+   Sodam Pastry · forms (css/components/forms.css)
+   Needs css/base/variables.css
+   Contains: .form-card, .field (+ states), .dropzone, .calendar,
+   .quantity, .switch, .form-error, .form-success
+   States are set by the JS on the .field wrapper:
+   .is-valid and .is-invalid (messages and icons use [hidden]).
+   ========================================================= */
+
+
+/* ---------- Form card ---------- */
+.form-card {
+  margin-block: var(--space-6);
+  padding: var(--space-6) var(--space-5);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+}
+
+.form-card__title {
+  margin-bottom: var(--space-6);
+}
+
+.form-card__divider {
+  margin: var(--space-6) 0;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+
+/* ---------- Field ---------- */
+.field {
+  margin-bottom: var(--space-5);
+  min-width: 0;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.field__control {
+  position: relative;
+}
+
+.field__input {
+  display: block;
+  width: 100%;
+  min-height: var(--field-height);
+  padding: 0 var(--space-5);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-field);
+  transition:
+    border-color var(--duration-fast) var(--ease),
+    box-shadow var(--duration-fast) var(--ease);
+}
+
+.field__input:hover {
+  border-color: var(--color-line);
+}
+
+.field__input:focus,
+.field__input:focus-visible {
+  outline: none;
+  border-color: var(--color-line);
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, .28);
+}
+
+.field__input[readonly] {
+  cursor: default;
+}
+
+.field__input:disabled {
+  opacity: var(--opacity-disabled);
+}
+
+.field__textarea {
+  min-height: 7rem;
+  padding: var(--space-4) var(--space-5);
+  line-height: 1.6;
+}
+
+/* Select with a custom arrow */
+.field__select {
+  padding-right: 3rem;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23A89479' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-5) center;
+  background-size: 12px 8px;
+}
+
+/* Date input */
+.field__input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: .6;
+  cursor: pointer;
+}
+
+/* Help text and messages */
+.field__help {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.field__message {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--color-text-accent);
+}
+
+/* Check / alert icon inside the field */
+.field__status {
+  position: absolute;
+  top: 50%;
+  right: var(--space-4);
+  width: 1.25rem;
+  height: 1.25rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* ---------- Field states ---------- */
+.field.is-valid .field__input,
+.field.is-invalid .field__input {
+  padding-right: 3rem;
+  border-color: var(--color-rosewood);
+}
+
+.field.is-valid .field__input:focus,
+.field.is-invalid .field__input:focus {
+  box-shadow: 0 0 0 3px rgba(155, 90, 99, .2);
+}
+
+/* Fieldset used as a field (radio chips, address block) */
+fieldset.field {
+  margin-inline: 0;
+}
+
+.address {
+  display: block;
+  margin: 0 0 var(--space-5);
+}
+
+.address > legend {
+  margin-bottom: var(--space-4);
+}
+
+
+/* ---------- Form messages ---------- */
+.form-error {
+  margin: var(--space-4) 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-accent);
+}
+
+.form-success {
+  margin-top: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-accent);
+  background: var(--color-surface-soft);
+  border-radius: var(--radius-lg);
+}
+
+
+/* ---------- Upload box (dropzone) ---------- */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 10rem;
+  margin-top: var(--space-3);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  background: rgba(245, 239, 230, .55);
+  border: var(--border-dashed);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease);
+}
+
+.dropzone:hover,
+.dropzone.is-dragover {
+  background: var(--color-surface-soft);
+  border-color: var(--color-rosewood);
+}
+
+.dropzone__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: var(--space-1);
+}
+
+.dropzone__text {
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+/* Keyboard focus lands on the hidden file input, so show it on the box */
+.dropzone:has(+ input:focus-visible) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.dropzone__list {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.dropzone__list:empty {
+  display: none;
+}
+
+
+/* ---------- Calendar ---------- */
+.calendar {
+  margin-block: var(--space-3) var(--space-6);
+  padding: var(--space-5) var(--space-4);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+}
+
+.calendar__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.calendar__month {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.calendar__nav {
+  display: grid;
+  place-items: center;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-taupe-text);
+  border-radius: 50%;
+  transition: background-color var(--duration-fast) var(--ease);
+}
+
+.calendar__nav:hover:not(:disabled) {
+  background: var(--color-surface-soft);
+}
+
+.calendar__nav:disabled {
+  opacity: .35;
+}
+
+.calendar__table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.calendar__table th {
+  padding: var(--space-2) 0 var(--space-3);
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-label);
+  text-align: center;
+  color: var(--color-text-label);
+}
+
+.calendar__table td {
+  padding: 2px 0;
+  text-align: center;
+}
+
+.calendar__day {
+  display: inline-grid;
+  place-items: center;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1;
+  color: var(--color-text);
+  border: var(--border-width) solid transparent;
+  border-radius: 50%;
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease);
+}
+
+.calendar__day:hover:not(:disabled) {
+  background: var(--color-surface-soft);
+  border-color: var(--color-border-strong);
+}
+
+.calendar__day.is-today {
+  border-color: var(--color-line);
+}
+
+.calendar__day.is-selected,
+.calendar__day[aria-pressed="true"] {
+  color: var(--color-text-accent);
+  background: var(--color-surface-strong);
+  border-color: var(--color-surface-strong);
+}
+
+.calendar__day:disabled {
+  color: var(--color-taupe);
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.calendar__note {
+  margin-top: var(--space-4);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+
+/* ---------- Quantity (− 1 cake +) ---------- */
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.quantity__label {
+  margin-right: var(--space-1);
+}
+
+.quantity__btn {
+  display: grid;
+  place-items: center;
+  width: var(--tap-target);
+  height: var(--tap-target);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: 50%;
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease);
+}
+
+.quantity__btn:hover:not(:disabled) {
+  background: var(--color-surface-soft);
+  border-color: var(--color-line);
+}
+
+.quantity__btn:disabled {
+  opacity: var(--opacity-disabled);
+}
+
+.quantity__value {
+  min-width: 4.5rem;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-text);
+}
+
+
+/* ---------- Switch (publish to gallery) ---------- */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+.switch-row__text {
+  font-size: var(--fs-body);
+  line-height: 1.5;
+}
+
+.switch {
+  position: relative;
+  flex: none;
+  display: inline-block;
+  width: 3.25rem;
+  height: 1.875rem;
+}
+
+.switch input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.switch__track {
+  position: absolute;
+  inset: 0;
+  background: var(--color-surface-strong);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  transition:
+    background-color var(--duration-base) var(--ease),
+    border-color var(--duration-base) var(--ease);
+}
+
+.switch__track::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--color-surface);
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(43, 43, 43, .18);
+  transform: translateY(-50%);
+  transition: transform var(--duration-base) var(--ease);
+}
+
+.switch input:checked + .switch__track {
+  background: var(--color-beige);
+  border-color: var(--color-beige);
+}
+
+.switch input:checked + .switch__track::after {
+  transform: translate(1.375rem, -50%);
+}
+
+.switch input:focus-visible + .switch__track {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.switch input:disabled + .switch__track {
+  opacity: var(--opacity-disabled);
+}
+
+
+/* ---------- Tablet and up ---------- */
+@media (min-width: 768px) {
+  .form-card {
+    padding: var(--space-8);
+  }
+
+  .calendar {
+    padding: var(--space-6);
+  }
+
+  .calendar__day {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .dropzone {
+    min-height: 11rem;
+  }
+}
