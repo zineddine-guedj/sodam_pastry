@@ -1,8 +1,7 @@
 (function () {
   const list = document.getElementById('reservation-list');
   if (!list) return;
-  if (sessionStorage.getItem('sodam:admin-session') !== 'active') { location.replace('login.html'); return; }
-  document.getElementById('sign-out')?.addEventListener('click', () => { sessionStorage.removeItem('sodam:admin-session'); location.href = 'login.html'; });
+  if (!window.SodamAuth?.requireLogin('login.html')) return;
   const store = window.ReservationsStore;
   if (!store) return;
   const labels = { new: 'New', confirmed: 'Confirmed', completed: 'Completed', cancelled: 'Cancelled' };
@@ -50,7 +49,7 @@
     set('look-area', [record.area, record.city].filter(Boolean).join(', '));
     set('look-when', `${fmtDate(record.date)} · ${(record.time || '').replace('-', '–')}`);
     set('look-pastry', `${record.pastryName || 'Pastry'} · ${record.size || ''}`);
-    set('look-servings', `${record.servings || record.size || ''} · ${record.quantity || 1} ${Number(record.quantity) === 1 ? 'cake' : 'cakes'}`);
+    set('look-servings', `${record.servings || record.size || ''} · ${record.quantity || 1} ${Number(record.quantity) === 1 ? 'item' : 'items'}`);
     set('look-message', record.message ? `Message: “${record.message}”` : 'No cake message.');
     set('look-allergies', record.allergies || 'No allergies or special requests.');
     set('look-photo', `Inspiration photos: ${record.inspiration?.length || 0}`);
@@ -59,7 +58,8 @@
     badge.className = `chip chip--status chip--${record.status}`;
     const digits = (record.phone || '').replace(/\D/g, '');
     const whatsapp = document.getElementById('look-whatsapp');
-    whatsapp.href = digits ? `https://wa.me/${digits}` : `https://wa.me/?text=${encodeURIComponent(`Hello ${record.name || 'there'}, I’m contacting you from Sodam Pastry about your reservation ${record.id}.`)}`;
+    const message = `Hello ${record.name || 'there'}, I’m contacting you from Sodam Pastry about your reservation ${record.id}.`;
+    whatsapp.href = digits ? window.SodamWhatsApp.link(digits, message) : window.SodamWhatsApp.messageLink(message);
   }
   function render() {
     const records = store.all().sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));

@@ -63,7 +63,7 @@
   function updateQuantity(value) {
     const number = Math.min(20, Math.max(1, Number(value) || 1));
     qty.value = String(number);
-    qtyOutput.textContent = `${number} ${number === 1 ? 'cake' : 'cakes'}`;
+    qtyOutput.textContent = `${number} ${number === 1 ? 'item' : 'items'}`;
   }
   radios.forEach(radio => radio.addEventListener('change', updateSelection));
   document.getElementById('qty-minus')?.addEventListener('click', () => updateQuantity(Number(qty.value) - 1));

@@ -1,19 +1,28 @@
 (function () {
   const params = new URLSearchParams(location.search);
-  const ref = params.get('ref') || sessionStorage.getItem('sodam:last-reservation');
-  const record = ref ? window.ReservationsStore?.find(ref) : null;
-  if (!record) return;
-  const set = (id, value) => { const node = document.getElementById(id); if (node) node.textContent = value; };
-  const date = record.date ? new Date(`${record.date}T12:00:00`) : null;
-  const dateLabel = date ? date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : '';
+  const key = window.SodamConstants?.keys.lastReservation || 'sodam:last-reservation';
+  const reference = params.get('ref') || sessionStorage.getItem(key);
+  const record = reference ? window.ReservationsStore?.find(reference) : null;
+  const set = (id, value) => { const node = document.getElementById(id); if (node) node.textContent = value || ''; };
+  if (!record) {
+    set('thanks-ref', '—');
+    set('thanks-ref-2', '—');
+    set('thanks-name', 'you');
+    set('thanks-summary', 'Your request details are not available in this browser.');
+    return;
+  }
+  const summary = window.ReservationTemplates?.summary(record) || {};
   set('thanks-ref', record.id);
   set('thanks-ref-2', record.id);
-  set('thanks-name', (record.name || '').split(' ')[0] || 'you');
-  set('thanks-summary', `${record.pastryName || 'Pastry'} · ${record.servings || ''} servings · ${dateLabel} · ${record.fulfilment || 'delivery'}.`);
+  set('thanks-name', window.SodamFormat?.firstName(record.name) || 'you');
+  set('thanks-summary', `${record.pastryName || 'Pastry'} · ${record.servings || 'servings'} · ${summary.date} · ${summary.fulfilment}.`);
   const link = document.getElementById('whatsapp-link');
-  if (link) {
-    const message = `Hello Sodam, I sent reservation ${record.id} for ${record.pastryName || 'a pastry'}. Could you help me with the details?`;
-    link.href = `https://wa.me/?text=${encodeURIComponent(message)}`;
-  }
+  const message = `Hello Sodam, I sent reservation ${record.id} for ${record.pastryName || 'a pastry'}. Could you help me with the details?`;
+  window.SodamConfig?.load().then(config => {
+    if (!link) return;
+    link.href = config.whatsappNumber
+      ? window.SodamWhatsApp.link(config.whatsappNumber, message)
+      : window.SodamWhatsApp.messageLink(message);
+  });
   window.ReservationDraft?.clear();
 })();

@@ -14,10 +14,11 @@
   }
   updateAddress();
 
+  const summary = window.ReservationTemplates?.summary(draft);
   const when = document.getElementById('when-summary');
-  if (when && draft.dateLabel) when.textContent = `${draft.fulfilment === 'pickup' ? 'Pickup' : 'Delivery'} · ${draft.dateLabel} · ${draft.time || ''}`;
+  if (when && draft.dateLabel) when.textContent = `${summary?.fulfilment || 'Delivery'} · ${draft.dateLabel} · ${summary?.time || ''}`;
   const pastry = document.getElementById('pastry-summary');
-  if (pastry && draft.pastryName) pastry.textContent = `${draft.pastryName} · ${draft.size || 'medium'}, ${draft.servings || '6–8'} servings · ${draft.quantity || 1} ${Number(draft.quantity) === 1 ? 'cake' : 'cakes'}. Your preferred details are saved for this request.`;
+  if (pastry && draft.pastryName) pastry.textContent = `${summary?.pastry || draft.pastryName} · ${summary?.size || 'Medium · 6–8 servings'}. Your preferred details are saved for this request.`;
 
   function validate(input) {
     const message = document.getElementById(`${input.id}-message`);
@@ -25,22 +26,12 @@
     const field = input.closest('.field');
     const value = input.value.trim();
     let error = '';
-    if (input.required && !value) error = message.dataset.empty || 'Please complete this field.';
-    else if (input.id === 'name' && value.length < 2) error = 'Please enter your name.';
-    else if (input.id === 'phone' && value && (/[a-z]/i.test(value) || value.replace(/\D/g, '').length < 8)) error = message.dataset.invalid;
-    else if (input.id === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = message.dataset.invalid;
-    if (message.dataset.valid && input.id !== 'email') {
-      message.textContent = error || message.dataset.valid;
-      message.hidden = false;
-    } else {
-      message.textContent = error;
-      message.hidden = !error;
-    }
-    field?.classList.toggle('is-invalid', Boolean(error));
-    field?.classList.toggle('is-valid', !error && Boolean(value));
-    field?.querySelector('.field__status--valid')?.toggleAttribute('hidden', Boolean(error) || !value);
-    field?.querySelector('.field__status--error')?.toggleAttribute('hidden', !error);
-    return !error;
+    const validator = window.SodamValidator;
+    if (input.required && !validator.required(value)) error = message.dataset.empty || 'Please complete this field.';
+    else if (input.id === 'name' && !validator.length(value, 2)) error = 'Please enter your name.';
+    else if (input.id === 'phone' && value && !validator.phone(value)) error = message.dataset.invalid;
+    else if (input.id === 'email' && !validator.email(value)) error = message.dataset.invalid;
+    return validator.message(input, error, !error && value && input.id !== 'email' ? message.dataset.valid || '' : '');
   }
 
   fieldIds.forEach(id => {
@@ -57,7 +48,14 @@
       form.querySelector('.is-invalid .field__input')?.focus();
       return;
     }
-    draftStore?.update(Object.fromEntries(fieldIds.map(id => [id, document.getElementById(id)?.value.trim() || ''])));
+    try {
+      draftStore?.update(Object.fromEntries(fieldIds.map(id => [id, document.getElementById(id)?.value.trim() || ''])));
+    } catch (error) {
+      const formError = document.getElementById('form-error');
+      formError.textContent = 'This browser could not save your details. Please try again.';
+      formError.hidden = false;
+      return;
+    }
     location.href = 'reserve-review.html';
   });
 })();

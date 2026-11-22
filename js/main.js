@@ -8,9 +8,8 @@
    Page scripts do NOT import this file.
    ========================================================= */
 
-// Must match utils/constants.js
-const STORAGE_PREFIX = 'sodam:';
-const DATA_CHANGED_EVENT = 'sodam:data-changed';
+const STORAGE_PREFIX = window.SodamConstants?.storagePrefix || 'sodam:';
+const DATA_CHANGED_EVENT = window.SodamConstants?.events.dataChanged || 'sodam:data-changed';
 
 
 /* ---------- 1. JS ready ---------- */
@@ -62,6 +61,7 @@ function initMobileMenu() {
 
 /* ---------- 3. Saving blocked? ---------- */
 function isStorageAvailable() {
+  if (window.SodamStorage) return window.SodamStorage.available();
   try {
     const probe = `${STORAGE_PREFIX}probe`;
     window.localStorage.setItem(probe, '1');

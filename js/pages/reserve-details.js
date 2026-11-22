@@ -8,16 +8,16 @@
   const calendarBody = document.getElementById('cal-body');
   const selectedDate = document.getElementById('selected-date');
   const dateValue = document.getElementById('date-value');
-  const minDate = new Date();
-  minDate.setHours(0, 0, 0, 0);
-  minDate.setDate(minDate.getDate() + 2);
+  const minBookingAt = new Date(Date.now() + 48 * 60 * 60 * 1000);
+  const minDate = new Date(minBookingAt.getFullYear(), minBookingAt.getMonth(), minBookingAt.getDate());
   let month = new Date(minDate.getFullYear(), minDate.getMonth(), 1);
   let chosen = draft.date ? new Date(`${draft.date}T12:00:00`) : null;
   if (chosen && chosen < minDate) chosen = null;
   if (chosen) month = new Date(chosen.getFullYear(), chosen.getMonth(), 1);
 
   const pastrySummary = document.getElementById('pastry-summary');
-  if (pastrySummary && draft.pastryName) pastrySummary.textContent = `${draft.pastryName} · ${capitalize(draft.size || 'medium')}, ${draft.servings || '6–8'} servings · ${draft.quantity || 1} ${Number(draft.quantity) === 1 ? 'cake' : 'cakes'}`;
+  const reservationSummary = window.ReservationTemplates?.summary(draft);
+  if (pastrySummary && draft.pastryName) pastrySummary.textContent = `${reservationSummary.pastry} · ${reservationSummary.size}`;
   function capitalize(text) { return text.charAt(0).toUpperCase() + text.slice(1); }
   function toYmd(date) { return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; }
   function formatDate(date) { return date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }); }
@@ -42,7 +42,8 @@
       button.type = 'button';
       button.dataset.date = toYmd(date);
       button.textContent = String(day);
-      button.disabled = date < minDate;
+      const latestSlot = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 16);
+      button.disabled = latestSlot < minBookingAt;
       if (chosen && toYmd(chosen) === button.dataset.date) {
         button.classList.add('is-selected');
         button.setAttribute('aria-pressed', 'true');
@@ -103,19 +104,9 @@
       uploadList.append(li);
     });
   }
-  async function compress(file) {
-    if (!/^image\/(jpeg|png)$/.test(file.type) || file.size > 10 * 1024 * 1024) throw new Error('Choose a JPG or PNG under 10 MB.');
-    const src = await new Promise((resolve, reject) => {
-      const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file);
-    });
-    const image = await new Promise((resolve, reject) => { const img = new Image(); img.onload = () => resolve(img); img.onerror = reject; img.src = src; });
-    const scale = Math.min(1, 1000 / Math.max(image.width, image.height));
-    const canvas = document.createElement('canvas'); canvas.width = Math.round(image.width * scale); canvas.height = Math.round(image.height * scale);
-    canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL('image/jpeg', 0.72);
-  }
+
   uploadInput?.addEventListener('change', async () => {
-    try { for (const file of uploadInput.files) photos.push(await compress(file)); renderPhotos(); }
+    try { for (const file of uploadInput.files) photos.push(await window.SodamImages.read(file, { maxDimension: 1000, quality: 0.72 })); renderPhotos(); }
     catch (error) { window.alert(error.message || 'Could not read the selected photo.'); }
     uploadInput.value = '';
   });
@@ -132,7 +123,20 @@
     const timeValue = form.querySelector('[name="time"]:checked')?.value;
     const fulfilmentValue = form.querySelector('[name="fulfilment"]:checked')?.value;
     if (!timeValue || !fulfilmentValue) return;
-    draftStore?.update({ date: toYmd(chosen), dateLabel: formatDate(chosen), time: timeValue, fulfilment: fulfilmentValue, message: message.value.trim(), allergies: allergies.value.trim(), inspiration: photos });
+    const startHour = Number(timeValue.slice(0, 2));
+    const requestedAt = new Date(chosen.getFullYear(), chosen.getMonth(), chosen.getDate(), startHour);
+    if (requestedAt < minBookingAt) {
+      const note = document.querySelector('.calendar__note');
+      if (note) note.textContent = 'Please choose a time at least 48 hours from now, subject to availability.';
+      return;
+    }
+    try {
+      draftStore?.update({ date: toYmd(chosen), dateLabel: formatDate(chosen), time: timeValue, fulfilment: fulfilmentValue, message: message.value.trim(), allergies: allergies.value.trim(), inspiration: photos });
+    } catch (error) {
+      const note = document.querySelector('.calendar__note');
+      if (note) note.textContent = 'This browser could not save your details. Remove some inspiration photos and try again.';
+      return;
+    }
     location.href = 'reserve-contact.html';
   });
 })();

@@ -3,32 +3,41 @@
   if (!form) return;
   const draftStore = window.ReservationDraft;
   const draft = draftStore?.get() || {};
-  const text = (id, value) => { const node = document.getElementById(id); if (node) node.textContent = value || 'Not provided'; };
-  const date = draft.date ? new Date(`${draft.date}T12:00:00`) : null;
-  const dateLabel = date ? date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }) : 'Date not selected';
-  const timeLabel = (draft.time || '').replace('-', '–');
-  text('receipt-pastry', `${draft.pastryName || 'Pastry'} · ${draft.quantity || 1} ${Number(draft.quantity) === 1 ? 'cake' : 'cakes'}`);
-  text('receipt-size', `${capitalize(draft.size || 'medium')} · ${draft.servings || '6–8'} servings`);
-  text('receipt-when', `${dateLabel} · ${timeLabel}`);
-  text('receipt-where', `${capitalize(draft.fulfilment || 'delivery')} · ${draft.city || 'Algiers'}`);
-  text('receipt-name', draft.name);
-  text('receipt-phone', draft.phone);
-  text('receipt-address', draft.fulfilment === 'pickup' ? 'Pickup · address shared after confirmation' : [draft.street, draft.area, draft.city].filter(Boolean).join(', '));
-  text('receipt-message', draft.message ? `“${draft.message}”` : 'No cake message added.');
-  text('receipt-allergies', draft.allergies || 'No allergies or special requests added.');
-  text('receipt-photo', `Inspiration photos: ${draft.inspiration?.length || 0}`);
-  text('contact-check', `${draft.name || 'Customer'} · WhatsApp ${draft.phone || ''}${draft.email ? ` · ${draft.email}` : ' · Optional email omitted.'}`);
+  const summary = window.ReservationTemplates?.summary(draft) || {};
+  const set = window.ReservationTemplates?.setText || ((id, value) => { const node = document.getElementById(id); if (node) node.textContent = value || 'Not provided'; });
+  set('receipt-pastry', summary.pastry);
+  set('receipt-size', summary.size);
+  set('receipt-when', `${summary.date || 'Date not selected'} · ${summary.time || ''}`);
+  set('receipt-where', `${summary.fulfilment || 'Delivery'} · ${draft.city || 'Algiers'}`);
+  set('receipt-name', draft.name);
+  set('receipt-phone', draft.phone);
+  set('receipt-address', summary.address, 'Address not provided');
+  set('receipt-message', draft.message ? `“${draft.message}”` : 'No cake message added.');
+  set('receipt-allergies', draft.allergies || 'No allergies or special requests added.');
+  set('receipt-photo', `Inspiration photos: ${draft.inspiration?.length || 0}`);
+  set('contact-check', `${draft.name || 'Customer'} · WhatsApp ${draft.phone || ''}${draft.email ? ` · ${draft.email}` : ' · Optional email omitted.'}`);
 
-  function capitalize(value) { return value.charAt(0).toUpperCase() + value.slice(1); }
+  const problem = document.createElement('p');
+  problem.className = 'form-error';
+  problem.setAttribute('role', 'alert');
+  problem.hidden = true;
+  form.prepend(problem);
   form.addEventListener('submit', event => {
     event.preventDefault();
-    if (!draft.name || !draft.phone || !draft.pastry) {
-      location.href = !draft.pastry ? 'reserve-pastry.html' : 'reserve-contact.html';
+    const missingPastry = !draft.pastry || !draft.pastryName;
+    const missingDetails = !draft.date || !draft.time || !draft.fulfilment;
+    const missingContact = !draft.name || !draft.phone || (draft.fulfilment === 'delivery' && (!draft.street || !draft.area || !draft.city));
+    if (missingPastry || missingDetails || missingContact) {
+      location.href = missingPastry ? 'reserve-pastry.html' : missingDetails ? 'reserve-details.html' : 'reserve-contact.html';
       return;
     }
-    if (!window.ReservationsStore) return;
-    const reservation = window.ReservationsStore.create(draft);
-    sessionStorage.setItem('sodam:last-reservation', reservation.id);
-    location.href = `thank-you.html?ref=${encodeURIComponent(reservation.id)}`;
+    try {
+      const reservation = window.ReservationsStore.create(draft);
+      sessionStorage.setItem(window.SodamConstants?.keys.lastReservation || 'sodam:last-reservation', reservation.id);
+      location.href = `thank-you.html?ref=${encodeURIComponent(reservation.id)}`;
+    } catch (error) {
+      problem.textContent = 'We could not save this request in your browser. Please try again or contact us on Instagram.';
+      problem.hidden = false;
+    }
   });
 })();

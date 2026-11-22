@@ -13,10 +13,7 @@
     return;
   }
 
-  const labels = {
-    pavlova: 'Pavlova', 'dome-cakes': 'Dome cakes', 'custom-cakes': 'Custom cakes',
-    'fruit-cakes': 'Fruit cakes', seasonal: 'Seasonal'
-  };
+  const labels = window.SodamConstants?.categories || {};
   const title = document.getElementById('creation-title');
   title.textContent = item.title;
   document.title = `${item.title} · Sodam Pastry`;
@@ -31,7 +28,7 @@
   const date = document.getElementById('creation-date');
   if (item.date) {
     date.dateTime = item.date;
-    date.textContent = new Date(`${item.date}T12:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    date.textContent = window.SodamFormat?.date(item.date, { day: 'numeric', month: 'long', year: 'numeric' }) || item.date;
   }
   const reserveLink = document.getElementById('reserve-link');
   reserveLink.href = `reserve-pastry.html?creation=${encodeURIComponent(item.id)}`;
@@ -79,22 +76,10 @@
   });
 
   const hint = document.querySelector('.carousel__hint');
-  hint.hidden = photos.length < 2;
-  let current = 0;
-  function show(index) {
-    current = (index + photos.length) % photos.length;
-    track.scrollTo({ left: current * track.clientWidth, behavior: 'smooth' });
-    thumbs.querySelectorAll('.carousel__thumb').forEach((button, i) => {
-      button.classList.toggle('is-active', i === current);
-      button.setAttribute('aria-current', i === current ? 'true' : 'false');
-    });
-    dots.querySelectorAll('.carousel__dot').forEach((dot, i) => dot.classList.toggle('is-active', i === current));
-  }
-  thumbs.addEventListener('click', event => {
-    const button = event.target.closest('[data-slide]');
-    if (button) show(Number(button.dataset.slide));
+  if (hint) hint.hidden = photos.length < 2;
+  window.SodamCarousel?.init({
+    track, thumbs, dots,
+    previous: document.getElementById('carousel-prev'),
+    next: document.getElementById('carousel-next')
   });
-  document.getElementById('carousel-prev').addEventListener('click', () => show(current - 1));
-  document.getElementById('carousel-next').addEventListener('click', () => show(current + 1));
-  show(0);
 })();

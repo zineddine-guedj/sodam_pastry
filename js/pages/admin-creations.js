@@ -2,14 +2,7 @@
   const store = window.CreationsStore;
   const form = document.getElementById('creation-form');
   if (!form || !store) return;
-  if (sessionStorage.getItem('sodam:admin-session') !== 'active') {
-    location.replace('login.html');
-    return;
-  }
-  document.getElementById('sign-out')?.addEventListener('click', () => {
-    sessionStorage.removeItem('sodam:admin-session');
-    location.href = 'login.html';
-  });
+  if (!window.SodamAuth?.requireLogin('login.html')) return;
 
   const $ = selector => document.querySelector(selector);
   const list = $('#collection-list');
@@ -137,33 +130,12 @@
     title.focus({ preventScroll: true });
   }
 
-  async function readPhoto(file) {
-    if (!file.type.match(/^image\/(jpeg|png)$/)) throw new Error(`${file.name}: choose a JPG or PNG image.`);
-    if (file.size > 10 * 1024 * 1024) throw new Error(`${file.name}: each image must be under 10 MB.`);
-    const source = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(new Error(`Could not read ${file.name}.`));
-      reader.readAsDataURL(file);
-    });
-    const image = await new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error(`Could not open ${file.name}.`));
-      img.src = source;
-    });
-    const scale = Math.min(1, 1200 / Math.max(image.width, image.height));
-    const canvas = document.createElement('canvas');
-    canvas.width = Math.round(image.width * scale);
-    canvas.height = Math.round(image.height * scale);
-    canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL('image/jpeg', 0.78);
-  }
+
 
   photosInput.addEventListener('change', async () => {
     status.hidden = true;
     try {
-      for (const file of photosInput.files) photos.push(await readPhoto(file));
+      for (const file of photosInput.files) photos.push(await window.SodamImages.read(file));
       renderPhotos();
     } catch (error) {
       status.textContent = error.message;

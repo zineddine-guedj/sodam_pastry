@@ -1,8 +1,7 @@
 (function () {
   const form = document.getElementById('login-form');
   if (!form) return;
-  const SESSION_KEY = 'sodam:admin-session';
-  if (sessionStorage.getItem(SESSION_KEY) === 'active') { location.replace('creations.html'); return; }
+  if (window.SodamAuth?.isAuthenticated()) { location.replace('creations.html'); return; }
   const email = document.getElementById('owner-email');
   const password = document.getElementById('owner-password');
   const error = document.getElementById('login-error');
@@ -18,9 +17,11 @@
   form.addEventListener('submit', event => {
     event.preventDefault();
     error.hidden = true;
-    if (!show(email) || !show(password)) { (email.value ? password : email).focus(); return; }
-    // Demo-only access: any non-empty password is accepted. Use server authentication before launch.
-    sessionStorage.setItem(SESSION_KEY, 'active');
+    const emailValid = show(email);
+    const passwordValid = show(password);
+    if (!emailValid || !passwordValid) { (emailValid ? password : email).focus(); return; }
+    // Demo-only access: any valid email and non-empty password is accepted.
+    if (!window.SodamAuth?.signIn(email.value, password.value)) { error.hidden = false; return; }
     location.href = 'creations.html';
   });
 })();
