@@ -22,8 +22,6 @@
   <link rel="stylesheet" href="css/components/footer.css">
   <link rel="stylesheet" href="css/pages/creations.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <script type="module" src="js/main.js"></script>
-  <script type="module" src="js/pages/creations.js"></script>
 </head>
 <body class="page-creations">
 
@@ -64,7 +62,7 @@
           <p class="section-heading__intro">A soft swirl of cream, a petal, a little fruit. Each creation is made by hand, and no two are quite the same.</p>
         </header>
 
-        <!-- Filter chips: creations.js reads data-filter and shows/hides cards by data-category -->
+        <!-- Filter chips are applied to creations loaded from the owner studio. -->
         <div class="chips" role="group" aria-label="Filter creations by category">
           <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All</button>
           <button class="chip" type="button" data-filter="pavlova" aria-pressed="false">Pavlova</button>
@@ -74,7 +72,7 @@
           <button class="chip" type="button" data-filter="seasonal" aria-pressed="false">Seasonal</button>
         </div>
 
-        <p class="results-count" id="results-count" aria-live="polite">6 little joys · All creations</p>
+        <p class="results-count" id="results-count" aria-live="polite">0 little joys · All creations</p>
         <p class="script-note">made to be shared ♡</p>
       </div>
     </section>
@@ -82,91 +80,12 @@
     <!-- ============ GALLERY ============ -->
     <section class="section gallery" aria-label="Creations">
       <div class="container">
-        <!-- Later, creations.js can build these cards from data/creations.json -->
+        <!-- The gallery is populated from creations saved in the owner studio. -->
         <ul class="card-grid gallery__grid" id="gallery-grid">
-
-          <li class="gallery__item" data-category="pavlova">
-            <article class="gallery-card">
-              <a class="gallery-card__media" href="creation-detail.html?id=individual-pavlova">
-                <img src="assets/images/creations/pavlova.jpg" alt="Individual pavlova with berries and tiny flowers on a speckled plate, with a silver spoon" width="640" height="480" loading="lazy">
-              </a>
-              <p class="gallery-card__category">Pavlova</p>
-              <h2 class="gallery-card__title"><a href="creation-detail.html?id=individual-pavlova">Individual Pavlova</a></h2>
-              <p class="gallery-card__text">A crisp little cloud, soft at heart, crowned with berries.</p>
-              <time class="gallery-card__date" datetime="2026-10-24">24 Oct 2026</time>
-              <a class="gallery-card__link" href="reserve-pastry.html?creation=individual-pavlova">Reserve this</a>
-            </article>
-          </li>
-
-          <li class="gallery__item" data-category="dome-cakes">
-            <article class="gallery-card">
-              <a class="gallery-card__media" href="creation-detail.html?id=dome-cake">
-                <img src="assets/images/creations/dome-cake.jpg" alt="Pale pink dome cake with raspberries and daisies on a cake stand, on a gingham cloth" width="640" height="480" loading="lazy">
-              </a>
-              <p class="gallery-card__category">Dome cakes</p>
-              <h2 class="gallery-card__title"><a href="creation-detail.html?id=dome-cake">Dome Cake</a></h2>
-              <p class="gallery-card__text">A flower-kissed dome with a delicate, creamy heart.</p>
-              <time class="gallery-card__date" datetime="2026-10-22">22 Oct 2026</time>
-              <a class="gallery-card__link" href="reserve-pastry.html?creation=dome-cake">Reserve this</a>
-            </article>
-          </li>
-
-          <li class="gallery__item" data-category="fruit-cakes">
-            <article class="gallery-card">
-              <a class="gallery-card__media" href="creation-detail.html?id=fruit-flower-cream-cake">
-                <img src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peaches and small flowers on a ceramic stand" width="640" height="480" loading="lazy">
-              </a>
-              <p class="gallery-card__category">Fruit cakes</p>
-              <h2 class="gallery-card__title"><a href="creation-detail.html?id=fruit-flower-cream-cake">Fruit &amp; Flower Cream Cake</a></h2>
-              <p class="gallery-card__text">A little garden of sweetness, where every bite feels like a summer dream.</p>
-              <time class="gallery-card__date" datetime="2026-10-20">20 Oct 2026</time>
-              <a class="gallery-card__link" href="reserve-pastry.html?creation=fruit-flower-cream-cake">Reserve this</a>
-            </article>
-          </li>
-
-          <li class="gallery__item" data-category="custom-cakes">
-            <article class="gallery-card">
-              <a class="gallery-card__media" href="creation-detail.html?id=a-ribbon-of-joy">
-                <img src="assets/images/creations/ribbon-cake.jpg" alt="Small white cake decorated with pink piped ribbons and tiny flowers, on a stoneware plate" width="640" height="480" loading="lazy">
-              </a>
-              <p class="gallery-card__category">Custom cakes</p>
-              <h2 class="gallery-card__title"><a href="creation-detail.html?id=a-ribbon-of-joy">A Ribbon of Joy</a></h2>
-              <p class="gallery-card__text">For a birthday, a small milestone, a beautiful ordinary day.</p>
-              <time class="gallery-card__date" datetime="2026-10-18">18 Oct 2026</time>
-              <a class="gallery-card__link" href="reserve-pastry.html?creation=a-ribbon-of-joy">Reserve this</a>
-            </article>
-          </li>
-
-          <li class="gallery__item" data-category="seasonal">
-            <article class="gallery-card">
-              <a class="gallery-card__media" href="creation-detail.html?id=the-little-dessert-box">
-                <img src="assets/images/creations/dessert-box.jpg" alt="Kraft dessert box of mini pavlovas and fruit tarts, tied with a gingham ribbon" width="640" height="480" loading="lazy">
-              </a>
-              <p class="gallery-card__category">Seasonal</p>
-              <h2 class="gallery-card__title"><a href="creation-detail.html?id=the-little-dessert-box">The Little Dessert Box</a></h2>
-              <p class="gallery-card__text">Little joys, nestled together and ready to be shared.</p>
-              <time class="gallery-card__date" datetime="2026-10-16">16 Oct 2026</time>
-              <a class="gallery-card__link" href="reserve-pastry.html?creation=the-little-dessert-box">Reserve this</a>
-            </article>
-          </li>
-
-          <li class="gallery__item" data-category="seasonal">
-            <article class="gallery-card">
-              <a class="gallery-card__media" href="creation-detail.html?id=peach-afternoon">
-                <img src="assets/images/creations/peach-cake.jpg" alt="Layered peach and vanilla cake topped with a cream rose, on a linen cloth" width="640" height="480" loading="lazy">
-              </a>
-              <p class="gallery-card__category">Seasonal</p>
-              <h2 class="gallery-card__title"><a href="creation-detail.html?id=peach-afternoon">Peach Afternoon</a></h2>
-              <p class="gallery-card__text">Soft peaches and vanilla, a slow afternoon in every slice.</p>
-              <time class="gallery-card__date" datetime="2026-10-12">12 Oct 2026</time>
-              <a class="gallery-card__link" href="reserve-pastry.html?creation=peach-afternoon">Reserve this</a>
-            </article>
-          </li>
-
         </ul>
 
         <!-- Shown by creations.js when a filter has no results -->
-        <p class="gallery__empty" id="gallery-empty" hidden>No creations here yet. Try another category, or <a href="reserve-pastry.html">dream up something of your own</a>.</p>
+        <p class="gallery__empty" id="gallery-empty">No creations here yet. Check back soon, or <a href="reserve-pastry.html">dream up something of your own</a>.</p>
 
         <!-- Custom order note -->
         <aside class="notice" aria-label="Custom orders">
@@ -216,6 +135,7 @@
   </div>
 
   <script src="js/main.js" defer></script>
+  <script src="js/services/creations-service.js" defer></script>
   <script src="js/pages/creations.js" defer></script>
 </body>
 </html>

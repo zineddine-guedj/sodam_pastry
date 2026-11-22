@@ -100,13 +100,11 @@ The Figma frames are 1440px, 768px and 390px. In CSS, write desktop first, then 
 
 ## Data and storage (temporary)
 
-There is no backend yet, so the site works with local data:
+There is no backend yet. Creations start empty and are added in **Owner Studio → Creations**. Published creations appear in the public gallery; drafts stay hidden. Changes are saved in this browser's `localStorage` under `sodam:creations`, so they do not sync to another device or to visitors. Uploaded photos are resized in the browser before saving.
 
-- `data/creations.json`, `pastries.json` and `reservations.json` hold the sample content.
-- Reservations and any changes made in the owner area are saved in the browser's `localStorage` through `js/utils/storage.js`.
-- The reservation form keeps its answers between the 4 steps in `js/utils/reservation-draft.js`.
+The reservation form keeps its answers between the 4 steps in `js/utils/reservation-draft.js`.
 
-> **The owner login is a mock.** It is not secure and only exists so the flow can be demoed. Replace it with real authentication when a backend is added.
+> **Owner Studio and browser storage are a prototype, not secure multi-user publishing.** Connect a backend and real authentication before using this for a live client website.
 
 ## Before launch
 

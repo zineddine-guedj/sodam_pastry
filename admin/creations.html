@@ -23,8 +23,6 @@
   <link rel="stylesheet" href="../css/components/footer.css">
   <link rel="stylesheet" href="../css/pages/admin-creations.css">
   <link rel="stylesheet" href="../css/responsive.css">
-  <script type="module" src="js/main.js"></script>
-  <script type="module" src="js/pages/creations.js"></script>
 </head>
 <body class="page-admin page-admin-creations">
 
@@ -168,7 +166,7 @@
             <button class="btn btn--ghost" type="reset">Clear form</button>
           </div>
 
-          <!-- Shown by admin-creations.js after saving (text is a placeholder to confirm) -->
+          <!-- Shown by admin-creations.js after saving. -->
           <p class="form-success" id="form-status" role="status" hidden>Saved! Your creation is in the collection.</p>
         </form>
       </section>
@@ -177,97 +175,11 @@
       <section class="collection" aria-labelledby="collection-title">
         <header class="collection__head">
           <h2 class="collection__title" id="collection-title">Your collection</h2>
-          <p class="collection__count" id="collection-count" aria-live="polite">6 creations</p>
+          <p class="collection__count" id="collection-count" aria-live="polite">0 creations</p>
         </header>
 
-        <!-- Sample list from the design. admin-creations.js should build it from localStorage / data/creations.json. -->
-        <ul class="collection__list" id="collection-list">
-
-          <li class="creation-row" data-id="individual-pavlova">
-            <img class="creation-row__img" src="../assets/images/creations/pavlova.jpg" alt="" width="72" height="72" loading="lazy">
-            <div class="creation-row__info">
-              <h3 class="creation-row__title">Individual Pavlova</h3>
-              <p class="creation-row__category">Pavlova</p>
-            </div>
-            <time class="creation-row__date" datetime="2026-10-24">24 Oct 2026</time>
-            <div class="creation-row__actions">
-              <span class="chip chip--status chip--published">Published</span>
-              <button class="link-button" type="button" data-action="edit" aria-label="Edit Individual Pavlova">Edit</button>
-              <button class="link-button" type="button" data-action="delete" aria-label="Delete Individual Pavlova">Delete</button>
-            </div>
-          </li>
-
-          <li class="creation-row" data-id="dome-cake">
-            <img class="creation-row__img" src="../assets/images/creations/dome-cake.jpg" alt="" width="72" height="72" loading="lazy">
-            <div class="creation-row__info">
-              <h3 class="creation-row__title">Dome Cake</h3>
-              <p class="creation-row__category">Dome cakes</p>
-            </div>
-            <time class="creation-row__date" datetime="2026-10-22">22 Oct 2026</time>
-            <div class="creation-row__actions">
-              <span class="chip chip--status chip--published">Published</span>
-              <button class="link-button" type="button" data-action="edit" aria-label="Edit Dome Cake">Edit</button>
-              <button class="link-button" type="button" data-action="delete" aria-label="Delete Dome Cake">Delete</button>
-            </div>
-          </li>
-
-          <li class="creation-row" data-id="fruit-flower-cream-cake">
-            <img class="creation-row__img" src="../assets/images/creations/fruit-cake.jpg" alt="" width="72" height="72" loading="lazy">
-            <div class="creation-row__info">
-              <h3 class="creation-row__title">Fruit &amp; Flower Cream Cake</h3>
-              <p class="creation-row__category">Fruit cakes</p>
-            </div>
-            <time class="creation-row__date" datetime="2026-10-20">20 Oct 2026</time>
-            <div class="creation-row__actions">
-              <span class="chip chip--status chip--published">Published</span>
-              <button class="link-button" type="button" data-action="edit" aria-label="Edit Fruit &amp; Flower Cream Cake">Edit</button>
-              <button class="link-button" type="button" data-action="delete" aria-label="Delete Fruit &amp; Flower Cream Cake">Delete</button>
-            </div>
-          </li>
-
-          <li class="creation-row" data-id="a-ribbon-of-joy">
-            <img class="creation-row__img" src="../assets/images/creations/ribbon-cake.jpg" alt="" width="72" height="72" loading="lazy">
-            <div class="creation-row__info">
-              <h3 class="creation-row__title">A Ribbon of Joy</h3>
-              <p class="creation-row__category">Custom cakes</p>
-            </div>
-            <time class="creation-row__date" datetime="2026-10-18">18 Oct 2026</time>
-            <div class="creation-row__actions">
-              <span class="chip chip--status chip--published">Published</span>
-              <button class="link-button" type="button" data-action="edit" aria-label="Edit A Ribbon of Joy">Edit</button>
-              <button class="link-button" type="button" data-action="delete" aria-label="Delete A Ribbon of Joy">Delete</button>
-            </div>
-          </li>
-
-          <li class="creation-row" data-id="the-little-dessert-box">
-            <img class="creation-row__img" src="../assets/images/creations/dessert-box.jpg" alt="" width="72" height="72" loading="lazy">
-            <div class="creation-row__info">
-              <h3 class="creation-row__title">The Little Dessert Box</h3>
-              <p class="creation-row__category">Seasonal</p>
-            </div>
-            <time class="creation-row__date" datetime="2026-10-16">16 Oct 2026</time>
-            <div class="creation-row__actions">
-              <span class="chip chip--status chip--published">Published</span>
-              <button class="link-button" type="button" data-action="edit" aria-label="Edit The Little Dessert Box">Edit</button>
-              <button class="link-button" type="button" data-action="delete" aria-label="Delete The Little Dessert Box">Delete</button>
-            </div>
-          </li>
-
-          <li class="creation-row" data-id="peach-afternoon">
-            <img class="creation-row__img" src="../assets/images/creations/peach-cake.jpg" alt="" width="72" height="72" loading="lazy">
-            <div class="creation-row__info">
-              <h3 class="creation-row__title">Peach Afternoon</h3>
-              <p class="creation-row__category">Seasonal</p>
-            </div>
-            <time class="creation-row__date" datetime="2026-10-12">12 Oct 2026</time>
-            <div class="creation-row__actions">
-              <span class="chip chip--status chip--published">Published</span>
-              <button class="link-button" type="button" data-action="edit" aria-label="Edit Peach Afternoon">Edit</button>
-              <button class="link-button" type="button" data-action="delete" aria-label="Delete Peach Afternoon">Delete</button>
-            </div>
-          </li>
-
-        </ul>
+        <ul class="collection__list" id="collection-list" aria-live="polite"></ul>
+        <p class="gallery__empty" id="collection-empty">No creations yet. Add your first one above.</p>
       </section>
 
     </div>
@@ -313,9 +225,7 @@
   </footer>
 
   <script src="../js/main.js" defer></script>
-  <script src="../js/utils/storage.js" defer></script>
-  <script src="../js/utils/validators.js" defer></script>
-  <script src="../js/utils/format.js" defer></script>
+  <script src="../js/services/creations-service.js" defer></script>
   <script src="../js/components/modal.js" defer></script>
   <script src="../js/components/admin-navbar.js" defer></script>
   <script src="../js/pages/admin-creations.js" defer></script>
