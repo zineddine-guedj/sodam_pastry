@@ -21,8 +21,6 @@
   <link rel="stylesheet" href="css/components/footer.css">
   <link rel="stylesheet" href="css/pages/home.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <script type="module" src="js/main.js"></script>
-  <script type="module" src="js/pages/creations.js"></script>
 </head>
 <body class="page-home">
 
@@ -184,7 +182,9 @@
     </section>
 
     <!-- ============ LATEST CREATIONS ============ -->
-    <section class="section" id="latest" aria-labelledby="latest-title">
+    <!-- Hidden until home.js finds published creations. home.js fills #latest-list
+         with the newest ones (polaroid cards) and then removes the hidden attribute. -->
+    <section class="section" id="latest" aria-labelledby="latest-title" hidden>
       <div class="container">
         <header class="section-heading">
           <p class="eyebrow">Fresh from our little kitchen</p>
@@ -193,33 +193,7 @@
           <p class="section-heading__intro">A few sweet moments, before they found their way to someone’s table.</p>
         </header>
 
-        <!-- Later, home.js can fill this list from data/creations.json -->
-        <ul class="card-grid card-grid--4 polaroid-list">
-          <li>
-            <a class="polaroid polaroid--small" href="creation-detail.html?id=berry-little-joys">
-              <img src="assets/images/creations/pavlova.jpg" alt="Pavlova with strawberries and berries" loading="lazy">
-              <span class="polaroid__caption">berry little joys</span>
-            </a>
-          </li>
-          <li>
-            <a class="polaroid polaroid--small" href="creation-detail.html?id=a-bloom-for-you">
-              <img src="assets/images/creations/dome-cake.jpg" alt="Pink dome cake with raspberries and tiny flowers" loading="lazy">
-              <span class="polaroid__caption">a bloom for you</span>
-            </a>
-          </li>
-          <li>
-            <a class="polaroid polaroid--small" href="creation-detail.html?id=beautifully-boxed">
-              <img src="assets/images/creations/dessert-box.jpg" alt="Box of mini pavlovas with a gift box" loading="lazy">
-              <span class="polaroid__caption">beautifully boxed</span>
-            </a>
-          </li>
-          <li>
-            <a class="polaroid polaroid--small" href="creation-detail.html?id=peach-afternoon">
-              <img src="assets/images/creations/peach-cake.jpg" alt="Layer cake topped with a peach-coloured cream rose" loading="lazy">
-              <span class="polaroid__caption">peach afternoon</span>
-            </a>
-          </li>
-        </ul>
+        <ul class="card-grid card-grid--4 polaroid-list" id="latest-list"></ul>
 
         <div class="latest__actions">
           <a class="btn btn--secondary" href="creations.html">Explore the full gallery <span class="btn__arrow" aria-hidden="true">↗</span></a>
@@ -255,7 +229,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js" defer></script>
-  <script src="js/pages/home.js" defer></script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/pages/home.js"></script>
 </body>
 </html>
