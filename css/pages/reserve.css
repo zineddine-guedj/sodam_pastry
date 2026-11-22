@@ -1,0 +1,267 @@
+/* =========================================================
+   Sodam Pastry · reservation pages (css/pages/reserve.css)
+   Shared by the 4 steps: reserve-pastry, reserve-details,
+   reserve-contact, reserve-review.
+   Needs css/base/variables.css and the components:
+   stepper, forms, chips, cards (.notice), receipt, buttons, footer.
+   Mobile-first. The tablet and desktop layouts are an assumption
+   (only the 390px frames were available): the steps stay in one
+   centered column, and the pastry cards form a grid.
+   ========================================================= */
+
+
+/* ---------- Page ---------- */
+.reserve {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-16);
+}
+
+.reserve__kicker {
+  margin: 0 0 var(--space-5);
+}
+
+.reserve__step {
+  min-width: 0;
+}
+
+.reserve .section-heading {
+  margin-bottom: var(--space-6);
+}
+
+.reserve .notice {
+  margin-block: var(--space-6);
+}
+
+.reserve__form {
+  display: block;
+}
+
+/* Small label above a block of the form ("Your preferred date") */
+.reserve__form > .eyebrow {
+  display: block;
+  margin: var(--space-8) 0 var(--space-3);
+}
+
+
+/* ---------- Bottom row: Back / note on the left, Continue on the right ---------- */
+.reserve__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.reserve__actions .btn {
+  margin-left: auto;
+}
+
+
+/* ---------- Step 1: pastry cards (radio buttons as photo cards) ---------- */
+.pastry-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  min-width: 0;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.pastry-option {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  cursor: pointer;
+}
+
+/* The real radio sits on top of the card, invisible */
+.pastry-option__input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pastry-option__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--duration-fast) var(--ease),
+    box-shadow var(--duration-base) var(--ease);
+}
+
+.pastry-option__card img {
+  width: 100%;
+  aspect-ratio: 35 / 18;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.pastry-option__title {
+  display: block;
+  margin: var(--space-4) var(--space-2) 0;
+}
+
+/* "Choose this" */
+.pastry-option__cta {
+  display: block;
+  margin: var(--space-4) var(--space-2) var(--space-2);
+  font-family: var(--font-label);
+  font-size: var(--fs-button);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-label);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+/* "Selected for your reservation" */
+.pastry-option__selected {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-4) var(--space-2) var(--space-2);
+  font-family: var(--font-label);
+  font-size: var(--fs-label);
+  letter-spacing: var(--tracking-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+}
+
+.pastry-option__selected img {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+}
+
+.pastry-option:hover .pastry-option__card {
+  border-color: var(--color-line);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Chosen card */
+.pastry-option__input:checked + .pastry-option__card {
+  border-color: var(--color-rosewood);
+}
+
+.pastry-option__input:checked + .pastry-option__card .pastry-option__cta {
+  display: none;
+}
+
+.pastry-option__input:checked + .pastry-option__card .pastry-option__selected {
+  display: flex;
+}
+
+.pastry-option__input:focus-visible + .pastry-option__card {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+
+/* ---------- Step 1: selected creation (size and quantity) ---------- */
+.selection {
+  margin-top: var(--space-8);
+  padding: var(--space-6) var(--space-5);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+}
+
+.selection__title {
+  margin-top: var(--space-5);
+}
+
+.selection__text {
+  margin-top: var(--space-5);
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+}
+
+.selection .size-options {
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  border: 0;
+}
+
+
+/* ---------- Step 4: what happens next ---------- */
+.next-steps {
+  margin-top: var(--space-8);
+}
+
+.next-steps > .eyebrow {
+  margin-bottom: var(--space-4);
+}
+
+.next-steps__text {
+  margin-bottom: var(--space-6);
+}
+
+#review-form .reserve__actions {
+  margin-top: var(--space-6);
+}
+
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) {
+  .reserve {
+    max-width: calc(46rem + 2 * var(--container-pad));
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-20);
+  }
+
+  .reserve__kicker {
+    text-align: center;
+  }
+
+  /* Pastry page: wider, cards in two columns */
+  .page-reserve-pastry .reserve {
+    max-width: calc(64rem + 2 * var(--container-pad));
+  }
+
+  .pastry-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  .selection {
+    padding: var(--space-8);
+  }
+
+  .reserve__actions {
+    margin-top: var(--space-10);
+  }
+}
+
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1024px) {
+  .pastry-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pastry-option__card {
+    padding: var(--space-4);
+  }
+
+  .pastry-option__title {
+    margin-inline: var(--space-3);
+  }
+
+  .pastry-option__cta,
+  .pastry-option__selected {
+    margin-inline: var(--space-3);
+  }
+}
