@@ -230,5 +230,79 @@
   }
 
   .about .polaroid--about {
-    max-width:
+    max-width: 36rem;
+  }
+
+  .about__meaning {
+    font-size: 1.75rem;
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .step-ticket {
+    padding: var(--space-6) var(--space-5);
+  }
+}
+
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1024px) {
+  .hero {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-12);
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    column-gap: var(--space-20);
+  }
+
+  .hero__lead {
+    font-size: 1.125rem;
+  }
+
+  .hero__script {
+    margin-top: var(--space-6);
+    font-size: 1.625rem;
+  }
+
+  .hero__visual {
+    padding: var(--space-12) var(--space-12) var(--space-16);
+  }
+
+  .hero__footer {
+    padding-top: var(--space-16);
+  }
+
+  .about__inner {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+    column-gap: var(--space-20);
+  }
+
+  .about .polaroid--about {
+    max-width: none;
+  }
+
+  .about__meaning {
+    font-size: 2rem;
+  }
+
+  .about__text > p:not(.about__meaning):not(.about__sign) {
+    font-size: 0.9375rem;
+  }
+
+  .steps {
+    gap: var(--space-6);
+  }
+
+  .step-ticket {
+    padding: var(--space-8);
+  }
+
+  .latest__actions {
+    margin-top: var(--space-12);
+  }
 }
