@@ -1,0 +1,136 @@
+/* =========================================================
+   Sodam Pastry · creations page (css/pages/creations.css)
+   Needs css/base/variables.css and the components:
+   navbar, section-heading, chips, cards, buttons, footer.
+   Mobile-first. The tablet and desktop layouts are an assumption
+   (only the 390px frame was available): 2 columns on tablet,
+   3 columns on desktop (set by .card-grid in cards.css).
+   ========================================================= */
+
+/* ---------- Intro (title, filters, count) ---------- */
+.page-creations .page-intro {
+  padding-bottom: var(--space-2);
+}
+
+.page-creations .page-intro .section-heading {
+  margin-bottom: var(--space-6);
+}
+
+/* Filter chips under the intro text */
+.page-creations .chips {
+  margin: 0 0 var(--space-6);
+}
+
+/* "6 little joys · All creations" */
+.results-count {
+  margin: 0;
+}
+
+/* "made to be shared ♡" */
+.page-creations .script-note {
+  margin-top: var(--space-4);
+}
+
+
+/* ---------- Gallery ---------- */
+.gallery {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-4);
+}
+
+.gallery__grid {
+  margin-bottom: var(--space-8);
+}
+
+/* Cards fade in when a filter changes what is shown */
+.gallery__item {
+  animation: gallery-in var(--duration-slow) var(--ease) both;
+}
+
+@keyframes gallery-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* A card filtered out stays hidden (the [hidden] rule is in reset.css) */
+.gallery__item[hidden] {
+  display: none;
+}
+
+/* Nothing in this category */
+.gallery__empty {
+  max-width: 32rem;
+  margin: var(--space-6) auto var(--space-8);
+  padding: var(--space-8) var(--space-6);
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+  text-align: center;
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+}
+
+.gallery__empty a {
+  color: var(--color-text-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.gallery__empty a:hover {
+  color: var(--color-text);
+}
+
+/* Custom order note under the cards */
+.gallery .notice {
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+}
+
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) {
+  .page-creations .page-intro {
+    padding-bottom: var(--space-4);
+  }
+
+  .page-creations .page-intro .section-heading {
+    margin-bottom: var(--space-8);
+  }
+
+  .gallery {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+
+  .gallery__grid {
+    margin-bottom: var(--space-10);
+  }
+
+  .gallery .notice {
+    max-width: 40rem;
+  }
+}
+
+
+/* ---------- Desktop ---------- */
+@media (min-width: 1024px) {
+  .page-creations .chips {
+    margin-bottom: var(--space-8);
+  }
+
+  .gallery {
+    padding-top: var(--space-10);
+    padding-bottom: var(--space-12);
+  }
+
+  .gallery__grid {
+    margin-bottom: var(--space-12);
+  }
+}
