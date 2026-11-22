@@ -1,0 +1,264 @@
+/* =========================================================
+   Sodam Pastry · contact page (css/pages/contact.css)
+   Needs css/base/variables.css and the components:
+   navbar, section-heading, cards (.notice), forms, buttons, footer.
+   Mobile-first. The tablet and desktop layouts are an assumption
+   (only the 390px frame was available): contact cards in a row,
+   then the info on the left and the message form on the right.
+   ========================================================= */
+
+/* ---------- Page ---------- */
+.contact {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-16);
+}
+
+.page-contact .section-heading {
+  margin-bottom: var(--space-8);
+}
+
+
+/* ---------- Contact cards (phone, Instagram, email) ---------- */
+.contact-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+  transition: box-shadow var(--duration-base) var(--ease);
+}
+
+.contact-card:hover {
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-card__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-bottom: var(--space-4);
+}
+
+.contact-card__label {
+  margin-bottom: var(--space-4);
+}
+
+.contact-card__value {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.contact-card__value a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-target);
+  margin-block: calc(var(--space-3) * -1);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.contact-card__value a:hover {
+  color: var(--color-text-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.contact-card__text {
+  margin-top: var(--space-4);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+}
+
+
+/* ---------- Soft map (illustrative) ---------- */
+.soft-map {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--space-3);
+  min-height: 18.75rem;
+  margin-block: var(--space-6);
+  padding: var(--space-8) var(--space-4);
+  overflow: hidden;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(18deg, transparent 36%, rgba(255, 255, 255, .75) 36%, rgba(255, 255, 255, .75) 42%, transparent 42%),
+    linear-gradient(-14deg, transparent 56%, rgba(255, 255, 255, .75) 56%, rgba(255, 255, 255, .75) 62%, transparent 62%),
+    linear-gradient(8deg, transparent 18%, rgba(255, 255, 255, .55) 18%, rgba(255, 255, 255, .55) 21%, transparent 21%),
+    var(--color-surface-soft);
+}
+
+.soft-map__pin {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  background: var(--color-bg);
+  border-radius: 50%;
+}
+
+.soft-map__pin img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.soft-map__city {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-serif);
+  font-size: 2.375rem;
+  font-weight: var(--fw-regular);
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.soft-map__caption {
+  margin: 0;
+}
+
+
+/* ---------- Kitchen and hours ---------- */
+.info-card {
+  margin-block: var(--space-6);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+}
+
+.info-card__lead {
+  margin-top: var(--space-5);
+  font-size: var(--fs-lead);
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.info-card__title {
+  margin-top: var(--space-6);
+}
+
+.info-card__list {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.info-card__list li {
+  font-size: 0.8125rem;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+}
+
+
+/* ---------- Message form ---------- */
+.page-contact .form-card {
+  margin-bottom: 0;
+}
+
+#message-form .btn {
+  margin-top: var(--space-5);
+}
+
+#message-form .field__help {
+  margin-top: var(--space-1);
+  font-size: 0.8125rem;
+}
+
+#message-form .field__help a {
+  color: var(--color-text-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+#message-form .field__help a:hover {
+  color: var(--color-text);
+}
+
+#message-form .form-success {
+  margin-top: var(--space-5);
+}
+
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) {
+  .contact {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-20);
+  }
+
+  .contact-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .contact-card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .soft-map {
+    min-height: 22rem;
+  }
+
+  .soft-map__city {
+    font-size: 2.75rem;
+  }
+
+  .info-card {
+    padding: var(--space-8);
+  }
+}
+
+
+/* ---------- Desktop: info on the left, form on the right ---------- */
+@media (min-width: 1024px) {
+  .contact {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto auto auto auto 1fr;
+    align-items: start;
+    column-gap: var(--space-12);
+  }
+
+  .contact > .section-heading,
+  .contact > .contact-cards {
+    grid-column: 1 / -1;
+  }
+
+  .contact > .notice,
+  .contact > .soft-map,
+  .contact > .info-card {
+    grid-column: 1;
+  }
+
+  .contact > .form-card {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+    grid-column: 2;
+    grid-row: 3 / span 4;
+    margin-block: var(--space-6) 0;
+  }
+
+  .contact-cards {
+    margin-bottom: var(--space-4);
+  }
+
+  .soft-map {
+    min-height: 20rem;
+  }
+}
