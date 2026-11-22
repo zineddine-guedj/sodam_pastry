@@ -1,0 +1,36 @@
+/* =========================================================
+   Sodam Pastry · responsive (css/responsive.css)
+   Linked LAST on every page. Mobile-first: only min-width queries.
+   Most layout changes already sit inside each component and page file;
+   this file changes the design tokens for bigger screens.
+   Breakpoints: 768px tablet, 1024px desktop (Figma frames 768 / 1440).
+   ========================================================= */
+
+@media (min-width: 768px) {
+  :root {
+    --fs-display: 3.375rem;            /* 54px (UI kit) */
+    --fs-h2: 2.5rem;                   /* 40px */
+    --container-pad: 2rem;             /* 32px */
+    --section-space: var(--space-20);  /* 80px */
+  }
+
+  /* Page titles other than the hero stay smaller than the hero title */
+  h1:not(.hero__title) {
+    font-size: 3rem;                   /* 48px */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --fs-display: 5.5rem;              /* 88px (UI kit) */
+    --fs-h2: 3rem;                     /* 48px */
+    --fs-h3: 1.875rem;                 /* 30px */
+    --fs-lead: 1.125rem;               /* 18px */
+    --section-space: var(--space-30);  /* 120px */
+    --header-height: 6.75rem;          /* 108px */
+  }
+
+  h1:not(.hero__title) {
+    font-size: 4rem;                   /* 64px */
+  }
+}
