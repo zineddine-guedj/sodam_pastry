@@ -95,7 +95,7 @@
           </div>
         </aside>
 
-        <form class="reserve__form" id="details-form" action="reserve-contact.html" method="get">
+        <form class="reserve__form" id="details-form" action="reserve-contact.html" method="get" novalidate>
 
           <!-- ---------- Calendar ---------- -->
           <p class="eyebrow">Your preferred date</p>
@@ -105,7 +105,7 @@
           <section class="calendar" aria-label="Choose a date">
             <div class="calendar__head">
               <button class="calendar__nav" type="button" id="cal-prev" aria-label="Previous month">‹</button>
-              <h2 class="calendar__month" id="cal-month" aria-live="polite">November 2026</h2>
+              <h2 class="calendar__month" id="cal-month" aria-live="polite" tabindex="-1">November 2026</h2>
               <button class="calendar__nav" type="button" id="cal-next" aria-label="Next month">›</button>
             </div>
 
@@ -169,7 +169,7 @@
               </tbody>
             </table>
 
-            <p class="calendar__note">48h notice · dates remain subject to availability.</p>
+          <p class="calendar__note" aria-live="polite">48h notice · dates remain subject to availability.</p>
           </section>
 
           <!-- ---------- Date, time, delivery ---------- -->
@@ -239,7 +239,8 @@
                 <span class="dropzone__hint">JPG / PNG · up to 10 MB each</span>
               </label>
               <input class="visually-hidden" type="file" id="inspiration" name="inspiration" accept="image/jpeg,image/png" multiple aria-labelledby="upload-label">
-              <ul class="dropzone__list" id="upload-list" aria-live="polite"></ul>
+              <p class="field__help" id="upload-status" role="status" aria-live="polite">Photos are optional. Each image is resized before it is saved.</p>
+              <ul class="dropzone__list" id="upload-list" aria-label="Selected inspiration photos"></ul>
             </div>
           </section>
 

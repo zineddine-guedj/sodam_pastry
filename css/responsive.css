@@ -34,3 +34,66 @@
     font-size: 4rem;                   /* 64px */
   }
 }
+
+@media (max-width: 420px) {
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .reserve__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .page-admin-creations .collection__head {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .page-admin-creations .collection__count {
+    white-space: normal;
+  }
+
+  .page-admin-creations .creation-row {
+    padding: var(--space-4);
+  }
+
+  .page-admin-creations .creation-row__actions {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .modal__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --container-pad: 1rem;
+  }
+
+  .calendar {
+    padding-inline: var(--space-2);
+  }
+
+  .calendar__table th,
+  .calendar__table td {
+    padding-inline: 0;
+  }
+
+  .calendar__day {
+    height: 2.75rem;
+    font-size: var(--fs-small);
+  }
+
+  .quantity {
+    flex-wrap: wrap;
+  }
+
+  .quantity__label {
+    flex-basis: 100%;
+  }
+}

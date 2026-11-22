@@ -32,10 +32,16 @@
       return;
     }
     try {
+      const sendButton = document.getElementById('send-btn');
+      sendButton.disabled = true;
+      sendButton.setAttribute('aria-busy', 'true');
       const reservation = window.ReservationsStore.create(draft);
-      sessionStorage.setItem(window.SodamConstants?.keys.lastReservation || 'sodam:last-reservation', reservation.id);
+      try { sessionStorage.setItem(window.SodamConstants?.keys.lastReservation || 'sodam:last-reservation', reservation.id); } catch (error) {}
       location.href = `thank-you.html?ref=${encodeURIComponent(reservation.id)}`;
     } catch (error) {
+      const sendButton = document.getElementById('send-btn');
+      sendButton.disabled = false;
+      sendButton.removeAttribute('aria-busy');
       problem.textContent = 'We could not save this request in your browser. Please try again or contact us on Instagram.';
       problem.hidden = false;
     }

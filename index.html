@@ -28,7 +28,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="brand" href="index.html" aria-label="Sodam Pastry, home">
-        <img class="brand__logo" src="assets/logo/sodam-logo.png" alt="Sodam Pastry logo" width="64" height="64">
+        <img class="brand__logo" src="assets/icons/sodam_logo.svg" alt="Sodam Pastry logo" width="64" height="64">
         <span class="brand__tagline">A Quiet Abundance of Joy</span>
         <span class="brand__name">Sodam Pastry</span>
       </a>
@@ -71,10 +71,10 @@
           </p>
         </div>
 
-        <div class="hero__visual">
+        <div class="hero__visual" id="hero-creation-visual" hidden>
           <figure class="polaroid polaroid--hero">
-            <img src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peaches and small flowers on a ceramic cake stand" width="800" height="600">
-            <figcaption class="polaroid__caption">a little garden, made with love.</figcaption>
+            <img id="hero-creation-image" src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peaches and small flowers on a ceramic cake stand" width="800" height="600">
+            <figcaption class="polaroid__caption" id="hero-creation-caption">a little garden, made with love.</figcaption>
             <span class="stamp" aria-hidden="true">
               <span class="stamp__ko">소담</span>
               <img src="assets/icons/cloud.svg" alt="" width="14" height="14">
@@ -99,28 +99,8 @@
           <p class="section-heading__intro">Light as a cloud, lovely to share. A little sweetness for every kind of day.</p>
         </header>
 
-        <div class="card-grid card-grid--3">
-          <article class="pastry-card">
-            <img class="pastry-card__img" src="assets/images/creations/pavlova.jpg" alt="Individual pavlova with berries on a speckled plate" loading="lazy">
-            <h3 class="pastry-card__title">Individual Pavlova</h3>
-            <p class="pastry-card__text">A crisp little cloud, soft at heart, crowned with berries.</p>
-            <a class="pastry-card__link" href="reserve-pastry.html?pastry=pavlova">Reserve this</a>
-          </article>
-
-          <article class="pastry-card">
-            <img class="pastry-card__img" src="assets/images/creations/dome-cake.jpg" alt="Pale pink dome cake decorated with raspberries and tiny flowers on a stand" loading="lazy">
-            <h3 class="pastry-card__title">Dome Cake</h3>
-            <p class="pastry-card__text">A flower-kissed dome with a delicate, creamy heart.</p>
-            <a class="pastry-card__link" href="reserve-pastry.html?pastry=dome-cake">Reserve this</a>
-          </article>
-
-          <article class="pastry-card">
-            <img class="pastry-card__img" src="assets/images/creations/fruit-cake.jpg" alt="Whipped cream cake topped with strawberries, peaches and small flowers" loading="lazy">
-            <h3 class="pastry-card__title">Fruit &amp; Flower Cream Cake</h3>
-            <p class="pastry-card__text">A little garden of sweetness, where every bite feels like a summer dream.</p>
-            <a class="pastry-card__link" href="reserve-pastry.html?pastry=fruit-cream-cake">Reserve this</a>
-          </article>
-        </div>
+        <ul class="card-grid card-grid--3" id="signature-list"></ul>
+        <p class="signatures-empty" id="signatures-empty">The collection is being prepared. Come back soon to see Sodam’s latest creations.</p>
       </div>
     </section>
 

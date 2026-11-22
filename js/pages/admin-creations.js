@@ -10,6 +10,7 @@
   const count = $('#collection-count');
   const title = $('#creation-title');
   const description = $('#creation-description');
+  const servings = $('#creation-servings');
   const category = $('#creation-category');
   const date = $('#creation-date');
   const publish = $('#creation-publish');
@@ -23,6 +24,7 @@
   const deleteDialog = $('#delete-dialog');
   let photos = [];
   let deletingId = null;
+  let deleteTrigger = null;
   let resetting = false;
 
   const categoryNames = {
@@ -40,7 +42,9 @@
       image.src = src;
       image.alt = `Creation photo ${index + 1}`;
       fragment.querySelector('.photo-preview__label').textContent = index === 0 ? 'Cover photo' : `Detail photo ${index}`;
-      fragment.querySelector('[data-action="remove-photo"]').dataset.index = index;
+      const remove = fragment.querySelector('[data-action="remove-photo"]');
+      remove.dataset.index = index;
+      remove.setAttribute('aria-label', `Remove photo ${index + 1}`);
       previews.append(item);
     });
     photoStatus.textContent = photos.length
@@ -118,6 +122,7 @@
     idField.value = item.id;
     title.value = item.title || '';
     description.value = item.description || '';
+    servings.value = item.servings || '';
     category.value = item.category || '';
     date.value = item.date || '';
     publish.checked = item.status === 'published';
@@ -134,14 +139,19 @@
 
   photosInput.addEventListener('change', async () => {
     status.hidden = true;
+    photosInput.disabled = true;
+    photosInput.setAttribute('aria-busy', 'true');
+    photoStatus.textContent = 'Preparing photos…';
     try {
       for (const file of photosInput.files) photos.push(await window.SodamImages.read(file));
       renderPhotos();
     } catch (error) {
-      status.textContent = error.message;
-      status.hidden = false;
+      photoStatus.textContent = error.message || 'Could not prepare the selected photo.';
+    } finally {
+      photosInput.disabled = false;
+      photosInput.removeAttribute('aria-busy');
+      photosInput.value = '';
     }
-    photosInput.value = '';
   });
 
   previews.addEventListener('click', event => {
@@ -185,6 +195,7 @@
       id,
       title: title.value.trim(),
       description: description.value.trim(),
+      servings: servings.value.trim(),
       category: category.value,
       date: date.value,
       status: publishStatus,
@@ -212,18 +223,29 @@
     if (button.dataset.action === 'edit') editCreation(row.dataset.id);
     if (button.dataset.action === 'delete') {
       deletingId = row.dataset.id;
+      deleteTrigger = button;
       if (deleteDialog.showModal) deleteDialog.showModal();
     }
+  });
+
+  deleteDialog.addEventListener('close', () => {
+    const focusTarget = deleteTrigger?.isConnected ? deleteTrigger : $('#collection-title');
+    focusTarget?.focus();
   });
 
   $('#confirm-remove').addEventListener('click', event => {
     event.preventDefault();
     if (!deletingId) return;
-    store.remove(deletingId);
-    if (idField.value === deletingId) resetForm();
-    deletingId = null;
-    deleteDialog.close('remove');
-    renderCollection();
+    try {
+      store.remove(deletingId);
+      if (idField.value === deletingId) resetForm();
+      deletingId = null;
+      deleteDialog.close('remove');
+      renderCollection();
+    } catch (error) {
+      status.textContent = error.message || 'Could not remove this creation.';
+      status.hidden = false;
+    }
   });
 
   document.addEventListener('sodam:data-changed', renderCollection);

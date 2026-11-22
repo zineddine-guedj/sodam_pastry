@@ -234,10 +234,34 @@ fieldset.field {
 
 .dropzone__list {
   display: grid;
-  gap: var(--space-2);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
   margin-top: var(--space-3);
+  padding: 0;
+  list-style: none;
   font-size: var(--fs-small);
   color: var(--color-text-muted);
+}
+
+.dropzone__list li {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.dropzone__list img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.dropzone__list button {
+  min-height: var(--tap-target);
+  justify-self: start;
+  color: var(--color-text-accent);
+  text-decoration: underline;
+  text-underline-offset: .2em;
 }
 
 .dropzone__list:empty {
@@ -252,6 +276,11 @@ fieldset.field {
   background: var(--color-surface);
   border: var(--border-card);
   border-radius: var(--radius-lg);
+}
+
+.calendar__table {
+  width: 100%;
+  table-layout: fixed;
 }
 
 .calendar__head {
@@ -310,7 +339,8 @@ fieldset.field {
 .calendar__day {
   display: inline-grid;
   place-items: center;
-  width: var(--tap-target);
+  width: 100%;
+  max-width: var(--tap-target);
   height: var(--tap-target);
   font-family: var(--font-sans);
   font-size: var(--fs-body);

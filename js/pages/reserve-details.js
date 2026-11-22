@@ -18,7 +18,6 @@
   const pastrySummary = document.getElementById('pastry-summary');
   const reservationSummary = window.ReservationTemplates?.summary(draft);
   if (pastrySummary && draft.pastryName) pastrySummary.textContent = `${reservationSummary.pastry} · ${reservationSummary.size}`;
-  function capitalize(text) { return text.charAt(0).toUpperCase() + text.slice(1); }
   function toYmd(date) { return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; }
   function formatDate(date) { return date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }); }
   function paintChosen() {
@@ -42,6 +41,9 @@
       button.type = 'button';
       button.dataset.date = toYmd(date);
       button.textContent = String(day);
+      button.setAttribute('aria-label', date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
+      const today = new Date();
+      if (toYmd(today) === button.dataset.date) button.classList.add('is-today');
       const latestSlot = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 16);
       button.disabled = latestSlot < minBookingAt;
       if (chosen && toYmd(chosen) === button.dataset.date) {
@@ -64,10 +66,12 @@
     const button = event.target.closest('[data-date]');
     if (!button || button.disabled) return;
     chosen = new Date(`${button.dataset.date}T12:00:00`);
+    document.querySelector('.calendar__note').textContent = '48h notice · dates remain subject to availability.';
     paintChosen();
     renderCalendar();
   });
   if (chosen) paintChosen();
+  else { selectedDate.value = ''; dateValue.value = ''; }
   renderCalendar();
 
   const time = form.querySelector(`[name="time"][value="${CSS.escape(draft.time || '14:00-16:00')}"]`);
@@ -84,10 +88,14 @@
     fulfilmentNote.textContent = fulfilmentNote.dataset[mode];
   };
   form.querySelectorAll('[name="fulfilment"]').forEach(input => input.addEventListener('change', updateFulfilment));
+  form.querySelectorAll('[name="time"]').forEach(input => input.addEventListener('change', () => {
+    document.querySelector('.calendar__note').textContent = '48h notice · dates remain subject to availability.';
+  }));
   updateFulfilment();
 
   const uploadInput = document.getElementById('inspiration');
   const uploadList = document.getElementById('upload-list');
+  const uploadStatus = document.getElementById('upload-status');
   let photos = Array.isArray(draft.inspiration) ? [...draft.inspiration] : [];
   function renderPhotos() {
     uploadList.replaceChildren();
@@ -100,15 +108,28 @@
       remove.type = 'button';
       remove.dataset.removePhoto = String(index);
       remove.textContent = 'Remove';
+      remove.setAttribute('aria-label', `Remove inspiration photo ${index + 1}`);
       li.append(img, remove);
       uploadList.append(li);
     });
+    uploadStatus.textContent = photos.length
+      ? `${photos.length} inspiration photo${photos.length === 1 ? '' : 's'} ready.`
+      : 'Photos are optional. Each image is resized before it is saved.';
   }
 
   uploadInput?.addEventListener('change', async () => {
-    try { for (const file of uploadInput.files) photos.push(await window.SodamImages.read(file, { maxDimension: 1000, quality: 0.72 })); renderPhotos(); }
-    catch (error) { window.alert(error.message || 'Could not read the selected photo.'); }
-    uploadInput.value = '';
+    const selectedFiles = [...uploadInput.files];
+    uploadInput.disabled = true;
+    uploadStatus.textContent = `Preparing ${selectedFiles.length} photo${selectedFiles.length === 1 ? '' : 's'}…`;
+    try {
+      for (const file of selectedFiles) photos.push(await window.SodamImages.read(file, { maxDimension: 1000, quality: 0.72 }));
+      renderPhotos();
+    } catch (error) {
+      uploadStatus.textContent = error.message || 'Could not read the selected photo.';
+    } finally {
+      uploadInput.disabled = false;
+      uploadInput.value = '';
+    }
   });
   uploadList?.addEventListener('click', event => {
     const button = event.target.closest('[data-remove-photo]');
@@ -119,7 +140,12 @@
 
   form.addEventListener('submit', event => {
     event.preventDefault();
-    if (!chosen) { document.getElementById('cal-next').focus(); return; }
+    if (!chosen) {
+      const note = document.querySelector('.calendar__note');
+      if (note) note.textContent = 'Choose a preferred date to continue.';
+      document.getElementById('cal-month').focus();
+      return;
+    }
     const timeValue = form.querySelector('[name="time"]:checked')?.value;
     const fulfilmentValue = form.querySelector('[name="fulfilment"]:checked')?.value;
     if (!timeValue || !fulfilmentValue) return;

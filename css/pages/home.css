@@ -99,6 +99,16 @@
   text-underline-offset: 0.25em;
 }
 
+.signatures-empty {
+  max-width: 36rem;
+  margin: var(--space-6) auto 0;
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--color-surface);
+  border: var(--border-card);
+  border-radius: var(--radius-lg);
+}
+
 
 /* ---------- About ---------- */
 .about__inner {

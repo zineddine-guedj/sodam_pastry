@@ -30,5 +30,20 @@
     const caption = el('span', 'polaroid__caption', item.title || 'Creation');
     link.append(image, caption); li.append(link); return li;
   }
-  window.CreationTemplate = { galleryCard, polaroid };
+  function signatureCard(item) {
+    const listItem = el('li');
+    const article = el('article', 'pastry-card');
+    const image = el('img', 'pastry-card__img');
+    image.src = item.photos?.[0] || 'assets/logo/sodam-logo.png';
+    image.alt = item.title || 'Pastry';
+    image.loading = 'lazy';
+    const heading = el('h3', 'pastry-card__title', item.title || 'Creation');
+    const description = el('p', 'pastry-card__text', item.description || 'Handmade with care.');
+    const reserve = el('a', 'pastry-card__link', 'Reserve this');
+    reserve.href = `reserve-pastry.html?creation=${encodeURIComponent(item.id)}`;
+    article.append(image, heading, description, reserve);
+    listItem.append(article);
+    return listItem;
+  }
+  window.CreationTemplate = { galleryCard, polaroid, signatureCard };
 })();

@@ -30,6 +30,7 @@
     date.dateTime = item.date;
     date.textContent = window.SodamFormat?.date(item.date, { day: 'numeric', month: 'long', year: 'numeric' }) || item.date;
   }
+  document.getElementById('creation-servings').textContent = item.servings || 'Serving sizes confirmed when you reserve.';
   const reserveLink = document.getElementById('reserve-link');
   reserveLink.href = `reserve-pastry.html?creation=${encodeURIComponent(item.id)}`;
   const preselect = document.getElementById('preselect-text');
@@ -46,6 +47,8 @@
     const slide = document.createElement('li');
     slide.className = 'carousel__slide';
     slide.id = `slide-${index + 1}`;
+    slide.setAttribute('aria-roledescription', 'slide');
+    slide.setAttribute('aria-label', `Photo ${index + 1} of ${photos.length}`);
     const image = document.createElement('img');
     image.src = src;
     image.alt = `${item.title} · photo ${index + 1}`;

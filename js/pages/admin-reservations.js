@@ -7,6 +7,11 @@
   const labels = { new: 'New', confirmed: 'Confirmed', completed: 'Completed', cancelled: 'Cancelled' };
   let filter = 'all';
   let selectedId = null;
+  const actionStatus = document.createElement('p');
+  actionStatus.className = 'field__help';
+  actionStatus.setAttribute('role', 'status');
+  actionStatus.setAttribute('aria-live', 'polite');
+  document.getElementById('closer-look').querySelector('.closer-look__actions').before(actionStatus);
 
   function seedDemoRows() {
     if (store.all().length) return;
@@ -37,6 +42,7 @@
   }
   function renderPanel(record) {
     const panel = document.getElementById('closer-look');
+    actionStatus.textContent = '';
     if (!record) { panel.hidden = true; return; }
     panel.hidden = false;
     panel.dataset.id = record.id;
@@ -122,8 +128,13 @@
     const action = event.target.closest('[data-action]')?.dataset.action;
     if (!['confirm', 'complete', 'cancel'].includes(action)) return;
     const next = { confirm: 'confirmed', complete: 'completed', cancel: 'cancelled' }[action];
-    store.update(selectedId, { status: next });
-    render();
+    try {
+      store.update(selectedId, { status: next });
+      render();
+      actionStatus.textContent = `Reservation ${selectedId} marked ${labels[next].toLowerCase()}.`;
+    } catch (error) {
+      actionStatus.textContent = 'Could not update this reservation in the browser. Please try again.';
+    }
   });
   document.getElementById('view-all')?.addEventListener('click', () => {
     filter = 'all';

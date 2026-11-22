@@ -85,7 +85,7 @@
               <span class="dropzone__text">Drop your photos here, or browse files</span>
               <span class="dropzone__hint">JPG / PNG · up to 10 MB each</span>
             </label>
-            <input class="visually-hidden" type="file" id="creation-photos" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="photos-label">
+            <input class="visually-hidden" type="file" id="creation-photos" name="photos" accept="image/jpeg,image/png" multiple aria-labelledby="photos-label" aria-describedby="photo-status">
 
             <!-- admin-creations.js adds one <li> per photo, from the template below -->
             <ul class="photo-previews" id="photo-previews"></ul>
@@ -113,6 +113,12 @@
             <textarea class="field__input field__textarea" id="creation-description" name="description" rows="4" placeholder="A little garden of sweetness, where every bite feels like a summer dream." required aria-describedby="creation-description-help creation-description-message"></textarea>
             <p class="field__help" id="creation-description-help">A short, warm description for the gallery card.</p>
             <p class="field__message" id="creation-description-message" hidden data-empty="Please add a short description."></p>
+          </div>
+
+          <div class="field" data-field="servings">
+            <label class="field__label" for="creation-servings">Serving guide · optional</label>
+            <input class="field__input" type="text" id="creation-servings" name="servings" maxlength="80" placeholder="6–8 servings · Medium">
+            <p class="field__help">Shown on the creation details page. Leave blank if serving sizes depend on the order.</p>
           </div>
 
           <!-- Category: the select is the real field, the chips are quick picks kept in sync by the script -->
@@ -174,7 +180,7 @@
       <!-- ============ COLLECTION ============ -->
       <section class="collection" aria-labelledby="collection-title">
         <header class="collection__head">
-          <h2 class="collection__title" id="collection-title">Your collection</h2>
+          <h2 class="collection__title" id="collection-title" tabindex="-1">Your collection</h2>
           <p class="collection__count" id="collection-count" aria-live="polite">0 creations</p>
         </header>
 
