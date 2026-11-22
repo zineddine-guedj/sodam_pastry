@@ -2,6 +2,14 @@
   const store = window.CreationsStore;
   const form = document.getElementById('creation-form');
   if (!form || !store) return;
+  if (sessionStorage.getItem('sodam:admin-session') !== 'active') {
+    location.replace('login.html');
+    return;
+  }
+  document.getElementById('sign-out')?.addEventListener('click', () => {
+    sessionStorage.removeItem('sodam:admin-session');
+    location.href = 'login.html';
+  });
 
   const $ = selector => document.querySelector(selector);
   const list = $('#collection-list');
